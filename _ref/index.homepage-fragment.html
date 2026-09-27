@@ -1,0 +1,1522 @@
+<!--
+  SECTION 02 — HERO (light theme)
+  Same layout as the original homepage hero, in a light colour scheme.
+  Contains the page's only H1. Paste directly below the header.
+-->
+<style>
+.pbs-hero{--navy:var(--pb-slate,#01265A);--navy-text:#01265A;--pink:var(--pb-pink,#FA1C6E);--pink-soft:var(--pb-pink-soft,#FFE3EE);--black:var(--pb-dark,#111111);--text:var(--pb-text,#111111);--muted:var(--pb-muted,#01265A);--line:var(--pb-line,#C9D6EA);--gray:var(--pb-bg,#FFF0F6);--font:var(--pb-font,"General Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif);
+  position:relative;overflow:hidden;background:linear-gradient(180deg,#FFFFFF 0%,var(--gray) 100%);color:var(--text);font-family:var(--font);font-size:17px;line-height:1.6;padding-top:clamp(28px,7vw,6px);-webkit-font-smoothing:antialiased}
+.pbs-hero *,.pbs-hero *::before,.pbs-hero *::after{box-sizing:border-box}
+.pbs-hero :where(h1,p,ul,li){margin:0;padding:0}
+.pbs-hero :where(ul){list-style:none}
+.pbs-hero a{color:inherit;text-decoration:none}
+.pbs-hero img{display:block;max-width:100%;height:auto}
+.pbs-hero svg{display:block;flex:none}
+.pbs-hero .pbs-i{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pbs-hero .pbs-wrap{width:min(1300px,100% - 48px);margin-inline:auto}
+.pbs-hero a:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
+
+/* Soft brand glows */
+.pbs-hero::before,.pbs-hero::after{content:"";position:absolute;border-radius:50%;pointer-events:none}
+.pbs-hero::before{width:780px;height:780px;right:-240px;top:-180px;background:radial-gradient(closest-side,rgba(250,28,110,.42),transparent)}
+.pbs-hero::after{width:680px;height:680px;left:-280px;bottom:-240px;background:radial-gradient(closest-side,rgba(1,38,90,.16),transparent)}
+
+.pbs-hero .pbs-hero__grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+
+/* Copy */
+.pbs-hero .pbs-eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:18px;font-size:.8125rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--navy-text)}
+.pbs-hero .pbs-eyebrow::before{content:"";width:22px;height:4px;border-radius:2px;background:var(--pink)}
+.pbs-hero h1{font-size:clamp(2.6rem,4.6vw,3.6rem);font-weight:600;line-height:1.05;letter-spacing:-.035em;color:var(--black)}
+.pbs-hero h1 em{font-style:normal;padding:0 .06em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.pbs-hero .pbs-lead{max-width:600px;margin-top:24px;font-size:clamp(1.05rem,1.4vw,1.2rem);color:#33343A}
+.pbs-hero .pbs-lead b{font-weight:600;color:#C45D7E}
+
+.pbs-hero .pbs-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+.pbs-hero .pbs-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:14px 26px;border:1.5px solid transparent;border-radius:999px;font-size:15px;font-weight:500;line-height:1;white-space:nowrap;transition:transform .2s ease,background-color .2s ease,color .2s ease,border-color .2s ease}
+.pbs-hero .pbs-btn:hover{transform:translateY(-2px)}
+.pbs-hero .pbs-btn .pbs-i{width:18px;height:18px;transition:transform .2s ease}
+.pbs-hero .pbs-btn:hover .pbs-i{transform:translateX(3px)}
+.pbs-hero .pbs-btn--dark{background:var(--navy);color:#fff}
+.pbs-hero .pbs-btn--dark:hover{background:var(--pink);color:#fff}
+.pbs-hero .pbs-btn--line{border-color:rgba(1,38,90,.22);background:#fff;color:var(--black)}
+.pbs-hero .pbs-btn--line:hover{background:var(--black);border-color:var(--black);color:#fff}
+
+.pbs-hero .pbs-ticks{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:36px;font-size:.92rem;color:var(--black)}
+.pbs-hero .pbs-ticks li{display:flex;align-items:center;gap:8px}
+.pbs-hero .pbs-ticks li::before{content:"";flex:none;width:20px;height:20px;border-radius:50%;background:var(--pink-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2 5 8.5l4.5-5' fill='none' stroke='%2301265A' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/11px no-repeat}
+
+/* Image + floating cards */
+.pbs-hero .pbs-hero__media{position:relative;padding:28px 0 64px 32px}
+.pbs-hero .pbs-hero__img{width:100%;aspect-ratio:5/5.6;object-fit:cover;object-position:center 65%;border-radius:240px 32px 32px 32px;box-shadow:0 40px 80px -40px rgba(1,38,90,.35)}
+.pbs-hero .pbs-float{position:absolute;padding:18px 20px;border:1px solid var(--line);border-radius:20px;background:#fff;color:var(--black);box-shadow:0 24px 50px -20px rgba(1,38,90,.25);animation:pbs-hero-bob 6s ease-in-out infinite}
+.pbs-hero .pbs-float--a{left:0;bottom:24px;width:240px}
+.pbs-hero .pbs-float--b{left:0;top:72px;display:flex;align-items:center;gap:14px;animation-delay:-3s}
+.pbs-hero .pbs-float__row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.pbs-hero .pbs-float__title{display:block;font-size:.9rem;font-weight:600;line-height:1.3}
+.pbs-hero .pbs-float__meta{display:block;font-size:.78rem;line-height:1.4;color:var(--muted)}
+.pbs-hero .pbs-chip{padding:4px 9px;border-radius:999px;background:var(--pink-soft);color:var(--navy-text);font-size:.68rem;font-weight:600;white-space:nowrap}
+.pbs-hero .pbs-bars{display:flex;align-items:flex-end;gap:6px;height:64px;margin:16px 0 12px}
+.pbs-hero .pbs-bars i{flex:1;border-radius:5px 5px 2px 2px;background:var(--line)}
+.pbs-hero .pbs-bars i:nth-child(1){height:22%}.pbs-hero .pbs-bars i:nth-child(2){height:30%}.pbs-hero .pbs-bars i:nth-child(3){height:38%}.pbs-hero .pbs-bars i:nth-child(4){height:50%}
+.pbs-hero .pbs-bars i:nth-child(5){height:64%;background:var(--navy)}.pbs-hero .pbs-bars i:nth-child(6){height:80%;background:var(--navy)}.pbs-hero .pbs-bars i:nth-child(7){height:100%;background:var(--pink)}
+.pbs-hero .pbs-float__icon{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--pink);color:var(--black)}
+.pbs-hero .pbs-float__icon .pbs-i{width:22px;height:22px}
+@keyframes pbs-hero-bob{50%{transform:translateY(-10px)}}
+
+/* Platforms strip */
+.pbs-hero .pbs-platforms{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px 40px;margin-top:32px;padding-block:34px;border-top:1px solid var(--line)}
+.pbs-hero .pbs-platforms p{font-size:.9rem;font-weight:500;color:var(--navy-text)}
+.pbs-hero .pbs-platforms ul{display:flex;flex-wrap:wrap;gap:12px 40px}
+.pbs-hero .pbs-platforms li{font-size:1.2rem;font-weight:600;letter-spacing:-.01em;color:var(--text)}
+
+@media (max-width:1024px){
+  .pbs-hero .pbs-hero__grid{grid-template-columns:1fr}
+  .pbs-hero .pbs-hero__media{max-width:620px}
+}
+@media (max-width:640px){
+  .pbs-hero{font-size:16px}
+  .pbs-hero .pbs-wrap{width:min(1300px,100% - 32px)}
+  .pbs-hero .pbs-actions .pbs-btn{width:100%}
+  .pbs-hero .pbs-hero__media{padding:16px 0 56px 12px}
+  .pbs-hero .pbs-hero__img{border-radius:140px 24px 24px 24px}
+  .pbs-hero .pbs-float{padding:14px 16px;border-radius:16px}
+  .pbs-hero .pbs-float--a{width:190px;bottom:12px}
+  .pbs-hero .pbs-bars{height:44px;margin:12px 0 8px}
+  .pbs-hero .pbs-float--b{left:0;top:20px;max-width:230px}
+  .pbs-hero .pbs-platforms ul{gap:10px 24px}
+  .pbs-hero .pbs-platforms li{font-size:1rem}
+}
+@media (prefers-reduced-motion:reduce){.pbs-hero *{animation:none!important;transition:none!important}}
+</style>
+
+<section class="pbs-hero" aria-labelledby="pbs-hero-title">
+  <div class="pbs-wrap pbs-hero__grid">
+    <div class="pbs-hero__copy">
+      <p class="pbs-eyebrow">Digital agency · UK · Europe · USA · Canada</p>
+      <h1 id="pbs-hero-title">A full-service digital agency built to <em>grow your business.</em></h1>
+      <p class="pbs-lead"><b>In a nutshell:</b> whatever your business needs digitally, Pinky Brain can help. Websites, e-commerce, SEO &amp; AEO, social media, advertising, branding and AI automation &mdash; premium enough for luxury real estate, practical enough for your local dental practice.</p>
+      <div class="pbs-actions">
+        <a class="pbs-btn pbs-btn--dark" href="/contact/">Book a free consultation <svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="pbs-btn pbs-btn--line" href="#pbs-services">Explore our services</a>
+      </div>
+      <ul class="pbs-ticks">
+        <li>Strategy-led</li>
+        <li>Premium design</li>
+        <li>Clear monthly reporting</li>
+      </ul>
+    </div>
+
+    <div class="pbs-hero__media">
+      <img class="pbs-hero__img"
+           src="https://pinkybraindigital.com/wp-content/uploads/2026/09/2149273705.webp"
+           alt="Pinky Brain Digital team reviewing a design project on a laptop with clients"
+           width="1000" height="1120" fetchpriority="high" decoding="async">
+
+      <div class="pbs-float pbs-float--a" aria-hidden="true">
+        <div class="pbs-float__row"><span class="pbs-float__title">Search visibility</span><span class="pbs-chip">SEO + AEO</span></div>
+        <div class="pbs-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <span class="pbs-float__meta">Google · AI Overviews · ChatGPT</span>
+      </div>
+
+      <div class="pbs-float pbs-float--b" aria-hidden="true">
+        <span class="pbs-float__icon"><svg class="pbs-i" viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg></span>
+        <span><span class="pbs-float__title">New enquiry received</span><span class="pbs-float__meta">Penthouse viewing request</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="pbs-wrap pbs-platforms">
+    <p>Websites and campaigns built on the platforms you rely on</p>
+    <ul>
+      <li>WordPress</li><li>Shopify</li><li>WooCommerce</li><li>Google Ads</li><li>Meta</li><li>HubSpot</li>
+    </ul>
+  </div>
+</section>
+<!--
+  SECTION 03 — ABOUT
+-->
+<style>
+.pbs-about{--navy:var(--pb-slate,#01265A);--navy-text:#01265A;--pink:var(--pb-pink,#FA1C6E);--black:var(--pb-dark,#111111);--text:var(--pb-text,#111111);--line:var(--pb-line,#C9D6EA);--gray:var(--pb-bg,#FFF0F6);--font:var(--pb-font,"General Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif);
+  background:#fff;color:var(--text);font-family:var(--font);font-size:17px;line-height:1.6;padding-block:clamp(80px,9vw,128px);-webkit-font-smoothing:antialiased}
+.pbs-about *,.pbs-about *::before,.pbs-about *::after{box-sizing:border-box}
+.pbs-about :where(h2,h3,p,ul,li,figure){margin:0;padding:0}
+.pbs-about :where(ul){list-style:none}
+.pbs-about a{color:inherit;text-decoration:none}
+.pbs-about img{display:block;max-width:100%;height:auto}
+.pbs-about svg{display:block;flex:none}
+.pbs-about .pbs-i{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pbs-about .pbs-wrap{width:min(1300px,100% - 48px);margin-inline:auto}
+.pbs-about a:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
+.pbs-about .pbs-eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:16px;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--navy-text)}
+.pbs-about .pbs-eyebrow::before{content:"";width:24px;height:2px;border-radius:2px;background:var(--pink)}
+.pbs-about h2{font-size:clamp(2rem,3.6vw,3.1rem);font-weight:600;line-height:1.08;letter-spacing:-.03em;color:var(--black)}
+
+.pbs-about .pbs-about__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(48px,7vw,104px);align-items:center}
+.pbs-about .pbs-about__media{position:relative;padding:0 48px 48px 0}
+.pbs-about .pbs-about__main{width:100%;aspect-ratio:4/4.4;object-fit:cover;object-position:center 78%;border-radius:28px}
+.pbs-about .pbs-about__inset{position:absolute;right:0;bottom:0;width:46%;aspect-ratio:1/1;object-fit:cover;border:8px solid #fff;border-radius:24px;box-shadow:0 30px 60px -30px rgba(1,38,90,.45)}
+.pbs-about .pbs-about__badge{position:absolute;left:20px;top:20px;display:flex;align-items:center;gap:12px;padding:10px 18px 10px 10px;border-radius:16px;background:var(--navy);color:#fff}
+.pbs-about .pbs-about__badge img{width:40px;height:40px;padding:6px;border-radius:50%;background:#fff;box-sizing:border-box}
+.pbs-about .pbs-about__badge strong{display:block;font-size:1rem;font-weight:600;line-height:1.2}
+.pbs-about .pbs-about__badge span{display:block;font-size:.8rem;color:rgba(255,255,255,.85)}
+
+.pbs-about .pbs-about__intro{margin-top:20px;font-size:1.0625rem;color:#33343A}
+.pbs-about .pbs-nut{margin-top:14px;font-size:1.0625rem;line-height:1.6;color:#33343A}
+.pbs-about .pbs-nut b{font-weight:600;color:#C45D7E}
+.pbs-about .pbs-feats{display:grid;gap:24px;margin:30px 0 40px}
+.pbs-about .pbs-feat{display:grid;grid-template-columns:48px 1fr;gap:16px;align-items:start}
+.pbs-about .pbs-feat__ic{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:var(--gray);color:var(--navy)}
+.pbs-about .pbs-feat:nth-child(2) .pbs-feat__ic{background:var(--pink);color:var(--black)}
+.pbs-about .pbs-feat__ic .pbs-i{width:22px;height:22px}
+.pbs-about .pbs-feat h3{font-size:1.08rem;font-weight:600;line-height:1.3;letter-spacing:-.01em;color:var(--black)}
+.pbs-about .pbs-feat p{margin-top:4px;font-size:.95rem}
+
+.pbs-about .pbs-about__actions{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px}
+.pbs-about .pbs-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:14px 26px;border-radius:999px;background:var(--navy);color:#fff;font-size:15px;font-weight:500;line-height:1;transition:background-color .2s ease,transform .2s ease}
+.pbs-about .pbs-btn:hover{background:var(--pink);color:#fff;transform:translateY(-2px)}
+.pbs-about .pbs-btn .pbs-i{width:18px;height:18px}
+.pbs-about .pbs-link{display:inline-flex;align-items:center;gap:8px;padding-bottom:4px;border-bottom:1.5px solid var(--pink);font-weight:600;color:var(--black);transition:color .2s ease,border-color .2s ease}
+.pbs-about .pbs-link:hover{color:var(--navy-text);border-color:var(--navy)}
+.pbs-about .pbs-link .pbs-i{width:16px;height:16px}
+
+@media (max-width:1024px){
+  .pbs-about .pbs-about__grid{grid-template-columns:1fr}
+  .pbs-about .pbs-about__media{max-width:600px}
+}
+@media (max-width:640px){
+  .pbs-about .pbs-wrap{width:min(1300px,100% - 32px)}
+  .pbs-about .pbs-about__media{padding:0 24px 32px 0}
+  .pbs-about .pbs-about__main{border-radius:22px}
+  .pbs-about .pbs-about__inset{border-width:6px;border-radius:18px}
+  .pbs-about .pbs-about__badge{left:12px;top:12px}
+}
+</style>
+
+<section class="pbs-about" aria-labelledby="pbs-about-title">
+  <div class="pbs-wrap pbs-about__grid">
+    <figure class="pbs-about__media">
+      <img class="pbs-about__main"
+           src="https://pinkybraindigital.com/wp-content/uploads/2026/09/10539.webp"
+           alt="Pinky Brain Digital team collaborating on a client website and marketing plan"
+           width="900" height="990" loading="lazy" decoding="async">
+      <img class="pbs-about__inset"
+           src="https://pinkybraindigital.com/wp-content/uploads/2026/09/2149241210.jpg"
+           alt="Luxury living room interior used in a premium property marketing campaign"
+           width="500" height="500" loading="lazy" decoding="async">
+      <figcaption class="pbs-about__badge">
+        <img src="https://pinkybraindigital.com/wp-content/uploads/2026/09/favii.png" alt="" width="40" height="40" loading="lazy">
+        <span><strong>20+ digital services</strong><span>One expert team</span></span>
+      </figcaption>
+    </figure>
+
+    <div class="pbs-about__copy">
+      <p class="pbs-eyebrow">About Pinky Brain Digital</p>
+      <h2 id="pbs-about-title">One partner for every part of your digital growth</h2>
+      <p class="pbs-about__intro">Most businesses juggle a web designer, an SEO freelancer, a social media manager and an ads specialist, and nobody owns the results. We bring every digital discipline into one team, so your website, marketing and technology work together towards one goal: growth.</p>
+
+      <p class="pbs-nut"><b>In a nutshell:</b> one team that plans, builds and runs everything digital for your business, so you only have one number to call.</p>
+
+      <ul class="pbs-feats">
+        <li class="pbs-feat">
+          <span class="pbs-feat__ic"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.5 3.2-5.5 6.5-5.5s5.9 2 6.5 5.5M16 4.8a3.5 3.5 0 0 1 0 6.4M18.5 14.8c1.7.8 2.8 2.6 3 5.2"/></svg></span>
+          <div><h3>One team, everything digital</h3><p>Strategy, design, development, marketing and automation under one roof.</p></div>
+        </li>
+        <li class="pbs-feat">
+          <span class="pbs-feat__ic"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12l3 6-9 12L3 9z"/><path d="M3 9h18M9 3l3 18 3-18"/></svg></span>
+          <div><h3>Premium for luxury, practical for SMEs</h3><p>Refined work for high-end brands and clear, affordable packages for local businesses.</p></div>
+        </li>
+        <li class="pbs-feat">
+          <span class="pbs-feat__ic"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg></span>
+          <div><h3>Built for international growth</h3><p>Websites and campaigns tailored to the UK, Europe, USA and Canada.</p></div>
+        </li>
+      </ul>
+
+      <div class="pbs-about__actions">
+        <a class="pbs-btn" href="/about/">About us <svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="pbs-link" href="/case-studies/">See our work <svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+<!--
+  SECTION 04 — SERVICES (20 services in 5 groups + consulting card)
+
+  COPY RULE ("In a nutshell"):
+  every service gets ONE short, plain-English line saying what it is and how
+  it helps the customer. No jargon, no feature lists. The full detail lives
+  on the service page behind the link. Keep new services to the same pattern.
+-->
+<style>
+.pbs-services{--navy:var(--pb-slate,#01265A);--navy-text:#01265A;--pink:var(--pb-pink,#FA1C6E);--pink-soft:var(--pb-pink-soft,#FFE3EE);--black:var(--pb-dark,#111111);--text:var(--pb-text,#111111);--line:var(--pb-line,#C9D6EA);--gray:var(--pb-bg,#FFF0F6);--font:var(--pb-font,"General Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif);
+  background:var(--gray);color:var(--text);font-family:var(--font);font-size:17px;line-height:1.6;padding-block:clamp(80px,9vw,128px);-webkit-font-smoothing:antialiased}
+.pbs-services *,.pbs-services *::before,.pbs-services *::after{box-sizing:border-box}
+.pbs-services :where(h2,h3,h4,p,ul,li){margin:0;padding:0}
+.pbs-services :where(ul){list-style:none}
+.pbs-services a{color:inherit;text-decoration:none}
+.pbs-services svg{display:block;flex:none}
+.pbs-services .pbs-i{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pbs-services .pbs-wrap{width:min(1300px,100% - 48px);margin-inline:auto}
+.pbs-services a:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
+.pbs-services .pbs-eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:16px;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--navy-text)}
+.pbs-services .pbs-eyebrow::before{content:"";width:24px;height:2px;border-radius:2px;background:var(--pink)}
+.pbs-services h2{font-size:clamp(2rem,3.6vw,3.1rem);font-weight:600;line-height:1.08;letter-spacing:-.03em;color:var(--black)}
+.pbs-services .pbs-head{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:24px 72px;align-items:end;margin-bottom:clamp(40px,5vw,64px)}
+.pbs-services .pbs-head__intro{font-size:1.0625rem}
+.pbs-services .pbs-head__intro b{font-weight:600;color:var(--black)}
+.pbs-services .pbs-link{display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding-bottom:4px;border-bottom:1.5px solid var(--pink);font-weight:600;color:var(--black);transition:color .2s ease,border-color .2s ease}
+.pbs-services .pbs-link:hover{color:var(--navy-text);border-color:var(--navy)}
+.pbs-services .pbs-link .pbs-i{width:16px;height:16px}
+
+.pbs-services .pbs-svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.pbs-services .pbs-svc{display:flex;flex-direction:column;padding:28px 24px;border-radius:24px;background:#fff;transition:transform .25s ease,box-shadow .25s ease}
+.pbs-services .pbs-svc:hover{transform:translateY(-4px);box-shadow:0 28px 56px -32px rgba(1,38,90,.3)}
+.pbs-services .pbs-svc__head{display:flex;align-items:center;gap:14px;padding:0 4px 18px;border-bottom:1px solid var(--line)}
+.pbs-services .pbs-svc__ic{display:grid;place-items:center;width:50px;height:50px;border-radius:15px;background:var(--navy);color:#fff}
+.pbs-services .pbs-svc:nth-child(even) .pbs-svc__ic{background:var(--pink);color:var(--black)}
+.pbs-services .pbs-svc__ic .pbs-i{width:23px;height:23px}
+.pbs-services .pbs-svc h3{font-size:1.25rem;font-weight:600;line-height:1.2;letter-spacing:-.02em;color:var(--black)}
+
+/* One service = name + "in a nutshell" line + read-more arrow */
+.pbs-services .pbs-svc__list{display:flex;flex-direction:column;margin-top:6px}
+.pbs-services .pbs-svc__item{display:block;padding:14px;border-radius:14px;transition:background-color .2s ease}
+.pbs-services .pbs-svc__item:hover{background:var(--pink-soft)}
+.pbs-services .pbs-svc__name{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:.98rem;font-weight:600;line-height:1.3;color:var(--black)}
+.pbs-services .pbs-svc__name .pbs-i{width:16px;height:16px;color:var(--navy);transition:transform .2s ease}
+.pbs-services .pbs-svc__item:hover .pbs-svc__name{color:var(--navy-text)}
+.pbs-services .pbs-svc__item:hover .pbs-svc__name .pbs-i{transform:translateX(4px)}
+.pbs-services .pbs-svc__name h4{font:inherit;letter-spacing:inherit}
+.pbs-services .pbs-svc__nut{display:block;margin-top:5px;font-size:.88rem;line-height:1.5;color:#33343A}
+.pbs-services .pbs-svc__nut b{font-weight:600;color:#C45D7E}
+.pbs-services .pbs-svc__desc b{font-weight:600;color:var(--navy-text)}
+.pbs-services .pbs-svc--dark .pbs-svc__desc b{color:#FFAFCC}
+
+/* Consulting card */
+.pbs-services .pbs-svc--dark{position:relative;overflow:hidden;background:var(--navy);color:rgba(255,255,255,.74);isolation:isolate}
+.pbs-services .pbs-svc--dark::after{content:"";position:absolute;z-index:-1;right:-120px;bottom:-140px;width:340px;height:340px;border-radius:50%;background:radial-gradient(closest-side,rgba(1,38,90,.7),transparent)}
+.pbs-services .pbs-svc--dark h3{color:#fff}
+.pbs-services .pbs-svc--dark .pbs-svc__head{border-bottom-color:rgba(255,255,255,.14)}
+.pbs-services .pbs-svc__desc{margin:18px 4px 20px;font-size:.95rem}
+.pbs-services .pbs-svc__points{display:flex;flex-direction:column;gap:10px;margin:0 4px 28px}
+.pbs-services .pbs-svc__points li{display:flex;gap:10px;font-size:.9rem;line-height:1.45}
+.pbs-services .pbs-svc__points li::before{content:"";flex:none;width:18px;height:18px;margin-top:2px;border-radius:50%;background:rgba(250,28,110,.16) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2 5 8.5l4.5-5' fill='none' stroke='%23FA1C6E' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/10px no-repeat}
+.pbs-services .pbs-svc__actions{display:flex;flex-direction:column;align-items:flex-start;gap:16px;margin-top:auto;padding:0 4px}
+.pbs-services .pbs-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:14px 26px;border-radius:999px;background:var(--pink);color:var(--black);font-size:15px;font-weight:500;line-height:1;transition:background-color .2s ease,transform .2s ease}
+.pbs-services .pbs-btn:hover{background:var(--navy);color:#fff;transform:translateY(-2px)}
+.pbs-services .pbs-btn .pbs-i{width:18px;height:18px}
+.pbs-services .pbs-svc--dark .pbs-link{margin-top:0;color:#fff}
+.pbs-services .pbs-svc--dark .pbs-link:hover{color:var(--pink);border-color:var(--pink)}
+
+@media (max-width:1100px){.pbs-services .pbs-svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:1024px){.pbs-services .pbs-head{grid-template-columns:1fr}}
+@media (max-width:640px){
+  .pbs-services .pbs-wrap{width:min(1300px,100% - 32px)}
+  .pbs-services .pbs-svc-grid{grid-template-columns:1fr}
+  .pbs-services .pbs-svc{padding:24px 20px}
+}
+</style>
+
+<section id="pbs-services" class="pbs-services" aria-labelledby="pbs-services-title">
+  <div class="pbs-wrap">
+    <div class="pbs-head">
+      <div>
+        <p class="pbs-eyebrow">Our services</p>
+        <h2 id="pbs-services-title">Every digital service your business needs</h2>
+      </div>
+      <div>
+        <p class="pbs-head__intro">Each service in a nutshell: <b>what it is and how it helps you</b>. Select any service to read the full details, pricing and examples.</p>
+        <a class="pbs-link" href="/website-design-packages/">Compare website packages <svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+
+    <div class="pbs-svc-grid">
+
+      <article class="pbs-svc">
+        <div class="pbs-svc__head">
+          <span class="pbs-svc__ic"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
+          <h3>Websites &amp; Apps</h3>
+        </div>
+        <ul class="pbs-svc__list">
+          <li><a class="pbs-svc__item" href="/services/website-design/" aria-label="Website Design and Development - read more">
+            <div class="pbs-svc__name"><h4>Website Design &amp; Development</h4><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <p class="pbs-svc__nut"><b>In a nutshell:</b> a fast, modern website that turns visitors into real enquiries.</p>
+          </a></li>
+          <li><a class="pbs-svc__item" href="/services/ecommerce/" aria-label="E-commerce Websites - read more">
+            <div class="pbs-svc__name"><h4>E-commerce Websites</h4><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <p class="pbs-svc__nut"><b>In a nutshell:</b> an online shop that's simple for you to run and easy for people to buy from.</p>
+          </a></li>
+          <li><a class="pbs-svc__item" href="/services/app-development/" aria-label="Web and Mobile Apps - read more">
+            <div class="pbs-svc__name"><h4>Web &amp; Mobile Apps</h4><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <p class="pbs-svc__nut"><b>In a nutshell:</b> an app for your customers or your team, on iPhone, Android and web.</p>
+          </a></li>
+          <li><a class="pbs-svc__item" href="/services/custom-software/" aria-label="Custom Software - read more">
+            <div class="pbs-svc__name"><h4>Custom Software</h4><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <p class="pbs-svc__nut"><b>In a nutshell:</b> tools built around the way you already work, so your team saves time.</p>
+          </a></li>
+        </ul>
+      </article>
+
+      <article class="pbs-svc">
+        <div class="pbs-svc__head">
+          <span class="pbs-svc__ic"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg></span>
+          <h3>Search &amp; Advertising</h3>
+        </div>
+        <ul class="pbs-svc__list">
+          <li><a class="pbs-svc__item" href="/services/seo/" aria-label="SEO Services - read more">
+            <div class="pbs-svc__name"><h4>SEO Services</h4><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <p class="pbs-svc__nut"><b>In a nutshell:</b> get found on Google when customers search for what you sell.</p>
+          </a></li>
+          <li><a class="pbs-svc__item" href="/services/aeo/" aria-label="AEO, AI Search Optimisation - read more">
+            <div class="pbs-svc__name"><h4>AEO (AI Search)</h4><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <p class="pbs-svc__nut"><b>In a nutshell:</b> be the business that ChatGPT and Google's AI answers recommend.</p>
+          </a></li>
+          <li><a class="pbs-svc__item" href="/services/local-seo/" aria-label="Local SEO and Google Business Profile - read more">
+            <div class="pbs-svc__name"><h4>Local SEO &amp; Google Profile</h4><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <p class="pbs-svc__nut"><b>In a nutshell:</b> show up on Google Maps so nearby customers find you first.</p>
+          </a></li>
+          <li><a class="pbs-svc__item" href="/services/ppc-management/" aria-label="PPC and Digital Advertising - read more">
+            <div class="pbs-svc__name"><h4>PPC &amp; Digital Advertising</h4><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <p class="pbs-svc__nut"><b>In a nutshell:</b> paid ads that put you in front of ready-to-buy customers, without wasting budget.</p>
+          </a></li>
+        </ul>
+      </article>
+
+      <article class="pbs-svc">
+        <div class="pbs-svc__head">
+          <span class="pbs-svc__ic"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg></span>
+          <h3>Marketing</h3>
+        </div>
+        <ul class="pbs-svc__list">
+          <li><a class="pbs-svc__item" href="/services/social-media-marketing/" aria-label="Social Media Marketing - read more">
+            <div class="pbs-svc__name"><h4>Social Media Marketing</h4><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <p class="pbs-svc__nut"><b>In a nutshell:</b> posts and paid social that keep your brand in front of the right people.</p>
+          </a></li>
+          <li><a class="pbs-svc__item" href="/services/content-marketing/" aria-label="Content Marketing - read more">
+            <div class="pbs-svc__name"><h4>Content Marketing</h4><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <p class="pbs-svc__nut"><b>In a nutshell:</b> useful blogs, guides and video that bring in customers for years, not days.</p>
+          </a></li>
+          <li><a class="pbs-svc__item" href="/services/email-marketing/" aria-label="Email Marketing - read more">
+            <div class="pbs-svc__name"><h4>Email Marketing</h4><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <p class="pbs-svc__nut"><b>In a nutshell:</b> stay in touch with past enquiries and turn them into repeat sales.</p>
+          </a></li>
+          <li><a class="pbs-svc__item" href="/services/lead-generation/" aria-label="Lead Generation - read more">
+            <div class="pbs-svc__name"><h4>Lead Generation</h4><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <p class="pbs-svc__nut"><b>In a nutshell:</b> campaigns and landing pages designed to fill your enquiry inbox.</p>
+          </a></li>
+        </ul>
+      </article>
+
+      <article class="pbs-svc">
+        <div class="pbs-svc__head">
+          <span class="pbs-svc__ic"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.5l-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></span>
+          <h3>Branding &amp; Creative</h3>
+        </div>
+        <ul class="pbs-svc__list">
+          <li><a class="pbs-svc__item" href="/services/branding/" aria-label="Branding and Identity - read more">
+            <div class="pbs-svc__name"><h4>Branding &amp; Identity</h4><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <p class="pbs-svc__nut"><b>In a nutshell:</b> a logo and look that makes your business feel established and trustworthy.</p>
+          </a></li>
+          <li><a class="pbs-svc__item" href="/services/graphic-design/" aria-label="Graphic Design - read more">
+            <div class="pbs-svc__name"><h4>Graphic Design</h4><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <p class="pbs-svc__nut"><b>In a nutshell:</b> brochures, property packs and social graphics that all look properly on brand.</p>
+          </a></li>
+          <li><a class="pbs-svc__item" href="/services/video-photography/" aria-label="Video and Photography - read more">
+            <div class="pbs-svc__name"><h4>Video &amp; Photography</h4><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <p class="pbs-svc__nut"><b>In a nutshell:</b> photos and video that show your property, product or team at its best.</p>
+          </a></li>
+          <li><a class="pbs-svc__item" href="/services/copywriting/" aria-label="Copywriting - read more">
+            <div class="pbs-svc__name"><h4>Copywriting</h4><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <p class="pbs-svc__nut"><b>In a nutshell:</b> clear words that explain what you do and persuade people to get in touch.</p>
+          </a></li>
+        </ul>
+      </article>
+
+      <article class="pbs-svc">
+        <div class="pbs-svc__head">
+          <span class="pbs-svc__ic"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9.5 9.5h5v5h-5zM9 2.5V6M15 2.5V6M9 18v3.5M15 18v3.5M2.5 9H6M2.5 15H6M18 9h3.5M18 15h3.5"/></svg></span>
+          <h3>Automation &amp; Security</h3>
+        </div>
+        <ul class="pbs-svc__list">
+          <li><a class="pbs-svc__item" href="/services/ai-automation/" aria-label="AI Automation and Chatbots - read more">
+            <div class="pbs-svc__name"><h4>AI Automation &amp; Chatbots</h4><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <p class="pbs-svc__nut"><b>In a nutshell:</b> let AI answer common questions and follow up leads while you sleep.</p>
+          </a></li>
+          <li><a class="pbs-svc__item" href="/services/crm/" aria-label="CRM Setup and Integration - read more">
+            <div class="pbs-svc__name"><h4>CRM Setup &amp; Integration</h4><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <p class="pbs-svc__nut"><b>In a nutshell:</b> one place to track every enquiry, so no customer slips through the cracks.</p>
+          </a></li>
+          <li><a class="pbs-svc__item" href="/services/cyber-security/" aria-label="Cyber Security - read more">
+            <div class="pbs-svc__name"><h4>Cyber Security</h4><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <p class="pbs-svc__nut"><b>In a nutshell:</b> protect your website and customer data from hackers and downtime.</p>
+          </a></li>
+          <li><a class="pbs-svc__item" href="/services/website-maintenance/" aria-label="Website Care and Hosting - read more">
+            <div class="pbs-svc__name"><h4>Website Care &amp; Hosting</h4><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <p class="pbs-svc__nut"><b>In a nutshell:</b> we keep your site fast, updated, backed up and online, so you don't have to.</p>
+          </a></li>
+        </ul>
+      </article>
+
+      <article class="pbs-svc pbs-svc--dark">
+        <div class="pbs-svc__head">
+          <span class="pbs-svc__ic"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.3 1.1 2.2h5c0-.9.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span>
+          <h3>Digital Consulting</h3>
+        </div>
+        <p class="pbs-svc__desc"><b>In a nutshell:</b> not sure what you actually need? We look at your website and marketing, then tell you plainly where your money is best spent, and what can wait.</p>
+        <ul class="pbs-svc__points">
+          <li>A plain-English review of where you are now</li>
+          <li>A prioritised plan with costs and timings</li>
+          <li>No jargon and no obligation</li>
+        </ul>
+        <div class="pbs-svc__actions">
+          <a class="pbs-btn" href="/services/digital-consulting/">Book a strategy call <svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="pbs-link" href="/services/">View all services <svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+<!--
+  SECTION 05 — INDUSTRIES
+  Luxury & real estate feature panel + local business cards.
+-->
+<style>
+.pbs-industries{--navy:var(--pb-slate,#01265A);--navy-text:#01265A;--pink:var(--pb-pink,#FA1C6E);--black:var(--pb-dark,#111111);--text:var(--pb-text,#111111);--line:var(--pb-line,#C9D6EA);--gray:var(--pb-bg,#FFF0F6);--font:var(--pb-font,"General Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif);
+  background:#fff;color:var(--text);font-family:var(--font);font-size:17px;line-height:1.6;padding-block:clamp(80px,9vw,128px);-webkit-font-smoothing:antialiased}
+.pbs-industries *,.pbs-industries *::before,.pbs-industries *::after{box-sizing:border-box}
+.pbs-industries :where(h2,h3,h4,p,ul,li){margin:0;padding:0}
+.pbs-industries :where(ul){list-style:none}
+.pbs-industries a{color:inherit;text-decoration:none}
+.pbs-industries img{display:block;max-width:100%;height:auto}
+.pbs-industries svg{display:block;flex:none}
+.pbs-industries .pbs-i{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pbs-industries .pbs-wrap{width:min(1300px,100% - 48px);margin-inline:auto}
+.pbs-industries a:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
+.pbs-industries .pbs-eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:16px;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--navy-text)}
+.pbs-industries .pbs-eyebrow::before{content:"";width:24px;height:2px;border-radius:2px;background:var(--pink)}
+.pbs-industries h2{font-size:clamp(2rem,3.6vw,3.1rem);font-weight:600;line-height:1.08;letter-spacing:-.03em;color:var(--black)}
+.pbs-industries .pbs-head{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:24px 72px;align-items:end;margin-bottom:clamp(40px,5vw,64px)}
+.pbs-industries .pbs-head__intro{font-size:1.0625rem}
+
+/* Luxury panel */
+.pbs-industries .pbs-lux{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);border-radius:28px;overflow:hidden;background:var(--navy);color:rgba(255,255,255,.72)}
+.pbs-industries .pbs-lux__media{position:relative;min-height:560px}
+.pbs-industries .pbs-lux__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pbs-industries .pbs-lux__body{display:flex;flex-direction:column;padding:clamp(32px,4.5vw,56px)}
+.pbs-industries .pbs-lux__kicker{display:inline-flex;align-items:center;gap:10px;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--pink)}
+.pbs-industries .pbs-lux__kicker::before{content:"";width:24px;height:2px;border-radius:2px;background:var(--pink)}
+.pbs-industries .pbs-lux h3{margin-top:16px;font-size:clamp(1.6rem,2.4vw,2.1rem);font-weight:600;line-height:1.15;letter-spacing:-.025em;color:#fff}
+.pbs-industries .pbs-lux__rows{margin-top:28px}
+.pbs-industries .pbs-lux__row{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;padding:20px 0;border-top:1px solid rgba(255,255,255,.14)}
+.pbs-industries .pbs-lux__row h4{font-size:1.15rem;font-weight:600;color:#fff}
+.pbs-industries .pbs-lux__row p{margin-top:5px;font-size:.92rem;line-height:1.5}
+.pbs-industries .pbs-lux__row p b{font-weight:600;color:#FFAFCC}
+.pbs-industries .pbs-sme p{color:#33343A}
+.pbs-industries .pbs-sme p b{font-weight:600;color:#C45D7E}
+.pbs-industries .pbs-go{display:grid;place-items:center;width:40px;height:40px;border:1px solid rgba(255,255,255,.25);border-radius:50%;color:#fff;transition:background-color .2s ease,border-color .2s ease,color .2s ease,transform .2s ease}
+.pbs-industries .pbs-go .pbs-i{width:16px;height:16px}
+.pbs-industries .pbs-lux__row:hover .pbs-go{background:var(--pink);border-color:var(--pink);color:var(--black);transform:translateX(3px)}
+.pbs-industries .pbs-lux__chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:24px}
+.pbs-industries .pbs-lux__chips li{padding:7px 14px;border-radius:999px;background:rgba(1,38,90,.35);color:#fff;font-size:.8rem;font-weight:500}
+
+/* Local businesses */
+.pbs-industries .pbs-sme-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin:clamp(56px,6vw,80px) 0 24px}
+.pbs-industries .pbs-sme-head h3{font-size:1.5rem;font-weight:600;letter-spacing:-.02em;color:var(--black)}
+.pbs-industries .pbs-sme-head p{margin-top:4px;font-size:.98rem}
+.pbs-industries .pbs-link{display:inline-flex;align-items:center;gap:8px;padding-bottom:4px;border-bottom:1.5px solid var(--pink);font-weight:600;white-space:nowrap;color:var(--black);transition:color .2s ease,border-color .2s ease}
+.pbs-industries .pbs-link:hover{color:var(--navy-text);border-color:var(--navy)}
+.pbs-industries .pbs-link .pbs-i{width:16px;height:16px}
+.pbs-industries .pbs-sme-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.pbs-industries .pbs-sme{display:grid;grid-template-columns:88px 1fr auto;gap:16px;align-items:center;padding:12px 18px 12px 12px;border:1px solid var(--line);border-radius:20px;background:#fff;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.pbs-industries .pbs-sme:hover{transform:translateY(-3px);border-color:transparent;box-shadow:0 24px 48px -28px rgba(1,38,90,.3)}
+.pbs-industries .pbs-sme img{width:88px;height:88px;object-fit:cover;border-radius:14px}
+.pbs-industries .pbs-sme h4{font-size:1.05rem;font-weight:600;line-height:1.3;color:var(--black)}
+.pbs-industries .pbs-sme p{margin-top:4px;font-size:.86rem;line-height:1.45}
+.pbs-industries .pbs-sme .pbs-go{width:34px;height:34px;border-color:var(--line);color:var(--black)}
+.pbs-industries .pbs-sme:hover .pbs-go{background:var(--pink);border-color:var(--pink)}
+
+@media (max-width:1100px){.pbs-industries .pbs-sme-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:1024px){
+  .pbs-industries .pbs-head,.pbs-industries .pbs-lux{grid-template-columns:1fr}
+  .pbs-industries .pbs-lux__media{min-height:0;aspect-ratio:16/10}
+}
+@media (max-width:640px){
+  .pbs-industries .pbs-wrap{width:min(1300px,100% - 32px)}
+  .pbs-industries .pbs-lux{border-radius:22px}
+  .pbs-industries .pbs-sme-grid{grid-template-columns:1fr}
+  .pbs-industries .pbs-sme-head{flex-direction:column;align-items:flex-start}
+  .pbs-industries .pbs-sme{grid-template-columns:72px 1fr auto}
+  .pbs-industries .pbs-sme img{width:72px;height:72px}
+}
+</style>
+
+<section id="pbs-industries" class="pbs-industries" aria-labelledby="pbs-industries-title">
+  <div class="pbs-wrap">
+    <div class="pbs-head">
+      <div>
+        <p class="pbs-eyebrow">Industries we serve</p>
+        <h2 id="pbs-industries-title">Specialists in luxury real estate. Trusted by local businesses.</h2>
+      </div>
+      <p class="pbs-head__intro">We understand the difference between selling a £5 million penthouse and filling a dentist's diary, and we build a digital strategy that fits each one.</p>
+    </div>
+
+    <div class="pbs-lux">
+      <div class="pbs-lux__media">
+        <img src="https://pinkybraindigital.com/wp-content/uploads/2026/09/photo-1600585154526-990dced4db0d.webp"
+             alt="Contemporary luxury home at dusk, representing real estate and property developer marketing"
+             width="1000" height="1100" loading="lazy" decoding="async">
+      </div>
+      <div class="pbs-lux__body">
+        
+        <h3>Premium digital marketing for property and luxury brands</h3>
+        <div class="pbs-lux__rows">
+          <a class="pbs-lux__row" href="/industries/real-estate-marketing/">
+            <div><h4>Real Estate Agencies</h4><p><b>In a nutshell:</b> listing websites, property SEO and lead generation that win more instructions.</p></div>
+            <span class="pbs-go"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+          <a class="pbs-lux__row" href="/industries/property-developers/">
+            <div><h4>Property Developers</h4><p><b>In a nutshell:</b> launch campaigns, development microsites and international buyer leads.</p></div>
+            <span class="pbs-go"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+          <a class="pbs-lux__row" href="/industries/luxury-brands/">
+            <div><h4>Luxury &amp; Lifestyle Brands</h4><p><b>In a nutshell:</b> refined identities, e-commerce and content that protect exclusivity.</p></div>
+            <span class="pbs-go"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </div>
+        <ul class="pbs-lux__chips" aria-label="What we deliver for luxury clients">
+          <li>Property websites &amp; IDX search</li>
+          <li>CGI &amp; virtual tours</li>
+          <li>International buyer campaigns</li>
+          <li>CRM &amp; lead automation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pbs-sme-head">
+      <div>
+        <h3>Local &amp; growing businesses</h3>
+        <p>Practical, affordable digital marketing that brings in customers every week.</p>
+      </div>
+      <a class="pbs-link" href="/industries/">All industries <svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+
+    <div class="pbs-sme-grid">
+      <a class="pbs-sme" href="/industries/dental-marketing/">
+        <img src="https://pinkybraindigital.com/wp-content/uploads/2026/09/Modern-dental-clinic-treatment-room.avif" alt="Modern dental clinic treatment room" width="200" height="200" loading="lazy" decoding="async">
+        <div><h4>Dentists &amp; Clinics</h4><p><b>In a nutshell:</b> fill your appointment book from local searches.</p></div>
+        <span class="pbs-go"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="pbs-sme" href="/industries/trades-marketing/">
+        <img src="https://pinkybraindigital.com/wp-content/uploads/2026/09/plumber.avif" width="200" height="200" loading="lazy" decoding="async">
+        <div><h4>Plumbers &amp; Electricians</h4><p><b>In a nutshell:</b> turn local searches into booked jobs.</p></div>
+        <span class="pbs-go"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="pbs-sme" href="/industries/restaurant-marketing/">
+        <img src="https://pinkybraindigital.com/wp-content/uploads/2026/09/cafe.avif" alt="Stylish restaurant dining room" width="200" height="200" loading="lazy" decoding="async">
+        <div><h4>Restaurants &amp; Cafés</h4><p><b>In a nutshell:</b> more bookings from Google, menus and social.</p></div>
+        <span class="pbs-go"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="pbs-sme" href="/industries/retail-marketing/">
+        <img src="https://pinkybraindigital.com/wp-content/uploads/2026/09/shop.avif" alt="Customer paying at a retail shop counter" width="200" height="200" loading="lazy" decoding="async">
+        <div><h4>Retailers &amp; Shops</h4><p><b>In a nutshell:</b> bring more people through your door and online.</p></div>
+        <span class="pbs-go"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="pbs-sme" href="/industries/ecommerce-marketing/">
+        <img src="https://pinkybraindigital.com/wp-content/uploads/2026/09/online.avif" alt="Person shopping online with a card and laptop" width="200" height="200" loading="lazy" decoding="async">
+        <div><h4>Online Businesses</h4><p><b>In a nutshell:</b> sell more with a faster store and smarter ads.</p></div>
+        <span class="pbs-go"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="pbs-sme" href="/industries/professional-services-marketing/">
+        <img src="https://pinkybraindigital.com/wp-content/uploads/2026/09/service.avif" alt="Business professionals celebrating in a meeting" width="200" height="200" loading="lazy" decoding="async">
+        <div><h4>Professional Services</h4><p><b>In a nutshell:</b> win trust and steady enquiries from new clients.</p></div>
+        <span class="pbs-go"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+<!--
+  SECTION 11 — WHY CHOOSE US
+-->
+<style>
+.pbs-why{--navy:var(--pb-slate,#01265A);--navy-text:#01265A;--pink:var(--pb-pink,#FA1C6E);--black:var(--pb-dark,#111111);--text:var(--pb-text,#111111);--line:var(--pb-line,#C9D6EA);--gray:var(--pb-bg,#FFF0F6);--font:var(--pb-font,"General Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif);
+  background:var(--gray);color:var(--text);font-family:var(--font);font-size:17px;line-height:1.6;padding-block:clamp(80px,9vw,128px);-webkit-font-smoothing:antialiased}
+.pbs-why *,.pbs-why *::before,.pbs-why *::after{box-sizing:border-box}
+.pbs-why :where(h2,h3,p,ul,li){margin:0;padding:0}
+.pbs-why :where(ul){list-style:none}
+.pbs-why a{color:inherit;text-decoration:none}
+.pbs-why svg{display:block;flex:none}
+.pbs-why .pbs-i{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pbs-why .pbs-wrap{width:min(1300px,100% - 48px);margin-inline:auto}
+.pbs-why a:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
+.pbs-why .pbs-eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:16px;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--navy-text)}
+.pbs-why .pbs-eyebrow::before{content:"";width:24px;height:2px;border-radius:2px;background:var(--pink)}
+.pbs-why h2{font-size:clamp(2rem,3.6vw,3.1rem);font-weight:600;line-height:1.08;letter-spacing:-.03em;color:var(--black)}
+
+.pbs-why .pbs-why__grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);gap:clamp(40px,6vw,88px);align-items:start}
+.pbs-why .pbs-why__intro{position:sticky;top:32px}
+.pbs-why .pbs-why__lead{margin-top:18px;font-size:1.0625rem}
+.pbs-why .pbs-markets{margin-top:32px;padding:24px;border-radius:24px;background:#fff}
+.pbs-why .pbs-markets__title{font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--navy-text)}
+.pbs-why .pbs-markets ul{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.pbs-why .pbs-markets li{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:var(--gray);font-size:.9rem;font-weight:600;color:var(--black)}
+.pbs-why .pbs-markets li span{display:grid;place-items:center;min-width:34px;height:24px;padding:0 6px;border-radius:6px;background:var(--navy);color:#fff;font-size:.66rem;letter-spacing:.06em}
+.pbs-why .pbs-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;margin-top:24px;padding:14px 26px;border-radius:999px;background:var(--navy);color:#fff;font-size:15px;font-weight:500;line-height:1;transition:background-color .2s ease,transform .2s ease}
+.pbs-why .pbs-btn:hover{background:var(--pink);color:#fff;transform:translateY(-2px)}
+.pbs-why .pbs-btn .pbs-i{width:18px;height:18px}
+
+.pbs-why .pbs-why__items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.pbs-why .pbs-why__item{padding:32px;border-radius:24px;background:#fff;transition:transform .25s ease,box-shadow .25s ease}
+.pbs-why .pbs-why__item:hover{transform:translateY(-4px);box-shadow:0 28px 56px -32px rgba(1,38,90,.3)}
+.pbs-why .pbs-why__ic{display:grid;place-items:center;width:52px;height:52px;margin-bottom:22px;border-radius:16px;background:var(--navy);color:#fff}
+.pbs-why .pbs-why__item:nth-child(4n+2) .pbs-why__ic,.pbs-why .pbs-why__item:nth-child(4n+3) .pbs-why__ic{background:var(--pink);color:var(--black)}
+.pbs-why .pbs-why__ic .pbs-i{width:24px;height:24px}
+.pbs-why .pbs-why__item h3{font-size:1.2rem;font-weight:600;line-height:1.3;letter-spacing:-.015em;color:var(--black)}
+.pbs-why .pbs-why__item p{margin-top:10px;font-size:.95rem}
+
+@media (max-width:1024px){
+  .pbs-why .pbs-why__grid{grid-template-columns:1fr}
+  .pbs-why .pbs-why__intro{position:static}
+}
+@media (max-width:640px){
+  .pbs-why .pbs-wrap{width:min(1300px,100% - 32px)}
+  .pbs-why .pbs-why__items{grid-template-columns:1fr}
+  .pbs-why .pbs-why__item:nth-child(n) .pbs-why__ic{background:var(--navy);color:#fff}
+  .pbs-why .pbs-why__item:nth-child(even) .pbs-why__ic{background:var(--pink);color:var(--black)}
+  .pbs-why .pbs-why__item{padding:26px 24px}
+}
+</style>
+
+<section class="pbs-why" aria-labelledby="pbs-why-title">
+  <div class="pbs-wrap pbs-why__grid">
+    <div class="pbs-why__intro">
+      <p class="pbs-eyebrow">Why Pinky Brain</p>
+      <h2 id="pbs-why-title">Why businesses choose Pinky Brain Digital</h2>
+      <p class="pbs-why__lead">Premium enough for luxury brands, approachable enough for the business around the corner, and always focused on results you can measure.</p>
+      <div class="pbs-markets">
+        <p class="pbs-markets__title">Markets we serve</p>
+        <ul>
+          <li><span>UK</span>United Kingdom</li>
+          <li><span>EU</span>Europe</li>
+          <li><span>US</span>United States</li>
+          <li><span>CA</span>Canada</li>
+        </ul>
+      </div>
+      <a class="pbs-btn" href="/contact/">Book a free consultation <svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+
+    <div class="pbs-why__items">
+      <div class="pbs-why__item">
+        <span class="pbs-why__ic"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.5 3.2-5.5 6.5-5.5s5.9 2 6.5 5.5M16 4.8a3.5 3.5 0 0 1 0 6.4M18.5 14.8c1.7.8 2.8 2.6 3 5.2"/></svg></span>
+        <h3>One partner, every digital skill</h3>
+        <p>Websites, marketing, branding and automation delivered by one joined-up team.</p>
+      </div>
+      <div class="pbs-why__item">
+        <span class="pbs-why__ic"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12l3 6-9 12L3 9z"/><path d="M3 9h18M9 3l3 18 3-18"/></svg></span>
+        <h3>Premium quality at any budget</h3>
+        <p>The same design standards whether you sell penthouses or book boiler repairs.</p>
+      </div>
+      <div class="pbs-why__item">
+        <span class="pbs-why__ic"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg></span>
+        <h3>Built for Google and AI search</h3>
+        <p>SEO and AEO built in, so customers find you on Google, ChatGPT and voice assistants.</p>
+      </div>
+      <div class="pbs-why__item">
+        <span class="pbs-why__ic"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
+        <h3>Transparent reporting</h3>
+        <p>Plain-English monthly reports showing leads, sales and return on investment.</p>
+      </div>
+      <div class="pbs-why__item">
+        <span class="pbs-why__ic"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 3v6c0 4.8-3.4 8.2-8 9-4.6-.8-8-4.2-8-9V6z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></svg></span>
+        <h3>Secure and reliable</h3>
+        <p>Security, backups and ongoing care so your website is always fast and protected.</p>
+      </div>
+      <div class="pbs-why__item">
+        <span class="pbs-why__ic"><svg class="pbs-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span>
+        <h3>A growth partner, not a supplier</h3>
+        <p>We stay with you after launch, testing and improving so your results keep rising.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- =========================================================
+     PINKY BRAIN DIGITAL — TESTIMONIAL SLIDER
+     7 TESTIMONIALS / 3 VISIBLE / ARROW SLIDER
+     Background: #FFFFFF
+========================================================= -->
+
+<style>
+.pbd-testimonials{
+  --navy:#01265A;
+  --pink:#FA1C6E;
+  --dark:#111111;
+  --light:#F6F7FA;
+  --border:#E7E9EE;
+  background:#fff;
+  padding:90px 0;
+  font-family:var(--pb-font,"General Sans",-apple-system,BlinkMacSystemFont,
+  "Segoe UI",Roboto,Helvetica,Arial,sans-serif);
+  overflow:hidden;
+}
+
+.pbd-testimonials *{
+  box-sizing:border-box;
+}
+
+.pbd-testimonials .pbd-container{
+  width:min(1300px,calc(100% - 48px));
+  margin:0 auto;
+}
+
+.pbd-testimonials .pbd-heading{
+  text-align:center;
+  max-width:760px;
+  margin:0 auto 48px;
+}
+
+.pbd-testimonials .pbd-eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  margin-bottom:14px;
+  color:var(--pink);
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.pbd-testimonials .pbd-eyebrow:before{
+  content:"";
+  width:22px;
+  height:2px;
+  background:var(--pink);
+  border-radius:5px;
+}
+
+.pbd-testimonials h2{
+  margin:0;
+  color:var(--navy);
+  font-size:clamp(34px,4vw,52px);
+  line-height:1.08;
+  font-weight:600;
+  letter-spacing:-.035em;
+}
+
+.pbd-testimonials .pbd-subtitle{
+  margin:17px auto 0;
+  color:#606875;
+  font-size:17px;
+  line-height:1.7;
+  max-width:650px;
+}
+
+/* Slider */
+.pbd-testimonials .pbd-slider-wrap{
+  position:relative;
+}
+
+.pbd-testimonials .pbd-slider{
+  overflow:hidden;
+}
+
+.pbd-testimonials .pbd-track{
+  display:flex;
+  gap:24px;
+  transition:transform .55s cubic-bezier(.22,.61,.36,1);
+  will-change:transform;
+}
+
+.pbd-testimonials .pbd-card{
+  flex:0 0 calc((100% - 48px)/3);
+  min-width:0;
+  padding:30px;
+  border:1px solid var(--border);
+  border-radius:22px;
+  background:#fff;
+  transition:border-color .25s ease;
+}
+
+.pbd-testimonials .pbd-card:hover{
+  border-color:rgba(250,28,110,.35);
+}
+
+.pbd-testimonials .pbd-card-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:22px;
+}
+
+.pbd-testimonials .pbd-quote{
+  color:var(--pink);
+  font-size:48px;
+  line-height:.7;
+  font-family:Georgia,serif;
+}
+
+.pbd-testimonials .pbd-stars{
+  display:flex;
+  gap:3px;
+  color:#F7B500;
+}
+
+.pbd-testimonials .pbd-stars svg{
+  width:17px;
+  height:17px;
+  fill:currentColor;
+}
+
+.pbd-testimonials blockquote{
+  margin:0;
+  min-height:145px;
+  color:#252A33;
+  font-size:16px;
+  line-height:1.7;
+}
+
+.pbd-testimonials .pbd-person{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  margin-top:25px;
+  padding-top:20px;
+  border-top:1px solid #ECEEF2;
+}
+
+.pbd-testimonials .pbd-avatar{
+  width:46px;
+  height:46px;
+  flex:0 0 46px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#FCE4EF;
+  color:var(--pink);
+  font-size:16px;
+  font-weight:700;
+}
+
+.pbd-testimonials .pbd-name{
+  display:block;
+  color:var(--navy);
+  font-size:15px;
+  font-weight:700;
+  line-height:1.3;
+}
+
+.pbd-testimonials .pbd-location{
+  display:block;
+  margin-top:3px;
+  color:#7A818D;
+  font-size:13px;
+  line-height:1.4;
+}
+
+/* Arrows */
+.pbd-testimonials .pbd-controls{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin-top:38px;
+}
+
+.pbd-testimonials .pbd-arrow{
+  width:48px;
+  height:48px;
+  padding:0;
+  display:grid;
+  place-items:center;
+  border:1px solid #DDE1E8;
+  border-radius:50%;
+  background:#fff;
+  color:var(--navy);
+  cursor:pointer;
+  transition:all .2s ease;
+}
+
+.pbd-testimonials .pbd-arrow:hover{
+  background:var(--navy);
+  color:#fff;
+  border-color:var(--navy);
+}
+
+.pbd-testimonials .pbd-arrow svg{
+  width:19px;
+  height:19px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+/* Dots */
+.pbd-testimonials .pbd-dots{
+  display:flex;
+  justify-content:center;
+  gap:7px;
+  margin-top:20px;
+}
+
+.pbd-testimonials .pbd-dot{
+  width:7px;
+  height:7px;
+  padding:0;
+  border:0;
+  border-radius:50%;
+  background:#D9DDE4;
+  cursor:pointer;
+  transition:all .25s ease;
+}
+
+.pbd-testimonials .pbd-dot.active{
+  width:24px;
+  border-radius:10px;
+  background:var(--pink);
+}
+
+/* Tablet */
+@media(max-width:1024px){
+  .pbd-testimonials .pbd-card{
+    flex:0 0 calc((100% - 24px)/2);
+  }
+}
+
+/* Mobile */
+@media(max-width:640px){
+  .pbd-testimonials{
+    padding:70px 0;
+  }
+
+  .pbd-testimonials .pbd-container{
+    width:min(100% - 32px,1300px);
+  }
+
+  .pbd-testimonials h2{
+    font-size:36px;
+  }
+
+  .pbd-testimonials .pbd-card{
+    flex:0 0 100%;
+    padding:25px;
+  }
+
+  .pbd-testimonials blockquote{
+    min-height:auto;
+  }
+}
+</style>
+
+
+<section class="pbd-testimonials" aria-labelledby="pbd-testimonials-title">
+
+  <div class="pbd-container">
+
+    <div class="pbd-heading">
+      <div class="pbd-eyebrow">Client Feedback</div>
+
+      <h2 id="pbd-testimonials-title">
+        What Our Clients Say
+      </h2>
+
+      <p class="pbd-subtitle">
+        From websites and SEO to digital marketing and automation,
+        we help businesses build a stronger digital presence and grow with confidence.
+      </p>
+    </div>
+
+
+    <div class="pbd-slider-wrap">
+
+      <div class="pbd-slider">
+
+        <div class="pbd-track" id="pbdTrack">
+
+          <!-- 01 -->
+          <article class="pbd-card">
+
+            <div class="pbd-card-top">
+              <span class="pbd-quote">“</span>
+
+              <div class="pbd-stars">
+                ★★★★★
+              </div>
+            </div>
+
+            <blockquote>
+              The website feels much more professional and makes it far easier
+              for potential customers to understand our services. The whole
+              process was clear and straightforward.
+            </blockquote>
+
+            <div class="pbd-person">
+              <div class="pbd-avatar">J</div>
+
+              <div>
+                <span class="pbd-name">James R.</span>
+                <span class="pbd-location">Property Services · London, UK</span>
+              </div>
+            </div>
+
+          </article>
+
+
+          <!-- 02 -->
+          <article class="pbd-card">
+
+            <div class="pbd-card-top">
+              <span class="pbd-quote">“</span>
+
+              <div class="pbd-stars">
+                ★★★★★
+              </div>
+            </div>
+
+            <blockquote>
+              Our online presence is now much easier to manage. The new website
+              structure and SEO work gave us a clearer foundation for generating
+              enquiries through Google.
+            </blockquote>
+
+            <div class="pbd-person">
+              <div class="pbd-avatar">S</div>
+
+              <div>
+                <span class="pbd-name">Sarah M.</span>
+                <span class="pbd-location">Professional Services · Manchester, UK</span>
+              </div>
+            </div>
+
+          </article>
+
+
+          <!-- 03 -->
+          <article class="pbd-card">
+
+            <div class="pbd-card-top">
+              <span class="pbd-quote">“</span>
+
+              <div class="pbd-stars">
+                ★★★★★
+              </div>
+            </div>
+
+            <blockquote>
+              Pinky Brain helped us bring our website and marketing into one
+              clear strategy. Everything is much easier to understand,
+              and our brand now looks far more established.
+            </blockquote>
+
+            <div class="pbd-person">
+              <div class="pbd-avatar">D</div>
+
+              <div>
+                <span class="pbd-name">Daniel T.</span>
+                <span class="pbd-location">Local Business · Birmingham, UK</span>
+              </div>
+            </div>
+
+          </article>
+
+
+          <!-- 04 -->
+          <article class="pbd-card">
+
+            <div class="pbd-card-top">
+              <span class="pbd-quote">“</span>
+
+              <div class="pbd-stars">
+                ★★★★★
+              </div>
+            </div>
+
+            <blockquote>
+              We needed better visibility in local search and a website that
+              converted visitors into enquiries. The approach was practical,
+              easy to follow and focused on the areas that mattered most.
+            </blockquote>
+
+            <div class="pbd-person">
+              <div class="pbd-avatar">E</div>
+
+              <div>
+                <span class="pbd-name">Emma W.</span>
+                <span class="pbd-location">Dental Practice · Leeds, UK</span>
+              </div>
+            </div>
+
+          </article>
+
+
+          <!-- 05 -->
+          <article class="pbd-card">
+
+            <div class="pbd-card-top">
+              <span class="pbd-quote">“</span>
+
+              <div class="pbd-stars">
+                ★★★★★
+              </div>
+            </div>
+
+            <blockquote>
+              The team understood what we wanted from the beginning. Our
+              branding, website and digital campaigns now feel consistent
+              instead of looking like separate pieces.
+            </blockquote>
+
+            <div class="pbd-person">
+              <div class="pbd-avatar">A</div>
+
+              <div>
+                <span class="pbd-name">Andrew P.</span>
+                <span class="pbd-location">Property Developer · Bristol, UK</span>
+              </div>
+            </div>
+
+          </article>
+
+
+          <!-- 06 -->
+          <article class="pbd-card">
+
+            <div class="pbd-card-top">
+              <span class="pbd-quote">“</span>
+
+              <div class="pbd-stars">
+                ★★★★★
+              </div>
+            </div>
+
+            <blockquote>
+              We wanted a better way to manage enquiries and follow up with
+              potential customers. The digital and automation work has made
+              the process much more organised for our team.
+            </blockquote>
+
+            <div class="pbd-person">
+              <div class="pbd-avatar">O</div>
+
+              <div>
+                <span class="pbd-name">Olivia K.</span>
+                <span class="pbd-location">Online Business · London, UK</span>
+              </div>
+            </div>
+
+          </article>
+
+
+          <!-- 07 -->
+          <article class="pbd-card">
+
+            <div class="pbd-card-top">
+              <span class="pbd-quote">“</span>
+
+              <div class="pbd-stars">
+                ★★★★★
+              </div>
+            </div>
+
+            <blockquote>
+              We finally have a digital partner that understands both the
+              creative and technical side of our business. The communication
+              is clear and the work stays focused on measurable growth.
+            </blockquote>
+
+            <div class="pbd-person">
+              <div class="pbd-avatar">L</div>
+
+              <div>
+                <span class="pbd-name">Liam H.</span>
+                <span class="pbd-location">Marketing Consultant · Edinburgh, UK</span>
+              </div>
+            </div>
+
+          </article>
+
+        </div>
+      </div>
+
+
+      <!-- Arrows -->
+      <div class="pbd-controls">
+
+        <button class="pbd-arrow" id="pbdPrev" aria-label="Previous testimonial">
+          <svg viewBox="0 0 24 24">
+            <path d="M19 12H5"></path>
+            <path d="M11 18l-6-6 6-6"></path>
+          </svg>
+        </button>
+
+        <button class="pbd-arrow" id="pbdNext" aria-label="Next testimonial">
+          <svg viewBox="0 0 24 24">
+            <path d="M5 12h14"></path>
+            <path d="M13 6l6 6-6 6"></path>
+          </svg>
+        </button>
+
+      </div>
+
+
+      <!-- Dots -->
+      <div class="pbd-dots" id="pbdDots">
+        <button class="pbd-dot active"></button>
+        <button class="pbd-dot"></button>
+        <button class="pbd-dot"></button>
+        <button class="pbd-dot"></button>
+        <button class="pbd-dot"></button>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<script>
+(function(){
+
+  const track = document.getElementById("pbdTrack");
+  const prev = document.getElementById("pbdPrev");
+  const next = document.getElementById("pbdNext");
+  const dots = document.querySelectorAll("#pbdDots .pbd-dot");
+
+  if(!track || !prev || !next) return;
+
+  let current = 0;
+
+  function getVisible(){
+
+    if(window.innerWidth <= 640){
+      return 1;
+    }
+
+    if(window.innerWidth <= 1024){
+      return 2;
+    }
+
+    return 3;
+  }
+
+  function getMax(){
+
+    const visible = getVisible();
+    const total = track.children.length;
+
+    return Math.max(0,total - visible);
+  }
+
+  function updateSlider(){
+
+    const visible = getVisible();
+    const gap = 24;
+
+    const cardWidth =
+      (track.parentElement.clientWidth - gap * (visible - 1))
+      / visible;
+
+    const move = cardWidth + gap;
+
+    current = Math.max(0,Math.min(current,getMax()));
+
+    track.style.transform =
+      "translateX(-" + (current * move) + "px)";
+
+    dots.forEach(function(dot,index){
+      dot.classList.toggle("active",index === current);
+    });
+  }
+
+  next.addEventListener("click",function(){
+
+    if(current < getMax()){
+      current++;
+    }else{
+      current = 0;
+    }
+
+    updateSlider();
+
+  });
+
+  prev.addEventListener("click",function(){
+
+    if(current > 0){
+      current--;
+    }else{
+      current = getMax();
+    }
+
+    updateSlider();
+
+  });
+
+  dots.forEach(function(dot,index){
+
+    dot.addEventListener("click",function(){
+
+      current = Math.min(index,getMax());
+      updateSlider();
+
+    });
+
+  });
+
+  window.addEventListener("resize",updateSlider);
+
+  updateSlider();
+
+})();
+</script><!--
+  SECTION 13 — FAQ
+  Includes FAQPage schema (JSON-LD). Use this section only ONCE per page.
+  If you edit a question or answer, update the matching text in the
+  schema at the bottom too.
+-->
+<style>
+.pbs-faq{--navy:var(--pb-slate,#01265A);--navy-text:#01265A;--pink:var(--pb-pink,#FA1C6E);--black:var(--pb-dark,#111111);--text:var(--pb-text,#111111);--line:var(--pb-line,#C9D6EA);--gray:var(--pb-bg,#FFF0F6);--font:var(--pb-font,"General Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif);
+  background:var(--gray);color:var(--text);font-family:var(--font);font-size:17px;line-height:1.6;padding-block:clamp(80px,9vw,128px);-webkit-font-smoothing:antialiased}
+.pbs-faq *,.pbs-faq *::before,.pbs-faq *::after{box-sizing:border-box}
+.pbs-faq :where(h2,h3,p){margin:0;padding:0}
+.pbs-faq a{color:inherit;text-decoration:none}
+.pbs-faq .pbs-wrap{width:min(1300px,100% - 48px);margin-inline:auto}
+.pbs-faq a:focus-visible,.pbs-faq summary:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
+.pbs-faq .pbs-eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:16px;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--navy-text)}
+.pbs-faq .pbs-eyebrow::before{content:"";width:24px;height:2px;border-radius:2px;background:var(--pink)}
+.pbs-faq h2{font-size:clamp(2rem,3.6vw,3.1rem);font-weight:600;line-height:1.08;letter-spacing:-.03em;color:var(--black)}
+
+.pbs-faq .pbs-faq__grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(40px,6vw,88px);align-items:start}
+.pbs-faq .pbs-faq__intro{position:sticky;top:32px}
+.pbs-faq .pbs-faq__lead{margin-top:18px;font-size:1.0625rem}
+.pbs-faq .pbs-help{position:relative;overflow:hidden;margin-top:32px;padding:30px;border-radius:24px;background:var(--navy);color:rgba(255,255,255,.72);isolation:isolate}
+.pbs-faq .pbs-help::after{content:"";position:absolute;z-index:-1;right:-100px;bottom:-120px;width:280px;height:280px;border-radius:50%;background:radial-gradient(closest-side,rgba(1,38,90,.7),transparent)}
+.pbs-faq .pbs-help h3{font-size:1.3rem;font-weight:600;color:#fff}
+.pbs-faq .pbs-help p{margin:8px 0 22px;font-size:.95rem}
+.pbs-faq .pbs-help__actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
+.pbs-faq .pbs-help__mail{padding-bottom:3px;border-bottom:1.5px solid var(--pink);font-size:.92rem;font-weight:600;color:#fff}
+
+.pbs-faq .pbs-faq__list{display:flex;flex-direction:column;gap:12px}
+.pbs-faq details{border:1px solid transparent;border-radius:18px;background:#fff;transition:border-color .2s ease,box-shadow .2s ease}
+.pbs-faq details[open]{border-color:var(--navy);box-shadow:0 20px 40px -28px rgba(1,38,90,.25)}
+.pbs-faq summary{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 24px;cursor:pointer;list-style:none}
+.pbs-faq summary::-webkit-details-marker{display:none}
+.pbs-faq summary::after{content:"";flex:none;width:36px;height:36px;border-radius:50%;background:var(--gray) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 1.5v11M1.5 7h11' stroke='%23111111' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") center/12px no-repeat;transition:transform .25s ease,background-color .25s ease}
+.pbs-faq details[open] summary::after{transform:rotate(45deg);background-color:var(--pink)}
+.pbs-faq summary h3{font-size:1.06rem;font-weight:600;line-height:1.4;letter-spacing:-.01em;color:var(--black)}
+.pbs-faq details p{padding:0 24px 24px;font-size:.97rem}
+
+@media (max-width:1024px){
+  .pbs-faq .pbs-faq__grid{grid-template-columns:1fr}
+  .pbs-faq .pbs-faq__intro{position:static}
+}
+@media (max-width:640px){
+  .pbs-faq .pbs-wrap{width:min(1300px,100% - 32px)}
+  .pbs-faq summary{padding:18px 18px}
+  .pbs-faq details p{padding:0 18px 20px}
+}
+</style>
+
+<section id="pbs-faq" class="pbs-faq" aria-labelledby="pbs-faq-title">
+  <div class="pbs-wrap pbs-faq__grid">
+    <div class="pbs-faq__intro">
+      <p class="pbs-eyebrow">FAQs</p>
+      <h2 id="pbs-faq-title">Frequently asked questions</h2>
+      <p class="pbs-faq__lead">Straight answers to the questions businesses ask us most.</p>
+      <div class="pbs-help">
+        <h3>Still have a question?</h3>
+        <p>Talk to a real person about your business. We usually reply within one working day.</p>
+        <div class="pbs-help__actions">
+          <a class="pbs-help__mail" href="mailto:hello@pinkybraindigital.com">hello@pinkybraindigital.com</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pbs-faq__list">
+      <details open>
+        <summary><h3>What does a full-service digital agency do?</h3></summary>
+        <p>A full-service digital agency handles everything a business needs online: website design, e-commerce, SEO and AEO, digital advertising, social media, content, branding, CRM and AI automation. Instead of managing several suppliers, you work with one team that plans and delivers it all.</p>
+      </details>
+      <details>
+        <summary><h3>Do you work with small businesses as well as luxury brands?</h3></summary>
+        <p>Yes. We work with luxury real estate agencies, property developers and premium brands, and with SMEs such as dentists, plumbers, electricians, restaurants, retailers and online businesses. Every plan is scaled to your goals and budget.</p>
+      </details>
+      <details>
+        <summary><h3>Which countries do you work in?</h3></summary>
+        <p>We work with clients across the United Kingdom, Europe, the United States and Canada. Campaigns are tailored to each market's language, currency and search behaviour.</p>
+      </details>
+      <details>
+        <summary><h3>What is AEO and does my business need it?</h3></summary>
+        <p>AEO (Answer Engine Optimisation) helps your business become the answer that AI tools such as ChatGPT, Google AI Overviews and voice assistants give when customers ask questions. As more people search this way, AEO works alongside SEO to keep you visible.</p>
+      </details>
+      <details>
+        <summary><h3>How much does a website cost?</h3></summary>
+        <p>It depends on the size, features and level of design you need. Our Starter, Growth and Luxury &amp; Bespoke packages cover most businesses, and we provide a clear, fixed quote after a free consultation.</p>
+      </details>
+      <details>
+        <summary><h3>Can you improve our existing website instead of rebuilding it?</h3></summary>
+        <p>Yes. We can audit your current website and improve its speed, design, SEO and conversions. If a rebuild would give you a better return, we'll explain why before you commit.</p>
+      </details>
+      <details>
+        <summary><h3>Can you help my business use AI automation?</h3></summary>
+        <p>Yes. We build AI chatbots, automated lead follow-up, booking workflows and CRM automations that save your team time and make sure no enquiry is missed.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What does a full-service digital agency do?", "acceptedAnswer": {"@type": "Answer", "text": "A full-service digital agency handles everything a business needs online: website design, e-commerce, SEO and AEO, digital advertising, social media, content, branding, CRM and AI automation. Instead of managing several suppliers, you work with one team that plans and delivers it all."}},
+    {"@type": "Question", "name": "Do you work with small businesses as well as luxury brands?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We work with luxury real estate agencies, property developers and premium brands, and with SMEs such as dentists, plumbers, electricians, restaurants, retailers and online businesses. Every plan is scaled to your goals and budget."}},
+    {"@type": "Question", "name": "Which countries do you work in?", "acceptedAnswer": {"@type": "Answer", "text": "We work with clients across the United Kingdom, Europe, the United States and Canada. Campaigns are tailored to each market's language, currency and search behaviour."}},
+    {"@type": "Question", "name": "What is AEO and does my business need it?", "acceptedAnswer": {"@type": "Answer", "text": "AEO (Answer Engine Optimisation) helps your business become the answer that AI tools such as ChatGPT, Google AI Overviews and voice assistants give when customers ask questions. As more people search this way, AEO works alongside SEO to keep you visible."}},
+    {"@type": "Question", "name": "How much does a website cost?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on the size, features and level of design you need. Our Starter, Growth and Luxury & Bespoke packages cover most businesses, and we provide a clear, fixed quote after a free consultation."}},
+    {"@type": "Question", "name": "Can you improve our existing website instead of rebuilding it?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We can audit your current website and improve its speed, design, SEO and conversions. If a rebuild would give you a better return, we'll explain why before you commit."}},
+    {"@type": "Question", "name": "Can you help my business use AI automation?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We build AI chatbots, automated lead follow-up, booking workflows and CRM automations that save your team time and make sure no enquiry is missed."}}
+  ]
+}
+</script>
+<!--
+  SECTION 06 — RESULTS / STATS (white band)
+  PLACEHOLDER NUMBERS — replace with your real figures before publishing.
+-->
+<style>
+.pbs-stats{--navy:var(--pb-slate,#01265A);--pink:var(--pb-pink,#FA1C6E);--black:var(--pb-dark,#111111);--line:var(--pb-line,#C9D6EA);--font:var(--pb-font,"General Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif);
+  position:relative;overflow:hidden;background:#fff;color:var(--black);font-family:var(--font);font-size:17px;line-height:1.5;padding-block:clamp(56px,6vw,88px);-webkit-font-smoothing:antialiased}
+.pbs-stats *,.pbs-stats *::before,.pbs-stats *::after{box-sizing:border-box}
+.pbs-stats :where(h2,p,ul,li){margin:0;padding:0}
+.pbs-stats :where(ul){list-style:none}
+.pbs-stats .pbs-wrap{position:relative;z-index:1;width:min(1300px,100% - 48px);margin-inline:auto;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,2.15fr);gap:40px 64px;align-items:center}
+.pbs-stats .pbs-stats__kicker{display:flex;align-items:center;gap:10px;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--navy)}
+.pbs-stats .pbs-stats__kicker::before{content:"";width:24px;height:2px;border-radius:2px;background:var(--pink)}
+.pbs-stats h2{margin-top:14px;font-size:clamp(1.6rem,2.4vw,2.1rem);font-weight:600;line-height:1.15;letter-spacing:-.02em;color:var(--black)}
+.pbs-stats .pbs-stats__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.pbs-stats .pbs-stat{padding:4px 24px;border-left:1px solid var(--line)}
+.pbs-stats .pbs-stat__num{display:block;font-size:clamp(2.2rem,3.4vw,3rem);font-weight:600;line-height:1;letter-spacing:-.03em;color:var(--navy)}
+.pbs-stats .pbs-stat__num::after{content:"";display:block;width:28px;height:3px;margin-top:14px;border-radius:2px;background:var(--pink)}
+.pbs-stats .pbs-stat__label{display:block;margin-top:12px;font-size:.92rem;line-height:1.45;color:var(--black)}
+@media (max-width:1024px){.pbs-stats .pbs-wrap{grid-template-columns:1fr}}
+@media (max-width:640px){
+  .pbs-stats .pbs-wrap{width:min(1300px,100% - 32px)}
+  .pbs-stats .pbs-stats__grid{grid-template-columns:1fr 1fr;row-gap:32px}
+  .pbs-stats .pbs-stat{padding:0 0 0 18px}
+}
+</style>
+
+<section class="pbs-stats" aria-labelledby="pbs-stats-title">
+  <div class="pbs-wrap">
+    <div>
+      <p class="pbs-stats__kicker">Results so far</p>
+      <h2 id="pbs-stats-title">Growth you can measure</h2>
+    </div>
+    <ul class="pbs-stats__grid">
+      <li class="pbs-stat"><span class="pbs-stat__num">150+</span><span class="pbs-stat__label">Websites and campaigns delivered</span></li>
+      <li class="pbs-stat"><span class="pbs-stat__num">4</span><span class="pbs-stat__label">Markets served: UK, Europe, USA, Canada</span></li>
+      <li class="pbs-stat"><span class="pbs-stat__num">3.2x</span><span class="pbs-stat__label">Average increase in qualified leads</span></li>
+      <li class="pbs-stat"><span class="pbs-stat__num">20+</span><span class="pbs-stat__label">Digital services under one roof</span></li>
+    </ul>
+  </div>
+</section>

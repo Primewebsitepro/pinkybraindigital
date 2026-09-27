@@ -1,0 +1,6 @@
+_ref/*.html
+_ref/*.txt
+_ref/extract_text.py
+!_ref/index.homepage-fragment.html
+Thumbs.db
+.DS_Store
