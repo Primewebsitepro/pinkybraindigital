@@ -97,15 +97,15 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
   .pb-burger{display:flex}
   body.pb-nav-open .pb-mobile-nav{display:flex}
 }
-.pb-mobile-nav{display:none;position:fixed;inset:0;z-index:50;background:#fff;flex-direction:column;padding:18px 24px 32px}
-.pb-mobile-nav__top{display:flex;align-items:center;justify-content:space-between}
+.pb-mobile-nav{display:none;position:fixed;inset:0;z-index:50;background:#fff;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.pb-mobile-nav__top{position:sticky;top:0;z-index:2;background:#fff;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;flex:none}
 .pb-mobile-nav__top img{height:46px;width:auto}
 .pb-mobile-nav__close{flex:none}
 .pb-mobile-nav__close{width:44px;height:44px;border:1px solid var(--pb-line);border-radius:12px;background:#fff;display:grid;place-items:center}
-.pb-mobile-nav ul{margin-top:24px;display:flex;flex-direction:column;gap:4px;overflow-y:auto;max-height:calc(100vh - 180px)}
+.pb-mobile-nav ul{padding:0 24px;margin-top:8px;display:flex;flex-direction:column;gap:4px;flex:none}
 .pb-mobile-nav a{display:block;padding:14px 6px;border-bottom:1px solid var(--pb-line);font-size:1.05rem;font-weight:500}
 .pb-mobile-nav li.pb-mobile-sub a{padding:10px 6px 10px 22px;font-size:.92rem;font-weight:400;color:var(--pb-body);border-bottom:1px solid #F0F0F3}
-.pb-mobile-nav .pb-btn{margin-top:24px;width:100%;flex:none}
+.pb-mobile-nav .pb-btn{position:sticky;bottom:0;z-index:2;margin:20px 24px;width:calc(100% - 48px);flex:none;box-shadow:0 -12px 24px 8px #fff}
 
 /* =========================================================
    FOOTER
@@ -230,6 +230,26 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 .pb-locations{display:flex;flex-wrap:wrap;gap:10px}
 .pb-locations a{padding:9px 16px;border-radius:999px;border:1px solid var(--pb-line);font-size:.86rem;font-weight:500;color:var(--pb-dark);transition:background-color .2s ease,border-color .2s ease,color .2s ease}
 .pb-locations a:hover,.pb-locations a.is-current{background:var(--pb-slate);border-color:var(--pb-slate);color:#fff}
+
+/* =========================================================
+   ABOUT PAGE — approach rows + quote band
+========================================================= */
+.pb-quote-band{position:relative;overflow:hidden;background:var(--pb-slate);padding-block:clamp(56px,7vw,88px);text-align:center;isolation:isolate}
+.pb-quote-band::after{content:"";position:absolute;z-index:-1;left:50%;top:50%;width:900px;height:900px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(250,28,110,.22),transparent)}
+.pb-quote-band .pb-mark{font-family:Georgia,serif;font-size:4rem;line-height:.6;color:var(--pb-pink)}
+.pb-quote-band p{max-width:780px;margin:18px auto 0;font-family:var(--pb-font-head);font-size:clamp(1.4rem,2.6vw,2rem);font-weight:600;line-height:1.35;color:#fff}
+.pb-quote-band span{display:block;margin-top:20px;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+
+.pb-approach-row{padding-block:clamp(48px,6vw,72px)}
+.pb-approach-row .pb-wrap{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:start}
+.pb-approach-row__num{font-family:var(--pb-font-head);font-size:.85rem;font-weight:700;letter-spacing:.1em;color:var(--pb-pink);margin-bottom:14px}
+.pb-approach-row h2{font-size:clamp(1.5rem,2.4vw,1.9rem);line-height:1.2}
+.pb-approach-row p{margin-top:14px;font-size:1.02rem;color:var(--pb-body);max-width:640px}
+@media (max-width:768px){.pb-approach-row .pb-wrap{grid-template-columns:1fr}}
+
+.pb-values-row{display:flex;flex-wrap:wrap;gap:14px}
+.pb-values-row li{display:flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;background:#fff;border:1px solid var(--pb-line);font-family:var(--pb-font-head);font-weight:600;font-size:.95rem;color:var(--pb-dark)}
+.pb-values-row li .pb-i{width:18px;height:18px;color:var(--pb-pink)}
 
 /* =========================================================
    CONTACT FORM

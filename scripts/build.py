@@ -1042,8 +1042,8 @@ EXTRA_SERVICES = {
         "meta": "CRM setup and integration to track every enquiry in one place, connected to your website and marketing tools.",
         "ticks": ["One system for every enquiry", "Connected to your website &amp; ads", "Set up around your sales process"],
         "badge": ("One inbox", "For every enquiry", ""),
-        "hero_img": "professional-services-marketing.avif", "hero_alt": "CRM dashboard showing customer enquiries",
-        "split_img": "ecommerce-online-business-marketing.avif", "split_alt": "Sales pipeline being reviewed on a laptop",
+        "hero_img": "website-design-development-process.webp", "hero_alt": "CRM dashboard showing customer enquiries",
+        "split_img": "homepage-hero-digital-agency-team.webp", "split_alt": "Sales pipeline being reviewed by the team",
         "why_title": "Scattered enquiries mean lost customers.",
         "why_cards": [
             ("Scattered enquiries mean lost customers.", "When leads live across email, spreadsheets and sticky notes, some inevitably get missed."),
@@ -1092,7 +1092,7 @@ EXTRA_SERVICES = {
         "ticks": ["Security monitoring &amp; hardening", "Backups &amp; recovery plans", "Plain-English advice"],
         "badge": ("Monitored", "Around the clock", ""),
         "hero_img": "website-design-service-hero.jpg", "hero_alt": "Website security dashboard shown on a laptop",
-        "split_img": "professional-services-marketing.avif", "split_alt": "Security review being carried out on a website",
+        "split_img": "aeo-ai-search-detail.jpg", "split_alt": "Security review being carried out on a website",
         "why_title": "Most attacks target easy targets, not big ones.",
         "why_cards": [
             ("Most attacks target easy targets, not big ones.", "Automated attacks scan for unpatched, poorly configured websites &mdash; size rarely matters."),
@@ -1189,7 +1189,7 @@ EXTRA_SERVICES = {
         "meta": "Digital consulting - a plain-English review of your website and marketing, with a prioritised, honest plan.",
         "ticks": ["Plain-English review", "Prioritised plan with costs", "No jargon, no obligation"],
         "badge": ("Delivered", "A clear, honest plan", ""),
-        "hero_img": "professional-services-marketing.avif", "hero_alt": "Digital strategy consultation in progress",
+        "hero_img": "homepage-hero-digital-agency-team.webp", "hero_alt": "Digital strategy consultation in progress",
         "split_img": "about-pinky-brain-digital-team.webp", "split_alt": "Consultant reviewing a website and marketing plan",
         "why_title": "Most businesses don&rsquo;t need everything at once.",
         "why_cards": [
@@ -1350,7 +1350,6 @@ def header_html(root):
         </li>
         <li><a href="%(root)slocations.html">Locations</a></li>
         <li><a href="%(root)sabout-us.html">About Us</a></li>
-        <li><a href="%(root)scontact-us.html">Contact</a></li>
       </ul>
       <a class="pb-btn pb-btn--dark pb-nav__cta" href="%(root)scontact-us.html">Book a free consultation</a>
       <button class="pb-burger" aria-label="Open menu"><svg class="pb-i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
@@ -1371,7 +1370,6 @@ def header_html(root):
     %(dm_sub_m)s
     <li><a href="%(root)slocations.html">Locations</a></li>
     <li><a href="%(root)sabout-us.html">About Us</a></li>
-    <li><a href="%(root)scontact-us.html">Contact</a></li>
   </ul>
   <a class="pb-btn pb-btn--dark" href="%(root)scontact-us.html">Book a free consultation</a>
 </div>
@@ -1898,18 +1896,26 @@ def build_about_page():
     title = "About Us | Pinky Brain Digital"
     desc = "Digital is complicated. Trust shouldn't be. Meet Pinky Brain Digital and the approach behind every project we take on."
 
-    sections_html = "".join("""
-<div style="max-width:720px;margin-bottom:%(mb)s">
-  <span class="pb-card__ic">%(icon)s</span>
-  <h2 style="margin-top:18px">%(title)s</h2>
-  <p style="margin-top:14px;font-size:1.02rem;color:var(--pb-body)">%(p1)s</p>
-  <p style="margin-top:14px;font-size:1.02rem;color:var(--pb-body)">%(p2)s</p>
-</div>""" % {
-        "mb": "0" if i == len(APPROACH_SECTIONS) - 1 else "56px",
-        "icon": icon(ic), "title": t, "p1": p1, "p2": p2,
+    rows_html = "".join("""
+<section class="pb-approach-row%(tint)s">
+  <div class="pb-wrap">
+    <div>
+      <span class="pb-card__ic">%(icon)s</span>
+      <p class="pb-approach-row__num">%(num)s &mdash; %(count)s</p>
+      <h2>%(title)s</h2>
+    </div>
+    <div>
+      <p>%(p1)s</p>
+      <p style="margin-top:16px">%(p2)s</p>
+    </div>
+  </div>
+</section>""" % {
+        "tint": " pb-section--tint" if i % 2 else "",
+        "icon": icon(ic), "num": "%02d" % (i + 1), "count": "%02d" % len(APPROACH_SECTIONS),
+        "title": t, "p1": p1, "p2": p2,
     } for i, (t, p1, p2, ic) in enumerate(APPROACH_SECTIONS))
 
-    values_html = "".join('<li><span class="pb-card__ic">%s</span><span>%s</span></li>' % (icon(WHY_ICONS[i % len(WHY_ICONS)]), v) for i, v in enumerate(APPROACH_VALUES))
+    values_html = "".join('<li>%s %s</li>' % (icon("check"), v) for v in APPROACH_VALUES)
 
     out = []
     out.append(head_html(root, title, desc, "/about-us/"))
@@ -1923,21 +1929,24 @@ def build_about_page():
     <p class="pb-lead">Just as you have a trusted accountant, mechanic or doctor, we believe every business needs a reliable digital partner &mdash; someone who understands the landscape, explains things clearly and has your best interests at heart. That&rsquo;s what we want Pinky Brain Digital to be.</p>
   </div>
 </section>
-<section class="pb-section">
-  <div class="pb-wrap" style="max-width:820px">
-    %(sections)s
+<section class="pb-quote-band">
+  <div class="pb-wrap">
+    <span class="pb-mark">&ldquo;</span>
+    <p>Good work. Fair advice. Clear communication. Always evolving. Long-term relationships.</p>
+    <span>That&rsquo;s the Pinky Brain approach</span>
   </div>
 </section>
-<section class="pb-section pb-section--tint">
+%(rows)s
+<section class="pb-section">
   <div class="pb-wrap">
     <div class="pb-section__head" style="display:block">
       <p class="pb-eyebrow">What we stand for</p>
       <h2>The Pinky Brain approach, in five words</h2>
     </div>
-    <ul style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;list-style:none">%(values)s</ul>
+    <ul class="pb-values-row">%(values)s</ul>
   </div>
 </section>
-""" % {"sections": sections_html, "values": values_html})
+""" % {"rows": rows_html, "values": values_html})
     out.append(render_cta("tell us about your business, and we&rsquo;ll reply within one business day with honest, straight-talking advice &mdash; not a sales pitch.", root=root))
     out.append(footer_html(root))
     out.append("</body></html>")
