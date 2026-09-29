@@ -489,8 +489,756 @@ SERVICES = {
     },
 }
 
-SERVICE_ORDER = ["website-design", "e-commerce-websites-design", "seo-services", "aeo-ai-search",
+# ---------------------------------------------------------------------------
+# EXTRA SERVICES — the rest of the 20-service homepage grid. These don't sit
+# in the primary nav (that would be 21 nav items), but every one gets a real
+# page instead of a dead /services/... link.
+# ---------------------------------------------------------------------------
+EXTRA_SERVICES = {
+    "app-development": {
+        "slug": "app-development", "nav_label": "Web & Mobile Apps", "name": "Web & Mobile Apps",
+        "eyebrow": "Services · Web & Mobile Apps",
+        "h1": "Apps that make life easier for your customers and your team",
+        "lead": "an app for your customers or your team, on iPhone, Android and web &mdash; built around the job it needs to do.",
+        "meta": "Web and mobile app development for iOS, Android and the web, built around real workflows rather than trends.",
+        "ticks": ["iOS, Android &amp; web", "Built around real workflows", "Ongoing support included"],
+        "badge": ("Built for", "iOS &middot; Android &middot; Web", ""),
+        "hero_img": "homepage-hero-digital-agency-team.webp", "hero_alt": "Team planning a mobile app on a laptop and tablet",
+        "split_img": "website-design-development-process.webp", "split_alt": "App interface design being reviewed on screen",
+        "why_title": "An app is a commitment, not a trend.",
+        "why_cards": [
+            ("An app is a commitment, not a trend.", "We only recommend an app when it genuinely solves a problem a website can&rsquo;t &mdash; not because it sounds impressive."),
+            ("Useful beats flashy.", "The best apps are the ones people open again. We design around real, repeat tasks, not novelty."),
+            ("One codebase where possible.", "Cross-platform frameworks mean lower cost and faster updates across iPhone, Android and web."),
+            ("Support doesn&rsquo;t stop at launch.", "App stores and phones keep changing, so we stay on as your ongoing maintenance partner."),
+        ],
+        "core_title": "Everything your app needs.", "core_sub": "From first sketch to the app store.",
+        "core_intro": "We combine research, design and solid engineering to build apps that people actually keep on their phone.",
+        "core_cards": [
+            ("Discovery &amp; UX mapping", "We map the exact screens and actions your users need, before any design work starts."),
+            ("Native &amp; cross-platform builds", "We build for iPhone, Android and web using whichever approach fits your budget and timeline."),
+            ("Secure data &amp; logins", "User accounts, payments and personal data are handled with proper security from day one."),
+            ("App store submission", "We handle submission to the Apple App Store and Google Play, so launch is one less thing to manage."),
+        ],
+        "g3_numbered": True, "g3_title": "How We Build Your App", "g3_sub": "From first conversation to app store listing.",
+        "g3_intro": "A clear, staged process keeps the project predictable and the budget under control.",
+        "g3_cards": [
+            ("Discovery &amp; Planning", "We map user journeys, features and technical requirements before design begins."),
+            ("Design &amp; Prototyping", "Key screens are designed and tested as a clickable prototype, so you can try it before we build."),
+            ("Build &amp; Testing", "The app is built and tested across real devices for bugs, performance and usability."),
+            ("Launch &amp; Support", "We submit to the app stores, then stay on for updates, fixes and new features."),
+        ],
+        "g4_title": "An App People Actually Use", "g4_intro": "Downloads don&rsquo;t matter if nobody opens the app twice. We design for return visits.",
+        "g4_cards": [
+            ("Clear Onboarding", "New users understand what to do in the first 30 seconds."),
+            ("Fast &amp; Reliable", "Built to load quickly and work smoothly, even on a patchy connection."),
+            ("Built to Scale", "Your app can grow from your first 100 users to your next 100,000."),
+            ("Data You Can Act On", "Usage data shows you what people actually do, so you know what to improve next."),
+        ],
+        "faq": [
+            ("Should I build an app or a mobile-friendly website?", "Many businesses don&rsquo;t need an app at all &mdash; a fast, mobile-first website does the job. We&rsquo;ll tell you honestly which fits your goals before recommending an app."),
+            ("How much does an app cost?", "It depends on complexity, platforms and integrations. We&rsquo;ll give you a clear, fixed-scope quote once we understand what the app needs to do."),
+            ("Do you build for both iPhone and Android?", "Yes, usually from a single cross-platform codebase to keep costs down and updates simple."),
+            ("Will I own the app afterwards?", "Yes. Once the project is paid in full, the app, its code and your app store listings belong to you."),
+            ("What happens after launch?", "We offer ongoing support plans covering OS updates, bug fixes and new features as phones and platforms change."),
+        ],
+        "cta_intro": "tell us what you want your app to do, and we&rsquo;ll reply within one business day with honest advice on whether an app is even the right move.",
+    },
+    "custom-software": {
+        "slug": "custom-software", "nav_label": "Custom Software", "name": "Custom Software",
+        "eyebrow": "Services · Custom Software",
+        "h1": "Software built around the way your team already works",
+        "lead": "tools built around the way you already work, so your team saves time instead of fighting a system that doesn&rsquo;t fit.",
+        "meta": "Custom software and internal tools built around your team's real workflow, replacing spreadsheets and disconnected systems.",
+        "ticks": ["Built around your workflow", "Replaces spreadsheets &amp; email chains", "Grows as you grow"],
+        "badge": ("Built for", "Your exact workflow", ""),
+        "hero_img": "website-design-development-process.webp", "hero_alt": "Custom software dashboard being reviewed on screen",
+        "split_img": "homepage-hero-digital-agency-team.webp", "split_alt": "Team mapping a software workflow together",
+        "why_title": "Off-the-shelf software makes you adapt. Custom software adapts to you.",
+        "why_cards": [
+            ("Off-the-shelf makes you adapt. Custom adapts to you.", "Generic tools force your team into someone else&rsquo;s process. We build around your actual workflow instead."),
+            ("We start with the bottleneck, not the tech.", "We find where time is really being lost &mdash; double entry, manual reports, disconnected tools &mdash; and solve that first."),
+            ("Simple, maintainable builds.", "We favour proven, well-documented technology over anything clever just for the sake of it."),
+            ("You&rsquo;re not locked in.", "You own the code and the data. There&rsquo;s no vendor holding your business hostage."),
+        ],
+        "core_title": "What we build.", "core_sub": "Practical tools for real business problems.",
+        "core_intro": "From internal dashboards to systems that connect your existing tools, we build software that removes manual work.",
+        "core_cards": [
+            ("Internal tools &amp; dashboards", "Purpose-built tools that replace messy spreadsheets and give your team one clear source of truth."),
+            ("System integrations", "We connect the software you already use, so data moves automatically instead of being re-typed."),
+            ("Workflow automation", "Repetitive admin tasks are automated, freeing your team to focus on higher-value work."),
+            ("Secure, scalable builds", "Software built to handle real usage and grow as your business and data grow."),
+        ],
+        "g3_numbered": True, "g3_title": "How We Build Your Software", "g3_sub": "From process audit to a tool your team actually uses.",
+        "g3_intro": "We start by understanding the real problem, not by writing code.",
+        "g3_cards": [
+            ("Process Audit", "We map your current workflow and find where time and accuracy are being lost."),
+            ("Solution Design", "We design the simplest tool that solves the problem, and agree scope and cost before building."),
+            ("Build &amp; Test", "The software is built in stages, with regular check-ins so nothing drifts from what you asked for."),
+            ("Rollout &amp; Training", "We launch the tool with your team, with training so everyone knows how to use it from day one."),
+        ],
+        "g4_title": "Software That Fits the Way You Work", "g4_intro": "The right custom tool feels obvious once it&rsquo;s there &mdash; like it should have always existed.",
+        "g4_cards": [
+            ("Built Around Real Tasks", "Every screen is designed around what your team actually does each day."),
+            ("Less Manual Work", "Automation removes the repetitive admin that eats up hours every week."),
+            ("One Source of Truth", "No more conflicting spreadsheets &mdash; everyone works from the same accurate data."),
+            ("Room to Grow", "New features and integrations can be added later without starting over."),
+        ],
+        "faq": [
+            ("How is this different from buying off-the-shelf software?", "Off-the-shelf tools are built for everyone, so you compromise. Custom software is built around your exact process, with nothing you don&rsquo;t need."),
+            ("How much does custom software cost?", "It depends entirely on scope. We start with a process audit and give you a clear, fixed quote before any build work begins."),
+            ("How long does a project take?", "Small internal tools can take a few weeks; larger systems take longer. We&rsquo;ll give you a realistic timeline in the proposal."),
+            ("Will you maintain the software after launch?", "Yes. We offer ongoing support and development so the tool keeps working as your business changes."),
+            ("Do we own the software?", "Yes. Once paid in full, the code and everything built for you belongs to your business outright."),
+        ],
+        "cta_intro": "tell us what&rsquo;s slowing your team down, and we&rsquo;ll reply within one business day with honest thoughts on whether custom software is worth it.",
+    },
+    "local-seo": {
+        "slug": "local-seo", "nav_label": "Local SEO & Google Profile", "name": "Local SEO & Google Profile",
+        "eyebrow": "Services · Local SEO",
+        "h1": "Show up on Google Maps when nearby customers search",
+        "lead": "show up on Google Maps so nearby customers find you first &mdash; ahead of competitors down the road.",
+        "meta": "Local SEO and Google Business Profile management to help nearby customers find and choose your business first.",
+        "ticks": ["Google Business Profile setup", "Maps &amp; “near me” visibility", "Local reviews &amp; citations"],
+        "badge": ("Local pack", "Top 3 on Maps", ""),
+        "hero_img": "seo-services-hero.webp", "hero_alt": "Google Maps local search results shown on screen",
+        "split_img": "ecommerce-store-design-detail.webp", "split_alt": "Local business Google profile being optimised",
+        "why_title": "Most local searches never scroll past the map.",
+        "why_cards": [
+            ("Most local searches never scroll past the map.", "If you&rsquo;re not in the top 3 map results, most nearby customers never see you at all."),
+            ("Your profile is doing more selling than you think.", "Photos, reviews, hours and posts on your Google Business Profile shape a decision before anyone visits your website."),
+            ("Consistency builds trust with Google.", "Matching name, address and phone details across the web help Google trust that your business is legitimate."),
+            ("Reviews compound over time.", "A steady flow of genuine reviews, handled well, becomes one of your strongest local ranking signals."),
+        ],
+        "core_title": "What we manage.", "core_sub": "Everything that decides your local visibility.",
+        "core_intro": "Local SEO is part profile, part website, part reputation. We look after all three.",
+        "core_cards": [
+            ("Google Business Profile optimisation", "We complete, verify and actively manage your profile so it works as hard as possible."),
+            ("Local citations &amp; listings", "We fix inconsistent business details across directories that quietly hurt your rankings."),
+            ("Review strategy", "We help you collect genuine reviews and respond to them in a way that builds trust."),
+            ("Location-specific content", "We build pages and content that speak directly to the areas you serve."),
+        ],
+        "g3_numbered": True, "g3_title": "How We Boost Your Local Visibility", "g3_sub": "From audit to consistent map rankings.",
+        "g3_intro": "We fix the technical and reputation signals that decide who Google shows first.",
+        "g3_cards": [
+            ("Local Audit", "We check your current Maps ranking, profile completeness and citation consistency."),
+            ("Profile &amp; Citation Fixes", "We complete your Google Business Profile and correct listings across key directories."),
+            ("Review &amp; Content Plan", "We put a simple system in place for gathering reviews and publishing local content."),
+            ("Ongoing Monitoring", "We track your local rankings and keep your profile active month after month."),
+        ],
+        "g4_title": "Built for the Way People Search Locally", "g4_intro": "&ldquo;Near me&rdquo; searches convert fast &mdash; the person is often ready to buy or visit today.",
+        "g4_cards": [
+            ("Found on Maps First", "Show up in the local pack before customers even reach the full search results."),
+            ("Trusted at a Glance", "Reviews, photos and accurate hours help people choose you with confidence."),
+            ("One Business, One Story", "Consistent details everywhere stop Google &mdash; and customers &mdash; getting confused."),
+            ("Works Alongside National SEO", "Local SEO strengthens, rather than replaces, your wider search visibility."),
+        ],
+        "faq": [
+            ("What&rsquo;s the difference between SEO and local SEO?", "SEO helps you rank for searches anywhere. Local SEO focuses on &ldquo;near me&rdquo; searches and your Google Business Profile, which matters most if customers visit you or you serve a specific area."),
+            ("How long does local SEO take to work?", "Profile fixes can show movement within weeks; strong map rankings usually build over a few months, depending on competition."),
+            ("Can you help with negative reviews?", "We can&rsquo;t remove genuine reviews, but we help you respond professionally and build a steady flow of new positive ones."),
+            ("Do I need a website for local SEO to work?", "It helps, but your Google Business Profile can drive calls and visits even before your website is fully optimised."),
+            ("Can you manage multiple locations?", "Yes. We manage Google Business Profiles and local pages for businesses with several branches or service areas."),
+        ],
+        "cta_intro": "tell us where you&rsquo;re based and who you want to reach, and we&rsquo;ll reply within one business day with a clear view of your current local visibility.",
+    },
+    "content-marketing": {
+        "slug": "content-marketing", "nav_label": "Content Marketing", "name": "Content Marketing",
+        "eyebrow": "Services · Content Marketing",
+        "h1": "Content that brings in customers for years, not days",
+        "lead": "useful blogs, guides and video that bring in customers for years, not days &mdash; and support your SEO at the same time.",
+        "meta": "Content marketing - blogs, guides and video built to attract, inform and convert customers over the long term.",
+        "ticks": ["Built to support SEO", "Written for real customers", "Blogs, guides &amp; video"],
+        "badge": ("Built to last", "Years, not days", ""),
+        "hero_img": "social-media-marketing-detail.webp", "hero_alt": "Content calendar and blog article being planned",
+        "split_img": "aeo-ai-search-detail.jpg", "split_alt": "Long-form article being written and structured",
+        "why_title": "Most content is written once and forgotten.",
+        "why_cards": [
+            ("Most content is written once and forgotten.", "We plan content as an asset that keeps earning attention months and years after it&rsquo;s published."),
+            ("Every piece has a job.", "Awareness, education or conversion &mdash; each piece of content is planned around what it needs to achieve."),
+            ("Written for people, structured for search.", "Clear, useful writing that also follows the structure search engines and AI tools reward."),
+            ("Quality over volume.", "One genuinely useful guide outperforms ten thin articles. We&rsquo;d rather do less, well."),
+        ],
+        "core_title": "What we create.", "core_sub": "Content built around what your customers actually ask.",
+        "core_intro": "We plan, write and publish content that answers real questions and moves people toward getting in touch.",
+        "core_cards": [
+            ("Content strategy", "We plan topics around what your customers search for and where they are in their decision."),
+            ("Blogs &amp; guides", "In-depth, useful articles that build authority and support your SEO."),
+            ("Video &amp; short-form content", "Video content planned for your website and social channels."),
+            ("Distribution &amp; repurposing", "One piece of content is reshaped into social posts, email and more, so nothing is wasted."),
+        ],
+        "g3_numbered": True, "g3_title": "How We Build Your Content Engine", "g3_sub": "From topic research to publishing rhythm.",
+        "g3_intro": "Good content marketing is a system, not a one-off article.",
+        "g3_cards": [
+            ("Topic &amp; Keyword Research", "We find the questions your customers actually ask, and the gaps competitors haven&rsquo;t filled."),
+            ("Content Planning", "A realistic content calendar built around your goals and capacity."),
+            ("Writing &amp; Production", "Content is written, reviewed and optimised before it goes anywhere near your site."),
+            ("Publish &amp; Promote", "We publish, distribute and track what works, then do more of it."),
+        ],
+        "g4_title": "Content Built to Compound", "g4_intro": "Good content keeps bringing in visitors long after the work of writing it is done.",
+        "g4_cards": [
+            ("Answers Real Questions", "Every piece solves a genuine problem your customers have."),
+            ("Supports SEO &amp; AEO", "Structured so it helps you rank on Google and get quoted by AI tools."),
+            ("Consistent Brand Voice", "Content sounds like your business, not a generic template."),
+            ("Tracked &amp; Improved", "We see what performs and refine the plan every month."),
+        ],
+        "faq": [
+            ("How is content marketing different from copywriting?", "Copywriting covers your core website pages. Content marketing is the ongoing blogs, guides and video that keep bringing in new visitors over time."),
+            ("How often should we publish?", "Consistency matters more than frequency. We agree a realistic rhythm &mdash; often a few strong pieces a month rather than daily filler."),
+            ("Will content marketing help my SEO?", "Yes. Well-structured, useful content is one of the strongest long-term ranking signals, alongside technical SEO and links."),
+            ("Can you write in our brand voice?", "Yes. We learn how your business communicates and write to match, then you review everything before it&rsquo;s published."),
+            ("How long until content marketing shows results?", "Early pieces can bring traffic within weeks, but content marketing is a compounding, long-term investment that builds over 6&ndash;12 months."),
+        ],
+        "cta_intro": "tell us about your business and your customers, and we&rsquo;ll reply within one business day with content ideas worth pursuing.",
+    },
+    "email-marketing": {
+        "slug": "email-marketing", "nav_label": "Email Marketing", "name": "Email Marketing",
+        "eyebrow": "Services · Email Marketing",
+        "h1": "Stay in touch with past enquiries and turn them into repeat sales",
+        "lead": "stay in touch with past enquiries and turn them into repeat sales, without spamming your list into unsubscribing.",
+        "meta": "Email marketing campaigns and automated flows that turn past enquiries and customers into repeat business.",
+        "ticks": ["Automated welcome &amp; follow-up flows", "Segmented, relevant sending", "Clear open &amp; click reporting"],
+        "badge": ("Automated flows", "Welcome &middot; Follow-up &middot; Repeat", ""),
+        "hero_img": "ppc-digital-advertising-detail.webp", "hero_alt": "Email campaign performance dashboard on screen",
+        "split_img": "google-ads-detail.webp", "split_alt": "Email automation flow being mapped out",
+        "why_title": "Your list is the audience you already have.",
+        "why_cards": [
+            ("Your list is the audience you already have.", "Past customers and enquiries are cheaper to sell to than strangers &mdash; email keeps you front of mind."),
+            ("Automation does the remembering for you.", "Welcome and follow-up emails go out the moment they&rsquo;re needed, without anyone having to remember to send them."),
+            ("Relevance beats frequency.", "Segmented, well-timed emails perform better than blasting your whole list with everything."),
+            ("We watch deliverability, not just design.", "A beautiful email that lands in spam is worthless. We keep your sending reputation healthy."),
+        ],
+        "core_title": "What we set up.", "core_sub": "Campaigns and automations that keep working in the background.",
+        "core_intro": "We build the flows and campaigns that turn your list into a genuine sales channel.",
+        "core_cards": [
+            ("Welcome &amp; nurture flows", "Automated sequences that introduce new subscribers to your business and guide them toward buying."),
+            ("Newsletter &amp; campaigns", "Regular, useful email that keeps your business in customers&rsquo; inboxes without being annoying."),
+            ("Abandoned enquiry follow-up", "Automated reminders for people who showed interest but didn&rsquo;t convert."),
+            ("List segmentation &amp; targeting", "Emails sent to the right group of people, based on what they&rsquo;ve actually shown interest in."),
+        ],
+        "g3_numbered": True, "g3_title": "How We Build Your Email Marketing", "g3_sub": "From list audit to automated revenue.",
+        "g3_intro": "We set up the foundations properly before sending a single campaign.",
+        "g3_cards": [
+            ("List &amp; Platform Audit", "We review your current list, tools and sending reputation before building anything new."),
+            ("Flow &amp; Campaign Design", "We design the automated flows and campaign calendar around your sales cycle."),
+            ("Build &amp; Test", "Emails are built, tested and proofed before anything goes to your full list."),
+            ("Send, Track &amp; Improve", "We monitor opens, clicks and sales, and refine the plan every month."),
+        ],
+        "g4_title": "Email That Earns Its Place in the Inbox", "g4_intro": "People unsubscribe from emails that waste their time. We aim for the opposite.",
+        "g4_cards": [
+            ("Genuinely Useful", "Every email offers something worth opening, not just a sales pitch."),
+            ("Properly Segmented", "The right message reaches the right group, not your whole list every time."),
+            ("Mobile-Friendly Design", "Emails that look clean and work properly on a phone, where most people read them."),
+            ("Clear Reporting", "You see opens, clicks and sales attributed back to email, in plain English."),
+        ],
+        "faq": [
+            ("What email platform do you use?", "We work with popular platforms such as Mailchimp, Klaviyo and HubSpot, and recommend the one that fits your budget and CRM."),
+            ("Do you write the email content?", "Yes. We plan, write and design campaigns and flows, and you approve everything before it sends."),
+            ("How big does my list need to be?", "Any size. Automated welcome and follow-up flows are worth setting up even with a small list, since they keep working as it grows."),
+            ("Will this help with GDPR compliance?", "We follow best practice for consent and unsubscribes, though you remain responsible for your own compliance obligations."),
+            ("How do you measure success?", "Opens and clicks matter, but we focus on what they lead to &mdash; enquiries and sales &mdash; in your monthly report."),
+        ],
+        "cta_intro": "tell us about your list and your goals, and we&rsquo;ll reply within one business day with ideas for what to automate first.",
+    },
+    "lead-generation": {
+        "slug": "lead-generation", "nav_label": "Lead Generation", "name": "Lead Generation",
+        "eyebrow": "Services · Lead Generation",
+        "h1": "Campaigns and landing pages designed to fill your enquiry inbox",
+        "lead": "campaigns and landing pages designed to fill your enquiry inbox with people actually ready to buy.",
+        "meta": "Lead generation campaigns and landing pages built to turn traffic into qualified enquiries, not just clicks.",
+        "ticks": ["Landing pages built to convert", "Qualified leads, not just clicks", "Tracked from click to enquiry"],
+        "badge": ("Focus", "Qualified leads", ""),
+        "hero_img": "google-ads-hero.webp", "hero_alt": "Lead generation landing page and enquiry form on screen",
+        "split_img": "ppc-digital-advertising-hero.webp", "split_alt": "Lead generation campaign results being reviewed",
+        "why_title": "Traffic isn&rsquo;t the goal. Enquiries are.",
+        "why_cards": [
+            ("Traffic isn&rsquo;t the goal. Enquiries are.", "A page can get plenty of visitors and still generate nothing. We build and measure for enquiries."),
+            ("One page, one job.", "Landing pages built for lead generation do one thing well, instead of trying to be a whole website."),
+            ("Qualification saves everyone&rsquo;s time.", "The right form and messaging filter out poor-fit enquiries before they reach your inbox."),
+            ("We test, not guess.", "Headlines, offers and forms are refined based on real data, not opinion."),
+        ],
+        "core_title": "What we build.", "core_sub": "The pages and campaigns that turn traffic into leads.",
+        "core_intro": "We combine landing page design, clear offers and tracking to fill your pipeline with real opportunities.",
+        "core_cards": [
+            ("Conversion-focused landing pages", "Pages built around one clear offer and one clear action, with distractions removed."),
+            ("Lead magnets &amp; offers", "Guides, quotes or consultations designed to give people a reason to hand over their details."),
+            ("Form &amp; funnel optimisation", "Shorter, smarter forms and follow-up sequences that turn more visitors into enquiries."),
+            ("Lead tracking &amp; reporting", "Every lead is tracked back to its source, so you know exactly what&rsquo;s working."),
+        ],
+        "g3_numbered": True, "g3_title": "How We Build Your Lead Generation", "g3_sub": "From offer to full enquiry pipeline.",
+        "g3_intro": "A good lead generation system combines the right offer, the right page and the right traffic.",
+        "g3_cards": [
+            ("Offer &amp; Audience Research", "We identify what will genuinely make your ideal customer get in touch."),
+            ("Landing Page Design", "A focused page built around your offer, with a clear, simple next step."),
+            ("Traffic &amp; Promotion", "We connect the page to the right channels &mdash; SEO, ads or email &mdash; to drive qualified visitors."),
+            ("Track &amp; Optimise", "We monitor conversion rates and refine the page and offer to improve results over time."),
+        ],
+        "g4_title": "Built to Fill Your Pipeline, Not Just Your Analytics", "g4_intro": "Vanity metrics don&rsquo;t pay the bills. We build around the numbers that do.",
+        "g4_cards": [
+            ("Clear, Single Offer", "No confusing choices &mdash; just one compelling reason to get in touch."),
+            ("Friction Removed", "Short forms and clear next steps make enquiring effortless."),
+            ("Qualified Over Quantity", "We&rsquo;d rather send you 20 good leads than 200 poor ones."),
+            ("Every Lead Traceable", "You&rsquo;ll always know which channel and campaign a lead came from."),
+        ],
+        "faq": [
+            ("What counts as a &ldquo;lead&rdquo;?", "We agree this upfront &mdash; usually a form submission, call or booking &mdash; so success is measured on something real, not just clicks."),
+            ("Do you handle the traffic too?", "Yes, we can combine lead generation pages with SEO, PPC or email to drive the traffic that fills them."),
+            ("How quickly will we see leads?", "Landing pages can start converting as soon as they&rsquo;re live and receiving traffic; volume builds as we optimise."),
+            ("Can you integrate with our CRM?", "Yes, we connect lead forms to most common CRMs so new enquiries land exactly where your team already works."),
+            ("How do you improve results over time?", "We test headlines, offers and forms against real conversion data, and keep what performs best."),
+        ],
+        "cta_intro": "tell us what a great lead looks like for your business, and we&rsquo;ll reply within one business day with ideas to generate more of them.",
+    },
+    "branding": {
+        "slug": "branding", "nav_label": "Branding & Identity", "name": "Branding & Identity",
+        "eyebrow": "Services · Branding & Identity",
+        "h1": "A brand that makes your business feel established and trustworthy",
+        "lead": "a logo and look that makes your business feel established and trustworthy from the very first impression.",
+        "meta": "Branding and visual identity design - logo, colours and guidelines that make your business feel established and trustworthy.",
+        "ticks": ["Logo &amp; visual identity", "Brand guidelines included", "Consistent across every touchpoint"],
+        "badge": ("Delivered", "Logo + guidelines", ""),
+        "hero_img": "about-pinky-brain-digital-team.webp", "hero_alt": "Brand identity moodboard and logo concepts on a desk",
+        "split_img": "luxury-property-marketing.webp", "split_alt": "Branded materials shown in a real environment",
+        "why_title": "People judge a business before they read a word.",
+        "why_cards": [
+            ("People judge a business before they read a word.", "Your logo, colours and design set an impression in seconds &mdash; before anyone reads what you actually do."),
+            ("Consistency builds trust.", "A brand that looks the same everywhere feels reliable. A brand that looks different everywhere feels risky."),
+            ("Your brand should reflect where you&rsquo;re going.", "We design for the business you&rsquo;re growing into, not just where you are today."),
+            ("Guidelines save you money later.", "A proper brand kit means every future designer or supplier gets it right first time."),
+        ],
+        "core_title": "What&rsquo;s included.", "core_sub": "Everything needed to look consistent everywhere.",
+        "core_intro": "We build a complete, practical identity your team can actually use.",
+        "core_cards": [
+            ("Logo design", "A distinctive mark that works at any size, from a favicon to a shopfront sign."),
+            ("Colour &amp; typography system", "A defined palette and type system that keeps every touchpoint feeling consistent."),
+            ("Brand guidelines", "A clear reference document so anyone working on your brand gets it right."),
+            ("Templates &amp; assets", "Ready-to-use templates for social, documents and marketing materials."),
+        ],
+        "g3_numbered": True, "g3_title": "How We Build Your Brand", "g3_sub": "From first conversation to a brand you&rsquo;re proud of.",
+        "g3_intro": "Good branding starts with understanding the business, not picking colours.",
+        "g3_cards": [
+            ("Discovery", "We learn about your business, customers and competitors before any design work starts."),
+            ("Concept Development", "We design distinct directions for you to react to, then refine the one that fits best."),
+            ("Refinement", "The chosen direction is refined across logo, colour and typography until it&rsquo;s ready."),
+            ("Delivery &amp; Guidelines", "You receive final files, templates and a guidelines document covering everything."),
+        ],
+        "g4_title": "A Brand Built to Last", "g4_intro": "Trends fade. We design identities that still feel right in five years.",
+        "g4_cards": [
+            ("Distinctive, Not Generic", "A mark that stands out from competitors, not a template with your name swapped in."),
+            ("Works Everywhere", "Designed to work as well on a website as it does on a van or a business card."),
+            ("Easy to Apply", "Clear guidelines mean your team can use the brand confidently without you."),
+            ("Room to Evolve", "A flexible system that can extend to new products or services later."),
+        ],
+        "faq": [
+            ("Do you design logos only, or full brand identities?", "We can do either, but recommend a full identity &mdash; logo, colours, type and guidelines &mdash; so everything works together from day one."),
+            ("How long does a branding project take?", "Typically 3&ndash;5 weeks depending on the number of concepts and rounds of feedback."),
+            ("Can you rebrand an existing business?", "Yes. We can refresh or fully rebrand an existing identity, and advise on how to transition without confusing existing customers."),
+            ("What files will I receive?", "Logo files in every format you need, your colour and font specifications, and a guidelines document."),
+            ("Can you also design my website around the new brand?", "Yes, branding and website design work well together, and we can scope both as one project."),
+        ],
+        "cta_intro": "tell us about your business, and we&rsquo;ll reply within one business day with honest thoughts on what your brand needs.",
+    },
+    "graphic-design": {
+        "slug": "graphic-design", "nav_label": "Graphic Design", "name": "Graphic Design",
+        "eyebrow": "Services · Graphic Design",
+        "h1": "Brochures, packs and social graphics that all look properly on brand",
+        "lead": "brochures, property packs and social graphics that all look properly on brand &mdash; consistent, wherever they appear.",
+        "meta": "Graphic design for brochures, property packs, social graphics and marketing materials, kept consistently on brand.",
+        "ticks": ["Print &amp; digital design", "Kept consistently on brand", "Fast turnaround available"],
+        "badge": ("Design for", "Print &amp; Digital", ""),
+        "hero_img": "ecommerce-store-design-detail.webp", "hero_alt": "Graphic design layouts being reviewed on screen",
+        "split_img": "luxury-property-marketing.webp", "split_alt": "Printed brochure and property pack design",
+        "why_title": "Off-brand design quietly costs you trust.",
+        "why_cards": [
+            ("Off-brand design quietly costs you trust.", "A brochure or post that doesn&rsquo;t match your brand makes a business look inconsistent, even if the work behind it is great."),
+            ("Design should support a goal.", "Every piece is designed to do something &mdash; inform, sell or reassure &mdash; not just to look nice."),
+            ("Templates keep you moving fast.", "We build reusable templates so your team can produce on-brand materials without waiting on us for everything."),
+            ("Small details, done properly.", "Print-ready files, correct sizing and proper file handling save you costly reprints."),
+        ],
+        "core_title": "What we design.", "core_sub": "Every touchpoint, kept consistently on brand.",
+        "core_intro": "From brochures to social graphics, we design materials that look like they belong to the same business.",
+        "core_cards": [
+            ("Brochures &amp; property packs", "Polished, print-ready materials that represent your business properly."),
+            ("Social media graphics", "On-brand templates for posts, stories and ads that keep your feed consistent."),
+            ("Presentations &amp; documents", "Proposals, pitch decks and reports that look as professional as your work."),
+            ("Signage &amp; print materials", "Business cards, signage and other print, prepared correctly for the printer."),
+        ],
+        "g3_numbered": True, "g3_title": "How We Work", "g3_sub": "From brief to finished, print-ready files.",
+        "g3_intro": "A clear process keeps design projects on time and on brand.",
+        "g3_cards": [
+            ("Brief &amp; Brand Review", "We understand what the piece needs to achieve and review your existing brand assets."),
+            ("Concepts", "We design initial layouts for you to react to before refining further."),
+            ("Refinement", "We revise based on your feedback until the design is exactly right."),
+            ("Final Files", "You receive print-ready and digital files, correctly formatted and sized."),
+        ],
+        "g4_title": "Design That Looks Like One Business", "g4_intro": "Consistency is what makes a growing business feel established.",
+        "g4_cards": [
+            ("On-Brand, Every Time", "Colours, fonts and style stay consistent across every piece we design."),
+            ("Built for Purpose", "Print materials are print-ready; digital materials are optimised for screens."),
+            ("Fast Turnaround Available", "We can accommodate quick-turnaround requests for time-sensitive materials."),
+            ("Reusable Templates", "Where useful, we build templates so your team can self-serve future materials."),
+        ],
+        "faq": [
+            ("Do you need our brand guidelines to start?", "It helps, but if you don&rsquo;t have any, we can work from your existing website and materials, or build guidelines as part of a branding project."),
+            ("Can you design for both print and digital?", "Yes, we design and correctly prepare files for both, including print-ready specifications."),
+            ("How quickly can you turn around a design?", "It depends on complexity, but we can accommodate urgent requests &mdash; just let us know your deadline upfront."),
+            ("Do you offer ongoing design support?", "Yes, many clients keep us on for regular design needs rather than booking one-off projects each time."),
+            ("Can you match an existing brand exactly?", "Yes, we can work precisely within an existing brand&rsquo;s colours, fonts and style."),
+        ],
+        "cta_intro": "tell us what you need designed, and we&rsquo;ll reply within one business day with a clear quote and timeline.",
+    },
+    "video-photography": {
+        "slug": "video-photography", "nav_label": "Video & Photography", "name": "Video & Photography",
+        "eyebrow": "Services · Video & Photography",
+        "h1": "Photos and video that show your property, product or team at its best",
+        "lead": "photos and video that show your property, product or team at its best &mdash; the kind that make people stop scrolling.",
+        "meta": "Professional photography and video production for property, product and brand marketing.",
+        "ticks": ["Property, product &amp; brand shoots", "Edited &amp; ready to publish", "Licensed for your marketing"],
+        "badge": ("Delivered", "Edited &amp; ready to use", ""),
+        "hero_img": "luxury-property-marketing.webp", "hero_alt": "Professional property photography at dusk",
+        "split_img": "about-pinky-brain-digital-team.webp", "split_alt": "Video production team filming on location",
+        "why_title": "People decide in seconds, and images do the deciding.",
+        "why_cards": [
+            ("People decide in seconds, and images do the deciding.", "Before anyone reads your copy, they&rsquo;ve already judged you on your photos and video."),
+            ("Phone photos cost you credibility.", "Professional imagery signals a professional business, especially for premium products and property."),
+            ("Video earns attention that photos can&rsquo;t.", "Short-form video consistently gets more reach and engagement across social platforms."),
+            ("One shoot, many uses.", "We plan shoots to deliver content for your website, social and ads all at once."),
+        ],
+        "core_title": "What we shoot.", "core_sub": "Imagery built for how it will actually be used.",
+        "core_intro": "We plan every shoot around where the content will appear, so nothing gets wasted.",
+        "core_cards": [
+            ("Property &amp; interior photography", "Bright, professional photography that presents property at its absolute best."),
+            ("Product photography", "Clean, consistent product shots ready for your website and online store."),
+            ("Brand &amp; team photography", "Authentic photography that puts a real face to your business."),
+            ("Short-form video", "Video content edited for your website, social channels and ads."),
+        ],
+        "g3_numbered": True, "g3_title": "How a Shoot Works", "g3_sub": "From brief to finished, edited content.",
+        "g3_intro": "A clear plan means the shoot day runs smoothly and delivers exactly what you need.",
+        "g3_cards": [
+            ("Planning", "We agree locations, shot list and style before the shoot day."),
+            ("The Shoot", "Our photographer or videographer captures everything on the agreed list, plus extras."),
+            ("Editing", "Images and video are professionally edited and colour-graded."),
+            ("Delivery", "You receive final files, formatted and sized for every platform you need."),
+        ],
+        "g4_title": "Content That Actually Gets Used", "g4_intro": "The best photography is the kind that ends up everywhere &mdash; website, social and ads.",
+        "g4_cards": [
+            ("Shot for Multiple Uses", "One shoot delivers content for your website, social and print at once."),
+            ("Consistent Style", "Imagery that matches your brand&rsquo;s tone, every time."),
+            ("Fast Editing Turnaround", "Edited files delivered quickly, so content doesn&rsquo;t go stale."),
+            ("Rights Included", "You get full usage rights for your own marketing."),
+        ],
+        "faq": [
+            ("Do you shoot on location or in a studio?", "Both &mdash; property and brand shoots are usually on location; product photography can be studio or on-site, depending on what suits the product."),
+            ("How long does a shoot take?", "It depends on the brief, but most property or brand shoots take half a day to a full day."),
+            ("Do we get the raw files?", "We deliver final, edited files. Raw files can be included by request, agreed before the shoot."),
+            ("Can you handle video and photography in one shoot?", "Yes, we often combine both in a single session to save time and cost."),
+            ("How quickly will we get the final content?", "Typical turnaround is 5&ndash;10 working days, though we can prioritise urgent deadlines."),
+        ],
+        "cta_intro": "tell us what you need shot, and we&rsquo;ll reply within one business day with availability and a clear quote.",
+    },
+    "copywriting": {
+        "slug": "copywriting", "nav_label": "Copywriting", "name": "Copywriting",
+        "eyebrow": "Services · Copywriting",
+        "h1": "Clear words that explain what you do and persuade people to get in touch",
+        "lead": "clear words that explain what you do and persuade people to get in touch, without sounding like everyone else.",
+        "meta": "Copywriting for websites, brochures and marketing that explains what you do clearly and persuades people to act.",
+        "ticks": ["Written for your customers", "Clear, jargon-free English", "SEO-aware from the start"],
+        "badge": ("Written for", "Clarity &amp; conversion", ""),
+        "hero_img": "aeo-ai-search-detail.jpg", "hero_alt": "Website copy being written and edited on screen",
+        "split_img": "social-media-marketing-detail.webp", "split_alt": "Marketing copy being reviewed and refined",
+        "why_title": "Confusing copy costs you customers.",
+        "why_cards": [
+            ("Confusing copy costs you customers.", "If visitors can&rsquo;t quickly understand what you offer, most simply leave rather than work it out."),
+            ("Clever isn&rsquo;t the goal. Clear is.", "We write to be understood in seconds, not to sound impressive."),
+            ("Every page has a job.", "We write with a clear purpose for each page &mdash; inform, reassure or persuade &mdash; not just fill space."),
+            ("Your voice, not a template.", "We learn how your business actually talks and write to match, not a generic corporate tone."),
+        ],
+        "core_title": "What we write.", "core_sub": "Words for every part of your business.",
+        "core_intro": "From your homepage to your email sequences, we write copy that does a job.",
+        "core_cards": [
+            ("Website copy", "Homepage, service and about pages written to explain and convert."),
+            ("Brochures &amp; sales materials", "Persuasive copy for the materials your sales team actually hands over."),
+            ("SEO-aware content", "Copy written for people first, but structured to support your search visibility too."),
+            ("Taglines &amp; messaging", "Sharp, memorable lines that sum up what your business stands for."),
+        ],
+        "g3_numbered": True, "g3_title": "How We Write Your Copy", "g3_sub": "From brief to words you&rsquo;re proud to publish.",
+        "g3_intro": "Good copy starts with understanding the business and the customer, not a blank page.",
+        "g3_cards": [
+            ("Brief &amp; Research", "We learn about your business, customers and competitors before writing a word."),
+            ("First Draft", "We write a full draft built around a clear structure and purpose for each page."),
+            ("Review &amp; Refine", "You give feedback and we refine until the tone and message feel exactly right."),
+            ("Final Delivery", "You receive final copy, ready to drop straight into your website or materials."),
+        ],
+        "g4_title": "Copy That Does a Job", "g4_intro": "Good copywriting doesn&rsquo;t just read well &mdash; it moves people to act.",
+        "g4_cards": [
+            ("Clear in Seconds", "Visitors understand what you offer without having to work for it."),
+            ("Built to Persuade", "Every page guides the reader toward a clear next step."),
+            ("Consistent Tone", "Your business sounds like the same business, everywhere."),
+            ("SEO-Friendly Structure", "Written to read naturally while still supporting search visibility."),
+        ],
+        "faq": [
+            ("Do you write in our existing tone of voice?", "Yes. We learn how your business communicates and match it, or help define a tone if you don&rsquo;t have one yet."),
+            ("Can you write and optimise for SEO at the same time?", "Yes, we write for people first but structure content to support your target keywords and search visibility."),
+            ("How many revisions are included?", "We include revision rounds as standard so the final copy feels exactly right before delivery."),
+            ("Can you write for a technical or niche industry?", "Yes, we research thoroughly and can work with your team&rsquo;s input to get technical details right."),
+            ("Do you write blog content too?", "Yes, ongoing blog and content writing is covered under our content marketing service, which pairs well with copywriting."),
+        ],
+        "cta_intro": "tell us what needs writing, and we&rsquo;ll reply within one business day with a clear quote and timeline.",
+    },
+    "ai-automation": {
+        "slug": "ai-automation", "nav_label": "AI Automation & Chatbots", "name": "AI Automation & Chatbots",
+        "eyebrow": "Services · AI Automation & Chatbots",
+        "h1": "Let AI answer common questions and follow up leads while you sleep",
+        "lead": "let AI answer common questions and follow up leads while you sleep, so no enquiry waits until Monday morning.",
+        "meta": "AI automation and chatbots that answer common questions and follow up leads automatically, day or night.",
+        "ticks": ["Answers common questions instantly", "Follows up leads automatically", "Handed over when it&rsquo;s complex"],
+        "badge": ("Always on", "24/7 response", ""),
+        "hero_img": "aeo-ai-search-hero.webp", "hero_alt": "AI chatbot conversation shown on a website",
+        "split_img": "website-design-development-process.webp", "split_alt": "AI automation workflow being configured",
+        "why_title": "The first reply often wins the customer.",
+        "why_cards": [
+            ("The first reply often wins the customer.", "Whoever responds first is often who gets the enquiry. AI means you never lose that race to a competitor."),
+            ("Automation should feel helpful, not robotic.", "We build flows that genuinely answer questions, and hand over to a real person the moment it gets complex."),
+            ("Your team&rsquo;s time goes further.", "Repetitive questions get handled automatically, freeing your team for the enquiries that need a human."),
+            ("We&rsquo;re realistic about what AI can do.", "We won&rsquo;t oversell it. AI handles the predictable; people handle the rest."),
+        ],
+        "core_title": "What we build.", "core_sub": "Automation that saves time without losing the personal touch.",
+        "core_intro": "We combine chatbots, automated follow-up and workflow automation around your actual enquiries.",
+        "core_cards": [
+            ("Website chatbots", "AI chat that answers common questions instantly, day or night."),
+            ("Automated lead follow-up", "New enquiries get an immediate, helpful response while you&rsquo;re unavailable."),
+            ("Booking &amp; workflow automation", "Automated booking confirmations, reminders and internal handoffs."),
+            ("CRM &amp; tool integration", "AI automation connected to the tools you already use, not a separate silo."),
+        ],
+        "g3_numbered": True, "g3_title": "How We Build Your Automation", "g3_sub": "From common questions to a working system.",
+        "g3_intro": "We start with what&rsquo;s actually repetitive, not with the flashiest AI feature.",
+        "g3_cards": [
+            ("Process Review", "We find the repetitive questions and tasks worth automating."),
+            ("Flow Design", "We design conversation flows and automations around real customer journeys."),
+            ("Build &amp; Train", "The chatbot or automation is built and trained on your business&rsquo; actual information."),
+            ("Launch &amp; Refine", "We monitor real conversations and refine the flows based on what people actually ask."),
+        ],
+        "g4_title": "AI That Knows When to Step Back", "g4_intro": "The goal isn&rsquo;t to replace your team &mdash; it&rsquo;s to remove the repetitive parts of their day.",
+        "g4_cards": [
+            ("Answers Instantly", "Common questions get a helpful answer the moment they&rsquo;re asked."),
+            ("Hands Over Cleanly", "Complex queries are passed to your team with full context, not lost."),
+            ("Works Around the Clock", "Enquiries outside business hours still get an immediate response."),
+            ("Keeps Improving", "We refine the automation as we see what customers actually ask."),
+        ],
+        "faq": [
+            ("Will a chatbot feel impersonal to customers?", "Not if it&rsquo;s built well. We design flows that are genuinely helpful and hand over to a real person as soon as a query needs one."),
+            ("What can AI automation actually handle?", "Common questions, booking confirmations, lead follow-up and repetitive admin. Anything nuanced is routed to your team."),
+            ("Do you build on our existing website and tools?", "Yes, we integrate with your existing website, CRM and booking tools rather than replacing them."),
+            ("How long does it take to set up?", "Simple chatbots can launch within a couple of weeks; more complex automations take longer depending on integrations."),
+            ("Will it keep working as our business changes?", "We can update the automation&rsquo;s knowledge and flows as your services, pricing or processes change."),
+        ],
+        "cta_intro": "tell us what&rsquo;s eating up your team&rsquo;s time, and we&rsquo;ll reply within one business day with realistic ideas for what to automate.",
+    },
+    "crm": {
+        "slug": "crm", "nav_label": "CRM Setup & Integration", "name": "CRM Setup & Integration",
+        "eyebrow": "Services · CRM Setup & Integration",
+        "h1": "One place to track every enquiry, so no customer slips through the cracks",
+        "lead": "one place to track every enquiry, so no customer slips through the cracks between email, phone and forms.",
+        "meta": "CRM setup and integration to track every enquiry in one place, connected to your website and marketing tools.",
+        "ticks": ["One system for every enquiry", "Connected to your website &amp; ads", "Set up around your sales process"],
+        "badge": ("One inbox", "For every enquiry", ""),
+        "hero_img": "professional-services-marketing.avif", "hero_alt": "CRM dashboard showing customer enquiries",
+        "split_img": "ecommerce-online-business-marketing.avif", "split_alt": "Sales pipeline being reviewed on a laptop",
+        "why_title": "Scattered enquiries mean lost customers.",
+        "why_cards": [
+            ("Scattered enquiries mean lost customers.", "When leads live across email, spreadsheets and sticky notes, some inevitably get missed."),
+            ("A CRM should fit your process, not fight it.", "We configure the system around how your team actually sells, not a generic default setup."),
+            ("Adoption matters more than features.", "The best CRM is the one your team actually uses. We keep setups simple and practical."),
+            ("Connected beats isolated.", "A CRM disconnected from your website and ads is just another spreadsheet. We integrate it properly."),
+        ],
+        "core_title": "What we set up.", "core_sub": "A CRM that actually gets used.",
+        "core_intro": "We configure, connect and train your team on a system built around your real sales process.",
+        "core_cards": [
+            ("CRM selection &amp; setup", "We recommend and configure the right CRM for your size, budget and sales process."),
+            ("Website &amp; form integration", "Enquiries from your website land directly in the CRM, automatically."),
+            ("Pipeline &amp; automation setup", "Deal stages, reminders and follow-up tasks configured around how you actually sell."),
+            ("Team training", "We train your team so the system gets used properly from day one."),
+        ],
+        "g3_numbered": True, "g3_title": "How We Set Up Your CRM", "g3_sub": "From process mapping to a system your team trusts.",
+        "g3_intro": "We build around your existing sales process rather than forcing you into someone else&rsquo;s.",
+        "g3_cards": [
+            ("Process Mapping", "We learn how enquiries currently move from first contact to sale."),
+            ("CRM Configuration", "The CRM is set up to match that process, not a generic default."),
+            ("Integration", "Your website, forms and other tools are connected so data flows automatically."),
+            ("Training &amp; Handover", "Your team is trained and supported until the system is second nature."),
+        ],
+        "g4_title": "A CRM Your Team Actually Uses", "g4_intro": "A powerful CRM nobody logs into is worse than no CRM at all.",
+        "g4_cards": [
+            ("Simple by Design", "We configure only what your team needs, not every possible feature."),
+            ("Nothing Falls Through", "Every enquiry is captured and tracked automatically."),
+            ("Clear Reporting", "See exactly where enquiries come from and how many convert."),
+            ("Grows With You", "The setup can expand as your team and process mature."),
+        ],
+        "faq": [
+            ("Which CRM platforms do you work with?", "We work with popular platforms such as HubSpot, Pipedrive and Zoho, and recommend the one that fits your budget and needs."),
+            ("Can you migrate our existing data?", "Yes, we can import existing contacts and deal history from spreadsheets or another CRM."),
+            ("Will our website enquiries feed in automatically?", "Yes, we connect your website forms so new enquiries land directly in the CRM without manual entry."),
+            ("Do you provide training for our team?", "Yes, training is included so your team is confident using the system from launch."),
+            ("How long does a CRM setup take?", "Simple setups can take 1&ndash;2 weeks; more complex integrations take longer depending on your existing tools."),
+        ],
+        "cta_intro": "tell us how enquiries reach you today, and we&rsquo;ll reply within one business day with a clear plan to bring it all together.",
+    },
+    "cyber-security": {
+        "slug": "cyber-security", "nav_label": "Cyber Security", "name": "Cyber Security",
+        "eyebrow": "Services · Cyber Security",
+        "h1": "Protect your website and customer data from hackers and downtime",
+        "lead": "protect your website and customer data from hackers and downtime, with plain-English advice, not scare tactics.",
+        "meta": "Cyber security for websites and customer data - monitoring, hardening and plain-English advice, not scare tactics.",
+        "ticks": ["Security monitoring &amp; hardening", "Backups &amp; recovery plans", "Plain-English advice"],
+        "badge": ("Monitored", "Around the clock", ""),
+        "hero_img": "website-design-service-hero.jpg", "hero_alt": "Website security dashboard shown on a laptop",
+        "split_img": "professional-services-marketing.avif", "split_alt": "Security review being carried out on a website",
+        "why_title": "Most attacks target easy targets, not big ones.",
+        "why_cards": [
+            ("Most attacks target easy targets, not big ones.", "Automated attacks scan for unpatched, poorly configured websites &mdash; size rarely matters."),
+            ("Downtime costs more than the fix.", "Lost trading time and reputation damage usually outweigh the cost of proper prevention."),
+            ("We explain risk in plain English.", "No scare tactics or jargon &mdash; just a clear view of your actual risk and what to do about it."),
+            ("Prevention is cheaper than recovery.", "Ongoing monitoring and backups cost far less than recovering from a serious breach."),
+        ],
+        "core_title": "What we cover.", "core_sub": "The essentials that keep your website and data safe.",
+        "core_intro": "We combine monitoring, hardening and backups so problems get caught before they become disasters.",
+        "core_cards": [
+            ("Security audits", "A clear review of your current risks, in plain English, with a prioritised action plan."),
+            ("Website hardening", "Firewalls, malware scanning and configuration fixes that close common attack routes."),
+            ("Backups &amp; recovery", "Regular, tested backups so you can recover quickly if the worst happens."),
+            ("Ongoing monitoring", "Continuous monitoring that flags issues before they become serious problems."),
+        ],
+        "g3_numbered": True, "g3_title": "How We Secure Your Website", "g3_sub": "From audit to ongoing protection.",
+        "g3_intro": "We fix what&rsquo;s urgent first, then keep watching.",
+        "g3_cards": [
+            ("Security Audit", "We review your website, hosting and plugins for known vulnerabilities."),
+            ("Hardening", "We fix priority issues &mdash; outdated software, weak configurations and access controls."),
+            ("Backup Setup", "Regular, tested backups are put in place, stored securely off-site."),
+            ("Ongoing Monitoring", "We monitor continuously and respond quickly if anything looks wrong."),
+        ],
+        "g4_title": "Security That Doesn&rsquo;t Get in Your Way", "g4_intro": "Good security should be invisible day-to-day, and obvious the moment it&rsquo;s needed.",
+        "g4_cards": [
+            ("Plain-English Reporting", "You understand your risk without needing a technical background."),
+            ("Proactive, Not Reactive", "We aim to catch issues before they become incidents."),
+            ("Tested Backups", "Backups are actually tested, not just taken and forgotten."),
+            ("Fast Response", "If something does happen, we respond quickly to limit the damage."),
+        ],
+        "faq": [
+            ("Is my website really a target?", "Yes &mdash; most attacks are automated and scan the whole internet for weak configurations, regardless of business size."),
+            ("What happens if my site does get hacked?", "We isolate the issue, restore from a clean backup and identify how it happened, so it doesn&rsquo;t happen again."),
+            ("Do you offer ongoing monitoring, or one-off audits?", "Both. Many clients start with an audit, then move to ongoing monitoring and maintenance."),
+            ("Will security measures slow my website down?", "No, done properly, security measures have minimal impact on site speed."),
+            ("Can you secure any type of website?", "We primarily work with WordPress and WooCommerce sites, but can advise on other platforms too."),
+        ],
+        "cta_intro": "tell us about your current setup, and we&rsquo;ll reply within one business day with an honest view of your risk.",
+    },
+    "website-maintenance": {
+        "slug": "website-maintenance", "nav_label": "Website Care & Hosting", "name": "Website Care & Hosting",
+        "eyebrow": "Services · Website Care & Hosting",
+        "h1": "We keep your site fast, updated and online, so you don&rsquo;t have to",
+        "lead": "we keep your site fast, updated, backed up and online, so you don&rsquo;t have to think about it.",
+        "meta": "Website care plans and hosting - updates, backups, speed and uptime monitoring, so your site is always looked after.",
+        "ticks": ["Managed hosting", "Updates &amp; backups handled", "Fast, plain-English support"],
+        "badge": ("Uptime", "Monitored 24/7", ""),
+        "hero_img": "website-design-development-process.webp", "hero_alt": "Website hosting and maintenance dashboard",
+        "split_img": "homepage-hero-digital-agency-team.webp", "split_alt": "Support team monitoring website performance",
+        "why_title": "Websites don&rsquo;t stay finished.",
+        "why_cards": [
+            ("Websites don&rsquo;t stay finished.", "Plugins, themes and platforms all need regular updates, or your site quietly becomes a security risk."),
+            ("Small issues become big ones if ignored.", "A slow site or broken plugin left unchecked can eventually mean lost sales or downtime."),
+            ("You shouldn&rsquo;t need to be technical.", "We handle the technical side so you can focus on running your business."),
+            ("Fast support, real people.", "When something needs fixing, you get a real response, not a ticket number and a wait."),
+        ],
+        "core_title": "What&rsquo;s included.", "core_sub": "Everything that keeps a website healthy.",
+        "core_intro": "We handle the ongoing technical care that most businesses don&rsquo;t have time for.",
+        "core_cards": [
+            ("Managed hosting", "Fast, secure hosting set up and managed on your behalf."),
+            ("Updates &amp; patches", "Themes, plugins and core software kept up to date and compatible."),
+            ("Backups &amp; monitoring", "Regular backups and uptime monitoring, so problems are caught early."),
+            ("Ongoing support", "Small edits, fixes and questions handled by a real person."),
+        ],
+        "g3_numbered": True, "g3_title": "How Care Plans Work", "g3_sub": "From handover to ongoing peace of mind.",
+        "g3_intro": "We look after the technical details in the background, month after month.",
+        "g3_cards": [
+            ("Handover &amp; Audit", "We review your current site and set up monitoring, backups and hosting."),
+            ("Regular Updates", "Software and plugins are kept updated on a regular schedule."),
+            ("Monitoring", "Uptime and performance are monitored continuously."),
+            ("Support &amp; Reporting", "You get ongoing support and a simple monthly summary of what&rsquo;s been done."),
+        ],
+        "g4_title": "One Less Thing to Worry About", "g4_intro": "A well cared-for website quietly keeps working, month after month, without you thinking about it.",
+        "g4_cards": [
+            ("Always Up to Date", "Software stays current, reducing security risk and compatibility issues."),
+            ("Backed Up Properly", "Regular backups mean you can always recover quickly if needed."),
+            ("Fast When It Matters", "Ongoing performance checks keep your site loading quickly."),
+            ("Real Support", "A real person to call when something needs fixing."),
+        ],
+        "faq": [
+            ("Do I need a care plan if my site is new?", "Yes &mdash; even new sites need ongoing updates and backups. It&rsquo;s far cheaper than fixing a neglected site later."),
+            ("What&rsquo;s included in monthly support?", "Updates, backups, monitoring and a set amount of small edits or fixes each month, detailed in your plan."),
+            ("Can you take over a site built by someone else?", "Yes, we regularly take over care of existing sites, starting with a full audit to understand what&rsquo;s there."),
+            ("What happens if my site goes down?", "Our monitoring flags downtime immediately, and we act quickly to get it back online."),
+            ("Can I cancel a care plan any time?", "Yes, our plans are flexible with no long lock-in contracts."),
+        ],
+        "cta_intro": "tell us about your current website, and we&rsquo;ll reply within one business day with a care plan that fits.",
+    },
+    "digital-consulting": {
+        "slug": "digital-consulting", "nav_label": "Digital Consulting", "name": "Digital Consulting",
+        "eyebrow": "Services · Digital Consulting",
+        "h1": "Not sure what you actually need? Let&rsquo;s find out, honestly",
+        "lead": "not sure what you actually need? We look at your website and marketing, then tell you plainly where your money is best spent, and what can wait.",
+        "meta": "Digital consulting - a plain-English review of your website and marketing, with a prioritised, honest plan.",
+        "ticks": ["Plain-English review", "Prioritised plan with costs", "No jargon, no obligation"],
+        "badge": ("Delivered", "A clear, honest plan", ""),
+        "hero_img": "professional-services-marketing.avif", "hero_alt": "Digital strategy consultation in progress",
+        "split_img": "about-pinky-brain-digital-team.webp", "split_alt": "Consultant reviewing a website and marketing plan",
+        "why_title": "Most businesses don&rsquo;t need everything at once.",
+        "why_cards": [
+            ("Most businesses don&rsquo;t need everything at once.", "We tell you what genuinely matters now, and what can reasonably wait, instead of selling you everything."),
+            ("We look at the whole picture.", "Website, SEO, ads and social are reviewed together, not as separate boxes to tick."),
+            ("You&rsquo;ll get a plan, not just opinions.", "Every recommendation comes with a rough cost and priority, so you can actually act on it."),
+            ("No obligation to hire us afterwards.", "Some clients take the plan and run with their own team. That&rsquo;s absolutely fine."),
+        ],
+        "core_title": "What&rsquo;s included.", "core_sub": "A clear-eyed look at where your money is best spent.",
+        "core_intro": "We review what you have, benchmark it against competitors, and tell you honestly what to do next.",
+        "core_cards": [
+            ("Website &amp; SEO review", "An honest assessment of your current site&rsquo;s performance, structure and search visibility."),
+            ("Marketing audit", "A look at your current social, ads and content, and what&rsquo;s actually working."),
+            ("Competitor benchmarking", "We show you where you stand against the businesses you&rsquo;re actually competing with."),
+            ("Prioritised action plan", "A clear, costed list of what to do first, next and later."),
+        ],
+        "g3_numbered": True, "g3_title": "How a Consultation Works", "g3_sub": "From first look to a plan you can act on.",
+        "g3_intro": "A structured review keeps the process quick and the advice genuinely useful.",
+        "g3_cards": [
+            ("Discovery Call", "We learn about your business, goals and current frustrations."),
+            ("Full Review", "We audit your website, marketing and competitors in detail."),
+            ("Findings &amp; Plan", "We present clear findings and a prioritised, costed plan."),
+            ("Next Steps", "You decide what to act on &mdash; with us, your own team, or elsewhere."),
+        ],
+        "g4_title": "Advice You Can Actually Use", "g4_intro": "A good consultation leaves you clearer, not more confused.",
+        "g4_cards": [
+            ("Plain English, Always", "No jargon &mdash; just a clear explanation of what matters and why."),
+            ("Honest Prioritisation", "We tell you what to do first, and what genuinely can wait."),
+            ("Costed Recommendations", "Every suggestion comes with a realistic sense of cost and effort."),
+            ("No Pressure", "You&rsquo;re free to use the plan however, and with whoever, you choose."),
+        ],
+        "faq": [
+            ("Is this just a sales pitch for your services?", "No. We&rsquo;re paid for the consultation itself, and the plan is yours to use however you like, with us or otherwise."),
+            ("How long does a consultation take?", "Typically a discovery call plus a review, with findings delivered within a week or two."),
+            ("What will I actually receive?", "A written, prioritised plan covering website, SEO and marketing, with rough costs and timings for each recommendation."),
+            ("Is this suitable for a business with no website yet?", "Yes, it&rsquo;s just as useful for planning a first website and marketing approach as it is for improving an existing one."),
+            ("Do you offer this as an ongoing service?", "Most clients start with a one-off consultation, then decide whether ongoing advisory support makes sense."),
+        ],
+        "cta_intro": "tell us where you&rsquo;re stuck, and we&rsquo;ll reply within one business day to arrange a straight-talking consultation.",
+    },
+}
+EXTRA_SERVICE_ORDER = ["app-development", "custom-software", "local-seo", "content-marketing", "email-marketing",
+                        "lead-generation", "branding", "graphic-design", "video-photography", "copywriting",
+                        "ai-automation", "crm", "cyber-security", "website-maintenance", "digital-consulting"]
+SERVICES.update(EXTRA_SERVICES)
+
+SERVICE_ORDER = ["seo-services", "website-design", "e-commerce-websites-design", "aeo-ai-search",
                   "ppc-digital-advertising", "social-media", "google-ads"]
+ALL_SERVICE_SLUGS = SERVICE_ORDER + EXTRA_SERVICE_ORDER
 
 # A numbered "how we work" process for the two services whose page doesn't
 # already carry one (the rest have this baked into their g3 section).
@@ -572,29 +1320,7 @@ CITY_COUNTRY_OVERRIDE = {"Berlin": "Germany"}
 # ---------------------------------------------------------------------------
 # HEADER / FOOTER
 # ---------------------------------------------------------------------------
-def curated_city_locations(service_key, limit=7):
-    by_city = {l["city"]: l for l in ALL_LOCATIONS if l["service_key"] == service_key}
-    picks = [by_city[c] for c in CURATED_NAV_CITIES if c in by_city][:limit]
-    if len(picks) < limit:
-        for l in ALL_LOCATIONS:
-            if l["service_key"] == service_key and l not in picks:
-                picks.append(l)
-                if len(picks) >= limit:
-                    break
-    return picks
-
 DIGITAL_MARKETING_KEYS = ["e-commerce-websites-design", "aeo-ai-search", "ppc-digital-advertising", "google-ads"]
-
-def _city_dropdown(root, service_key, bare=True):
-    # NOTE: bare <a> tags (no <li>) for the desktop dropdown - it sits inside
-    # a <div> that is itself inside a <li>, and an <li> start tag auto-closes
-    # any open ancestor <li> (even through a <div>), which would otherwise
-    # hoist these links out of the dropdown and into the main nav row.
-    locs = curated_city_locations(service_key)
-    tag_open, tag_close = ("", "") if bare else ('<li class="pb-mobile-sub">', "</li>")
-    links = "".join('%s<a href="%s%s.html">%s</a>%s' % (tag_open, root, l["folder"], l["city"], tag_close) for l in locs)
-    more = '%s<a href="%ssitemap.html#%s">View all locations</a>%s' % (tag_open, root, service_key, tag_close)
-    return links + more
 
 def _digital_marketing_dropdown(root, bare=True):
     tag_open, tag_close = ("", "") if bare else ('<li class="pb-mobile-sub">', "</li>")
@@ -604,11 +1330,7 @@ def _digital_marketing_dropdown(root, bare=True):
     )
 
 def header_html(root):
-    wd_sub = _city_dropdown(root, "website-design")
-    seo_sub = _city_dropdown(root, "seo-services")
     dm_sub = _digital_marketing_dropdown(root)
-    wd_sub_m = _city_dropdown(root, "website-design", bare=False)
-    seo_sub_m = _city_dropdown(root, "seo-services", bare=False)
     dm_sub_m = _digital_marketing_dropdown(root, bare=False)
     chevron = '<svg class="pb-i" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>'
     return """
@@ -619,20 +1341,15 @@ def header_html(root):
     </a>
     <nav class="pb-nav" aria-label="Primary">
       <ul class="pb-nav__list">
-        <li class="pb-has-sub">
-          <a href="%(root)swebsite-design.html">Website Design %(chevron)s</a>
-          <div class="pb-nav__sub">%(wd_sub)s</div>
-        </li>
-        <li class="pb-has-sub">
-          <a href="%(root)sseo-services.html">SEO Services %(chevron)s</a>
-          <div class="pb-nav__sub">%(seo_sub)s</div>
-        </li>
+        <li><a href="%(root)sseo-services.html">SEO Services</a></li>
+        <li><a href="%(root)swebsite-design.html">Website Design</a></li>
         <li><a href="%(root)ssocial-media.html">Social Media</a></li>
         <li class="pb-has-sub">
           <a href="%(root)sindex.html#pbs-services">Digital Marketing %(chevron)s</a>
           <div class="pb-nav__sub">%(dm_sub)s</div>
         </li>
-        <li><a href="%(root)sindex.html#pbs-about-title">About Us</a></li>
+        <li><a href="%(root)slocations.html">Locations</a></li>
+        <li><a href="%(root)sabout-us.html">About Us</a></li>
         <li><a href="%(root)scontact-us.html">Contact</a></li>
       </ul>
       <a class="pb-btn pb-btn--dark pb-nav__cta" href="%(root)scontact-us.html">Book a free consultation</a>
@@ -647,20 +1364,18 @@ def header_html(root):
   </div>
   <ul>
     <li><a href="%(root)sindex.html">Home</a></li>
-    <li><a href="%(root)swebsite-design.html">Website Design</a></li>
-    %(wd_sub_m)s
     <li><a href="%(root)sseo-services.html">SEO Services</a></li>
-    %(seo_sub_m)s
+    <li><a href="%(root)swebsite-design.html">Website Design</a></li>
     <li><a href="%(root)ssocial-media.html">Social Media</a></li>
     <li><a href="%(root)sindex.html#pbs-services">Digital Marketing</a></li>
     %(dm_sub_m)s
-    <li><a href="%(root)sindex.html#pbs-about-title">About Us</a></li>
+    <li><a href="%(root)slocations.html">Locations</a></li>
+    <li><a href="%(root)sabout-us.html">About Us</a></li>
     <li><a href="%(root)scontact-us.html">Contact</a></li>
   </ul>
   <a class="pb-btn pb-btn--dark" href="%(root)scontact-us.html">Book a free consultation</a>
 </div>
-""" % {"root": root, "wd_sub": wd_sub, "seo_sub": seo_sub, "dm_sub": dm_sub,
-       "wd_sub_m": wd_sub_m, "seo_sub_m": seo_sub_m, "dm_sub_m": dm_sub_m, "chevron": chevron}
+""" % {"root": root, "dm_sub": dm_sub, "dm_sub_m": dm_sub_m, "chevron": chevron}
 
 def footer_html(root):
     services_links = "".join(
@@ -686,8 +1401,9 @@ def footer_html(root):
     <div>
       <h4>Company</h4>
       <ul>
-        <li><a href="%(root)sindex.html#pbs-about-title">About Us</a></li>
+        <li><a href="%(root)sabout-us.html">About Us</a></li>
         <li><a href="%(root)sindex.html#pbs-industries">Industries</a></li>
+        <li><a href="%(root)slocations.html">Locations</a></li>
         <li><a href="%(root)sindex.html#pbs-faq">FAQs</a></li>
         <li><a href="%(root)scontact-us.html">Contact Us</a></li>
         <li><a href="%(root)ssitemap.html">Sitemap</a></li>
@@ -1022,11 +1738,28 @@ def build_homepage():
     link_fix = {
         "/services/website-design/": "website-design.html",
         "/services/ecommerce/": "e-commerce-websites-design.html",
+        "/services/app-development/": "app-development.html",
+        "/services/custom-software/": "custom-software.html",
         "/services/seo/": "seo-services.html",
         "/services/aeo/": "aeo-ai-search.html",
+        "/services/local-seo/": "local-seo.html",
         "/services/ppc-management/": "ppc-digital-advertising.html",
         "/services/social-media-marketing/": "social-media.html",
+        "/services/content-marketing/": "content-marketing.html",
+        "/services/email-marketing/": "email-marketing.html",
+        "/services/lead-generation/": "lead-generation.html",
+        "/services/branding/": "branding.html",
+        "/services/graphic-design/": "graphic-design.html",
+        "/services/video-photography/": "video-photography.html",
+        "/services/copywriting/": "copywriting.html",
+        "/services/ai-automation/": "ai-automation.html",
+        "/services/crm/": "crm.html",
+        "/services/cyber-security/": "cyber-security.html",
+        "/services/website-maintenance/": "website-maintenance.html",
+        "/services/digital-consulting/": "digital-consulting.html",
         "/website-design-packages/": "website-design.html",
+        "/about/": "about-us.html",
+        "/case-studies/": "index.html#pbs-industries",
         "/contact/": "mailto:%s" % SITE_EMAIL,
     }
     for old, new in link_fix.items():
@@ -1134,6 +1867,150 @@ document.getElementById('pb-contact-form').addEventListener('submit', function (
     return path
 
 # ---------------------------------------------------------------------------
+# BUILD: ABOUT US PAGE
+# ---------------------------------------------------------------------------
+APPROACH_SECTIONS = [
+    ("Your needs come before our services",
+     "We don&rsquo;t start with what we can sell you. We start with what you&rsquo;re trying to achieve. We look at what&rsquo;s important now, what can wait, what you can already manage and where you genuinely need help.",
+     "Sometimes that means working alongside your existing team. Sometimes we&rsquo;ll bring in expertise from our wider network. And sometimes we&rsquo;ll tell you that you don&rsquo;t need to spend money on something yet. If we&rsquo;re not the right people for something, we&rsquo;ll be honest about that too. We&rsquo;d rather give you the right advice than sell you the wrong service.",
+     "users"),
+    ("Built around your business",
+     "Every business is different. We stay flexible and adapt our approach around what you actually need, rather than trying to fit you into a standard package.",
+     "As your business grows and changes, we want to grow and adapt with you.",
+     "target"),
+    ("Keeping you ahead",
+     "Digital never stands still, and neither do we. We keep up with new technologies, platforms, tools and changes in the digital world so you don&rsquo;t have to.",
+     "It&rsquo;s not about following every trend. It&rsquo;s about understanding what&rsquo;s changing, what matters to your business, and helping you take advantage of the right opportunities at the right time.",
+     "growth"),
+    ("Transparency from the start",
+     "You should know what we&rsquo;re doing, why we&rsquo;re doing it, what it costs and how things are progressing.",
+     "We&rsquo;ll keep you updated, be open about what&rsquo;s working, and equally open when something needs to change.",
+     "doc"),
+    ("Here for the long term",
+     "We don&rsquo;t expect trust because we have a website or make promises. We have to earn it through our work, communication, transparency and the way we treat people.",
+     "We&rsquo;re not looking for a quick transaction. We want to become the digital team you trust and still want to call years from now.",
+     "shield"),
+]
+APPROACH_VALUES = ["Good work", "Fair advice", "Clear communication", "Always evolving", "Long-term relationships"]
+
+def build_about_page():
+    root = ""
+    title = "About Us | Pinky Brain Digital"
+    desc = "Digital is complicated. Trust shouldn't be. Meet Pinky Brain Digital and the approach behind every project we take on."
+
+    sections_html = "".join("""
+<div style="max-width:720px;margin-bottom:%(mb)s">
+  <span class="pb-card__ic">%(icon)s</span>
+  <h2 style="margin-top:18px">%(title)s</h2>
+  <p style="margin-top:14px;font-size:1.02rem;color:var(--pb-body)">%(p1)s</p>
+  <p style="margin-top:14px;font-size:1.02rem;color:var(--pb-body)">%(p2)s</p>
+</div>""" % {
+        "mb": "0" if i == len(APPROACH_SECTIONS) - 1 else "56px",
+        "icon": icon(ic), "title": t, "p1": p1, "p2": p2,
+    } for i, (t, p1, p2, ic) in enumerate(APPROACH_SECTIONS))
+
+    values_html = "".join('<li><span class="pb-card__ic">%s</span><span>%s</span></li>' % (icon(WHY_ICONS[i % len(WHY_ICONS)]), v) for i, v in enumerate(APPROACH_VALUES))
+
+    out = []
+    out.append(head_html(root, title, desc, "/about-us/"))
+    out.append(header_html(root))
+    out.append(render_breadcrumb(root, [("Home", root + "index.html"), ("About Us", None)]))
+    out.append("""
+<section class="pb-hero">
+  <div class="pb-wrap" style="max-width:820px">
+    <p class="pb-eyebrow">Our Approach</p>
+    <h1>Digital is complicated. Trust shouldn&rsquo;t be.</h1>
+    <p class="pb-lead">Just as you have a trusted accountant, mechanic or doctor, we believe every business needs a reliable digital partner &mdash; someone who understands the landscape, explains things clearly and has your best interests at heart. That&rsquo;s what we want Pinky Brain Digital to be.</p>
+  </div>
+</section>
+<section class="pb-section">
+  <div class="pb-wrap" style="max-width:820px">
+    %(sections)s
+  </div>
+</section>
+<section class="pb-section pb-section--tint">
+  <div class="pb-wrap">
+    <div class="pb-section__head" style="display:block">
+      <p class="pb-eyebrow">What we stand for</p>
+      <h2>The Pinky Brain approach, in five words</h2>
+    </div>
+    <ul style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;list-style:none">%(values)s</ul>
+  </div>
+</section>
+""" % {"sections": sections_html, "values": values_html})
+    out.append(render_cta("tell us about your business, and we&rsquo;ll reply within one business day with honest, straight-talking advice &mdash; not a sales pitch.", root=root))
+    out.append(footer_html(root))
+    out.append("</body></html>")
+
+    path = os.path.join(ROOT, "about-us.html")
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("".join(out))
+    return path
+
+# ---------------------------------------------------------------------------
+# BUILD: LOCATIONS PAGE
+# ---------------------------------------------------------------------------
+LOCATIONS_REGION_ORDER = ["UK", "USA", "Canada", "Europe"]
+LOCATIONS_REGION_LABEL = {"UK": "United Kingdom", "USA": "United States", "Canada": "Canada", "Europe": "Europe"}
+
+def build_locations_page(locations):
+    root = ""
+    title = "Locations We Cover | Pinky Brain Digital"
+    desc = "Every city and region Pinky Brain Digital serves across the UK, USA, Canada and Europe, for website design and SEO services."
+
+    by_region = {}
+    for l in locations:
+        by_region.setdefault(l["region"], {}).setdefault(l["city"], []).append(l)
+
+    region_blocks = []
+    for region in LOCATIONS_REGION_ORDER:
+        cities = by_region.get(region)
+        if not cities:
+            continue
+        city_cards = []
+        for city in sorted(cities.keys()):
+            entries = cities[city]
+            links = "".join(
+                '<a class="pb-link" href="%s.html" style="margin-right:18px">%s %s</a>'
+                % (e["folder"], SERVICES[e["service_key"]]["nav_label"], icon("arrow"))
+                for e in entries
+            )
+            city_cards.append('<div class="pb-card"><h3>%s</h3><div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:10px 4px">%s</div></div>' % (city, links))
+        region_blocks.append("""
+<div style="margin-bottom:48px">
+  <p class="pb-eyebrow">%(region)s</p>
+  <div class="pb-grid-4">%(cards)s</div>
+</div>""" % {"region": LOCATIONS_REGION_LABEL.get(region, region), "cards": "".join(city_cards)})
+
+    out = []
+    out.append(head_html(root, title, desc, "/locations/"))
+    out.append(header_html(root))
+    out.append(render_breadcrumb(root, [("Home", root + "index.html"), ("Locations", None)]))
+    out.append("""
+<section class="pb-hero">
+  <div class="pb-wrap" style="max-width:820px">
+    <p class="pb-eyebrow">Where we work</p>
+    <h1>Locations we cover</h1>
+    <p class="pb-lead"><b>In a nutshell:</b> website design and SEO for businesses across the UK, USA, Canada and Europe &mdash; wherever you&rsquo;re based, we work the same way.</p>
+  </div>
+</section>
+<section class="pb-section">
+  <div class="pb-wrap">
+    %(regions)s
+    <p style="font-size:.95rem;color:var(--pb-body)">Don&rsquo;t see your city listed? We work with businesses everywhere across these markets &mdash; <a class="pb-link" href="contact-us.html">get in touch</a> and we&rsquo;ll confirm we can help.</p>
+  </div>
+</section>
+""" % {"regions": "".join(region_blocks)})
+    out.append(render_cta("tell us where you&rsquo;re based, and we&rsquo;ll reply within one business day to confirm how we can help.", root=root))
+    out.append(footer_html(root))
+    out.append("</body></html>")
+
+    path = os.path.join(ROOT, "locations.html")
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("".join(out))
+    return path
+
+# ---------------------------------------------------------------------------
 # BUILD: SITEMAP PAGE + sitemap.xml
 # ---------------------------------------------------------------------------
 def build_sitemap_page(locations):
@@ -1147,11 +2024,11 @@ def build_sitemap_page(locations):
         return '<div%s><h3>%s</h3><ul>%s</ul></div>' % (anchor, heading, items)
 
     company_links = [
-        ("Home", "index.html"), ("About Us", "index.html#pbs-about-title"),
+        ("Home", "index.html"), ("About Us", "about-us.html"),
         ("Industries", "index.html#pbs-industries"), ("FAQs", "index.html#pbs-faq"),
-        ("Contact Us", "contact-us.html"), ("Sitemap", "sitemap.html"),
+        ("Locations", "locations.html"), ("Contact Us", "contact-us.html"), ("Sitemap", "sitemap.html"),
     ]
-    service_links = [(SERVICES[k]["name"], "%s.html" % k) for k in SERVICE_ORDER]
+    service_links = [(SERVICES[k]["name"], "%s.html" % k) for k in ALL_SERVICE_SLUGS]
     wd_links = [(l["city"], "%s.html" % l["folder"]) for l in locations if l["service_key"] == "website-design"]
     seo_links = [(l["city"], "%s.html" % l["folder"]) for l in locations if l["service_key"] == "seo-services"]
 
@@ -1187,7 +2064,8 @@ def build_sitemap_page(locations):
 
 def build_sitemap_xml(locations):
     base = "https://pinkybraindigital.com"
-    urls = ["/"] + ["/%s/" % k for k in SERVICE_ORDER] + ["/contact-us/", "/sitemap/"] + [l["url"] for l in locations]
+    urls = (["/"] + ["/%s/" % k for k in ALL_SERVICE_SLUGS]
+            + ["/contact-us/", "/about-us/", "/locations/", "/sitemap/"] + [l["url"] for l in locations])
     body = "".join('  <url><loc>%s%s</loc></url>\n' % (base, u) for u in urls)
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n%s</urlset>\n' % body
     path = os.path.join(ROOT, "sitemap.xml")
@@ -1208,18 +2086,20 @@ def main():
     built.append(build_homepage())
     print("Built homepage")
 
-    for key in SERVICE_ORDER:
+    for key in ALL_SERVICE_SLUGS:
         built.append(build_service_page(key, locations))
-    print("Built %d service pages" % len(SERVICE_ORDER))
+    print("Built %d service pages" % len(ALL_SERVICE_SLUGS))
 
     for i, loc in enumerate(locations):
         built.append(build_location_page(loc, i, locations))
     print("Built %d location pages" % len(locations))
 
     built.append(build_contact_page())
+    built.append(build_about_page())
+    built.append(build_locations_page(locations))
     built.append(build_sitemap_page(locations))
     built.append(build_sitemap_xml(locations))
-    print("Built contact page + sitemap")
+    print("Built contact + about + locations + sitemap")
 
     print("Total files written: %d" % len(built))
 
