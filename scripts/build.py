@@ -1350,6 +1350,7 @@ def header_html(root):
         </li>
         <li><a href="%(root)slocations.html">Locations</a></li>
         <li><a href="%(root)sabout-us.html">About Us</a></li>
+        <li><a href="%(root)sblog.html">Blog</a></li>
       </ul>
       <a class="pb-btn pb-btn--dark pb-nav__cta" href="%(root)scontact-us.html">Book a free consultation</a>
       <button class="pb-burger" aria-label="Open menu"><svg class="pb-i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
@@ -1370,6 +1371,7 @@ def header_html(root):
     %(dm_sub_m)s
     <li><a href="%(root)slocations.html">Locations</a></li>
     <li><a href="%(root)sabout-us.html">About Us</a></li>
+    <li><a href="%(root)sblog.html">Blog</a></li>
   </ul>
   <a class="pb-btn pb-btn--dark" href="%(root)scontact-us.html">Book a free consultation</a>
 </div>
@@ -1402,6 +1404,7 @@ def footer_html(root):
         <li><a href="%(root)sabout-us.html">About Us</a></li>
         <li><a href="%(root)sindex.html#pbs-industries">Industries</a></li>
         <li><a href="%(root)slocations.html">Locations</a></li>
+        <li><a href="%(root)sblog.html">Blog</a></li>
         <li><a href="%(root)sindex.html#pbs-faq">FAQs</a></li>
         <li><a href="%(root)scontact-us.html">Contact Us</a></li>
         <li><a href="%(root)ssitemap.html">Sitemap</a></li>
@@ -1763,6 +1766,12 @@ def build_homepage():
     for old, new in link_fix.items():
         frag = frag.replace('href="%s"' % old, 'href="%s"' % new)
 
+    faq_marker = "<!--\n  SECTION 13"
+    if faq_marker in frag:
+        frag = frag.replace(faq_marker, render_blog_teaser() + faq_marker, 1)
+    else:
+        frag += render_blog_teaser()
+
     root = ""
     title = "Pinky Brain Digital | Full-Service Digital Agency &mdash; Websites, SEO, AEO & Marketing"
     desc = "Pinky Brain Digital is a full-service digital agency for the UK, Europe, USA and Canada &mdash; websites, e-commerce, SEO & AEO, social media, advertising, branding and AI automation."
@@ -2036,6 +2045,257 @@ def build_locations_page(locations):
     return path
 
 # ---------------------------------------------------------------------------
+# BLOG
+# Post bodies are lists of (kind, content) blocks: "p", "h2", "ul", "callout".
+# ---------------------------------------------------------------------------
+BLOG_POSTS = [
+    {
+        "slug": "do-you-need-a-new-website",
+        "title": "Do You Really Need a New Website? 7 Honest Questions to Ask First",
+        "date": "2026-09-29",
+        "category": "Website Design",
+        "read": "5 min read",
+        "image": "website-design-service-hero.jpg",
+        "image_alt": "Business owner reviewing their current website on a laptop",
+        "excerpt": "A rebuild is a big investment, and it isn&rsquo;t always the answer. These seven questions help you work out whether you need a new website &mdash; or just a few targeted fixes.",
+        "service": "website-design",
+        "body": [
+            ("callout", "a new website isn&rsquo;t always the answer. Sometimes a few targeted fixes will do more for your enquiries &mdash; for a fraction of the cost. These questions help you work out which is which."),
+            ("p", "We get asked this a lot, and our answer surprises people: often, no. A rebuild is a big investment, and if the real problem is something smaller, a shiny new design won&rsquo;t fix it. Before you spend, ask yourself these seven questions."),
+            ("h2", "1. What problem are you actually trying to solve?"),
+            ("p", "&ldquo;The website looks dated&rdquo; and &ldquo;the website doesn&rsquo;t bring in enquiries&rdquo; are very different problems. The first might need a redesign. The second might need better content, clearer calls to action or SEO work &mdash; none of which require starting over."),
+            ("h2", "2. Is it slow, especially on a phone?"),
+            ("p", "Most visitors will find you on their phone. If pages take more than a few seconds to load, people leave before they&rsquo;ve read a word. Speed problems can often be fixed &mdash; image optimisation, better hosting, removing heavy plugins &mdash; without a rebuild. But if the site sits on an outdated platform that simply can&rsquo;t be sped up, that&rsquo;s a genuine reason to start fresh."),
+            ("h2", "3. Can you update it yourself?"),
+            ("p", "If changing a price or adding a photo means emailing a developer and waiting a week, your website is costing you time and money every month. A modern, easy-to-edit site is one of the strongest arguments for a rebuild."),
+            ("h2", "4. Does it still describe what you do?"),
+            ("p", "Businesses evolve. If your services, pricing or customers have changed and the website hasn&rsquo;t kept up, you may only need new content and a few new pages &mdash; not a new site."),
+            ("h2", "5. Is it secure and still supported?"),
+            ("p", "An unsupported theme, outdated plugins or a missing SSL certificate are real risks &mdash; to your customers&rsquo; data and to your Google rankings. If the platform itself is no longer maintained, rebuilding is usually the safer long-term choice."),
+            ("h2", "6. Do people who visit actually get in touch?"),
+            ("p", "Look at the numbers if you have them. Plenty of visitors but few enquiries usually points to messaging, trust signals or the contact process &mdash; all fixable. Very few visitors is a visibility problem, and SEO will do more for you than design."),
+            ("h2", "7. Does it reflect the quality of your work?"),
+            ("p", "This one matters, especially for premium and luxury businesses. If your website feels cheaper than what you actually deliver, it quietly undermines every enquiry. That&rsquo;s a legitimate reason to invest in a proper redesign."),
+            ("h2", "So &mdash; fix or rebuild?"),
+            ("ul", [
+                "<b>Mostly fix</b> if the site is modern, secure and easy to edit, but underperforming. Improve the content, speed and calls to action.",
+                "<b>Mostly rebuild</b> if the platform is outdated, you can&rsquo;t edit it, it&rsquo;s slow at its core, or it no longer reflects your business.",
+            ]),
+            ("p", "If you&rsquo;re not sure which side you fall on, that&rsquo;s exactly the kind of question we&rsquo;re happy to answer honestly &mdash; even when the answer is &ldquo;you don&rsquo;t need us yet.&rdquo;"),
+        ],
+    },
+    {
+        "slug": "seo-vs-aeo-what-your-business-needs",
+        "title": "SEO vs AEO: What&rsquo;s the Difference, and Does Your Business Need Both?",
+        "date": "2026-09-22",
+        "category": "SEO &amp; AEO",
+        "read": "6 min read",
+        "image": "aeo-ai-search-hero.webp",
+        "image_alt": "AI search interface answering a customer's question",
+        "excerpt": "More customers now ask ChatGPT and Google&rsquo;s AI for recommendations instead of scrolling through results. Here&rsquo;s what that means for your search visibility &mdash; in plain English.",
+        "service": "seo-services",
+        "body": [
+            ("callout", "SEO helps you rank in Google&rsquo;s list of results. AEO helps AI tools like ChatGPT and Google&rsquo;s AI Overviews understand and recommend you. They share the same foundations, so most businesses should treat them as one strategy, not two."),
+            ("h2", "Search has changed &mdash; but not completely"),
+            ("p", "For twenty years, getting found online meant one thing: ranking on page one of Google. That still matters. But more of your customers now ask questions a different way &mdash; they type a full question into ChatGPT, read an AI Overview at the top of Google, or ask a voice assistant for a recommendation. Instead of a list of ten links, they get a single answer."),
+            ("p", "That shift is why you&rsquo;re hearing a new term: AEO, or Answer Engine Optimisation."),
+            ("h2", "What SEO actually does"),
+            ("p", "Search Engine Optimisation is the work of helping search engines find, understand and rank your website. Done properly, it covers four areas:"),
+            ("ul", [
+                "<b>Technical health</b> &mdash; speed, mobile usability and a structure search engines can crawl.",
+                "<b>Content</b> &mdash; pages built around what your customers actually search for.",
+                "<b>Local presence</b> &mdash; your Google Business Profile, directory listings and location pages.",
+                "<b>Authority</b> &mdash; relevant links and mentions that show your business is trusted.",
+            ]),
+            ("p", "The goal of SEO is a click: someone sees your listing, visits your site and gets in touch."),
+            ("h2", "What AEO does differently"),
+            ("p", "AEO is about being the answer rather than one of the results. AI tools read the web, decide which sources they trust, and summarise. If your business is described clearly and consistently, you&rsquo;re more likely to be mentioned. If it isn&rsquo;t, the AI simply recommends someone else."),
+            ("ul", [
+                "<b>Answer-ready content</b> &mdash; clear, direct answers to the questions customers really ask.",
+                "<b>Structured data</b> &mdash; schema markup that tells machines who you are, what you offer and where.",
+                "<b>Consistency</b> &mdash; the same name, services and contact details everywhere you appear.",
+                "<b>Trust signals</b> &mdash; reviews, credentials and clear authorship.",
+            ]),
+            ("h2", "The overlap is bigger than the difference"),
+            ("p", "Here&rsquo;s the honest part: good AEO is mostly good SEO, done thoroughly. Both reward fast, well-structured websites, genuinely useful content and a trustworthy reputation. An agency that sells AEO as a completely separate, expensive product is usually overcomplicating it."),
+            ("p", "Where they differ is emphasis. SEO leans on keywords and rankings. AEO leans on clarity, structure and being quotable &mdash; writing a direct two-sentence answer to &ldquo;how much does a website cost in Manchester?&rdquo; rather than burying it in paragraph six."),
+            ("h2", "So which does your business need?"),
+            ("ul", [
+                "<b>Starting from scratch?</b> Fix the SEO foundations first. AEO won&rsquo;t help a slow site that search engines can&rsquo;t crawl.",
+                "<b>Already ranking reasonably well?</b> Adding answer-style content and schema is often a quick, low-cost win.",
+                "<b>Rely on local customers?</b> Both matter. Google Maps, AI Overviews and voice assistants all draw on the same local signals.",
+            ]),
+            ("h2", "Three things you can do this week"),
+            ("ul", [
+                "Add an FAQ section to your key service pages, answering the questions customers ask you on the phone.",
+                "Check that your business name, address and phone number match exactly across your website, Google Business Profile and directories.",
+                "Search for your own services in ChatGPT and Google &mdash; note who gets recommended, and why.",
+            ]),
+            ("p", "If you&rsquo;d like a plain-English view of where you stand on both, we&rsquo;re happy to take a look &mdash; no jargon, no obligation."),
+        ],
+    },
+]
+
+def _fmt_date(iso):
+    y, m, d = iso.split("-")
+    months = ["January", "February", "March", "April", "May", "June", "July",
+              "August", "September", "October", "November", "December"]
+    return "%d %s %s" % (int(d), months[int(m) - 1], y)
+
+def _plain(s):
+    for ent, ch in (("&mdash;", "—"), ("&ndash;", "–"), ("&rsquo;", "’"), ("&lsquo;", "‘"),
+                    ("&ldquo;", "“"), ("&rdquo;", "”"), ("&amp;", "&")):
+        s = s.replace(ent, ch)
+    return s
+
+def render_post_card(post, root=""):
+    return """<a class="pb-post-card" href="%(root)s%(slug)s.html">
+  <img src="%(root)simages/%(img)s" alt="%(alt)s" loading="lazy" decoding="async">
+  <div class="pb-post-card__body">
+    <p class="pb-post-meta"><span class="pb-post-tag">%(cat)s</span> %(date)s &middot; %(read)s</p>
+    <h3>%(title)s</h3>
+    <p>%(excerpt)s</p>
+    <span class="pb-link">Read article %(arrow)s</span>
+  </div>
+</a>""" % {"root": root, "slug": post["slug"], "img": post["image"], "alt": post["image_alt"],
+           "cat": post["category"], "date": _fmt_date(post["date"]), "read": post["read"],
+           "title": post["title"], "excerpt": post["excerpt"], "arrow": icon("arrow")}
+
+def render_blog_teaser(root=""):
+    cards = "".join(render_post_card(p, root) for p in BLOG_POSTS[:3])
+    return """
+<section class="pb-section">
+  <div class="pb-wrap">
+    <div class="pb-section__head">
+      <div><p class="pb-eyebrow">From the blog</p><h2>Insights &amp; advice</h2></div>
+      <div>
+        <p>Plain-English guides on websites, search and marketing &mdash; written to help, not to sell.</p>
+        <a class="pb-link" href="%(root)sblog.html" style="margin-top:14px">View all posts %(arrow)s</a>
+      </div>
+    </div>
+    <div class="pb-blog-grid">%(cards)s</div>
+  </div>
+</section>
+""" % {"root": root, "cards": cards, "arrow": icon("arrow")}
+
+def _render_post_body(blocks):
+    out = []
+    for kind, content in blocks:
+        if kind == "p":
+            out.append("<p>%s</p>" % content)
+        elif kind == "h2":
+            out.append("<h2>%s</h2>" % content)
+        elif kind == "ul":
+            out.append("<ul>%s</ul>" % "".join("<li>%s</li>" % li for li in content))
+        elif kind == "callout":
+            out.append('<div class="pb-callout"><p><b>In a nutshell:</b> %s</p></div>' % content)
+    return "".join(out)
+
+def build_blog_post(post):
+    root = ""
+    s = SERVICES[post["service"]]
+    others = [p for p in BLOG_POSTS if p["slug"] != post["slug"]]
+    jsonld = """<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"%s","datePublished":"%s","image":"https://pinkybraindigital.com/images/%s","author":{"@type":"Organization","name":"Pinky Brain Digital"},"publisher":{"@type":"Organization","name":"Pinky Brain Digital"},"description":"%s"}
+</script>
+""" % (_plain(post["title"]).replace('"', '\\"'), post["date"], post["image"], _plain(post["excerpt"]).replace('"', '\\"'))
+
+    out = []
+    out.append(head_html(root, "%s | Pinky Brain Digital" % _plain(post["title"]), _plain(post["excerpt"]), "/%s/" % post["slug"]))
+    out.append(header_html(root))
+    out.append(render_breadcrumb(root, [("Home", "index.html"), ("Blog", "blog.html"), (post["category"], None)]))
+    out.append("""
+<article>
+  <header class="pb-article-head">
+    <div class="pb-wrap">
+      <p class="pb-eyebrow">%(cat)s</p>
+      <h1>%(title)s</h1>
+      <p class="pb-post-meta">By the Pinky Brain Digital team &middot; %(date)s &middot; %(read)s</p>
+      <img class="pb-article-head__img" src="images/%(img)s" alt="%(alt)s" loading="eager" decoding="async">
+    </div>
+  </header>
+  <div class="pb-section" style="padding-top:clamp(40px,5vw,64px)">
+    <div class="pb-wrap pb-article">
+      %(body)s
+      <div class="pb-article__service">
+        <div>
+          <p class="pb-eyebrow" style="margin-bottom:8px">Related service</p>
+          <h3>%(sname)s</h3>
+          <p>%(slead)s</p>
+        </div>
+        <a class="pb-btn pb-btn--dark" href="%(sslug)s.html">Explore %(slabel)s %(arrow)s</a>
+      </div>
+    </div>
+  </div>
+</article>
+<section class="pb-section pb-section--tint">
+  <div class="pb-wrap">
+    <div class="pb-section__head" style="display:block">
+      <p class="pb-eyebrow">Keep reading</p>
+      <h2>More from the blog</h2>
+    </div>
+    <div class="pb-blog-grid">%(more)s</div>
+  </div>
+</section>
+""" % {"cat": post["category"], "title": post["title"], "date": _fmt_date(post["date"]), "read": post["read"],
+       "img": post["image"], "alt": post["image_alt"], "body": _render_post_body(post["body"]),
+       "sname": s["name"], "slead": s["lead"][0].upper() + s["lead"][1:], "sslug": s["slug"], "slabel": s["nav_label"],
+       "arrow": icon("arrow"), "more": "".join(render_post_card(p) for p in others)})
+    out.append(render_cta("tell us what you&rsquo;re working on, and we&rsquo;ll reply within one business day with honest, plain-English advice.", root=root))
+    out.append(footer_html(root))
+    out.append(jsonld)
+    out.append("</body></html>")
+
+    path = os.path.join(ROOT, post["slug"] + ".html")
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("".join(out))
+    return path
+
+def build_blog_index():
+    root = ""
+    featured, rest = BLOG_POSTS[0], BLOG_POSTS[1:]
+    out = []
+    out.append(head_html(root, "Blog | Pinky Brain Digital",
+                         "Plain-English guides on websites, SEO, AI search and digital marketing from the Pinky Brain Digital team.", "/blog/"))
+    out.append(header_html(root))
+    out.append(render_breadcrumb(root, [("Home", "index.html"), ("Blog", None)]))
+    out.append("""
+<section class="pb-hero" style="padding-bottom:clamp(40px,5vw,64px)">
+  <div class="pb-wrap" style="max-width:820px">
+    <p class="pb-eyebrow">Insights &amp; advice</p>
+    <h1>The Pinky Brain blog</h1>
+    <p class="pb-lead"><b>In a nutshell:</b> honest, plain-English guides on websites, search and marketing &mdash; written to help you make better decisions, not to sell you something.</p>
+  </div>
+</section>
+<section class="pb-section" style="padding-top:clamp(40px,5vw,64px)">
+  <div class="pb-wrap">
+    <a class="pb-post-feature" href="%(fslug)s.html">
+      <img src="images/%(fimg)s" alt="%(falt)s" loading="eager" decoding="async">
+      <div>
+        <p class="pb-post-meta"><span class="pb-post-tag">Latest</span> %(fcat)s &middot; %(fdate)s &middot; %(fread)s</p>
+        <h2>%(ftitle)s</h2>
+        <p>%(fexcerpt)s</p>
+        <span class="pb-btn pb-btn--dark" style="margin-top:24px">Read article %(arrow)s</span>
+      </div>
+    </a>
+    %(rest)s
+  </div>
+</section>
+""" % {"fslug": featured["slug"], "fimg": featured["image"], "falt": featured["image_alt"],
+       "fcat": featured["category"], "fdate": _fmt_date(featured["date"]), "fread": featured["read"],
+       "ftitle": featured["title"], "fexcerpt": featured["excerpt"], "arrow": icon("arrow"),
+       "rest": ('<h2 class="pb-blog-subhead">More articles</h2><div class="pb-blog-grid">%s</div>'
+                % "".join(render_post_card(p) for p in rest)) if rest else ""})
+    out.append(render_cta("have a question we haven&rsquo;t answered here? Ask us, and we&rsquo;ll reply within one business day.", root=root))
+    out.append(footer_html(root))
+    out.append("</body></html>")
+
+    path = os.path.join(ROOT, "blog.html")
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("".join(out))
+    return path
+
+# ---------------------------------------------------------------------------
 # BUILD: SITEMAP PAGE + sitemap.xml
 # ---------------------------------------------------------------------------
 def build_sitemap_page(locations):
@@ -2051,8 +2311,8 @@ def build_sitemap_page(locations):
     company_links = [
         ("Home", "index.html"), ("About Us", "about-us.html"),
         ("Industries", "index.html#pbs-industries"), ("FAQs", "index.html#pbs-faq"),
-        ("Locations", "locations.html"), ("Contact Us", "contact-us.html"), ("Sitemap", "sitemap.html"),
-    ]
+        ("Locations", "locations.html"), ("Blog", "blog.html"), ("Contact Us", "contact-us.html"), ("Sitemap", "sitemap.html"),
+    ] + [(_plain(p["title"]), "%s.html" % p["slug"]) for p in BLOG_POSTS]
     service_links = [(SERVICES[k]["name"], "%s.html" % k) for k in ALL_SERVICE_SLUGS]
     wd_links = [(l["city"], "%s.html" % l["folder"]) for l in locations if l["service_key"] == "website-design"]
     seo_links = [(l["city"], "%s.html" % l["folder"]) for l in locations if l["service_key"] == "seo-services"]
@@ -2090,7 +2350,7 @@ def build_sitemap_page(locations):
 def build_sitemap_xml(locations):
     base = "https://pinkybraindigital.com"
     urls = (["/"] + ["/%s/" % k for k in ALL_SERVICE_SLUGS]
-            + ["/contact-us/", "/about-us/", "/locations/", "/sitemap/"] + [l["url"] for l in locations])
+            + ["/contact-us/", "/about-us/", "/locations/", "/blog/", "/sitemap/"] + ["/%s/" % p["slug"] for p in BLOG_POSTS] + [l["url"] for l in locations])
     body = "".join('  <url><loc>%s%s</loc></url>\n' % (base, u) for u in urls)
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n%s</urlset>\n' % body
     path = os.path.join(ROOT, "sitemap.xml")
@@ -2122,6 +2382,9 @@ def main():
     built.append(build_contact_page())
     built.append(build_about_page())
     built.append(build_locations_page(locations))
+    built.append(build_blog_index())
+    for post in BLOG_POSTS:
+        built.append(build_blog_post(post))
     built.append(build_sitemap_page(locations))
     built.append(build_sitemap_xml(locations))
     print("Built contact + about + locations + sitemap")

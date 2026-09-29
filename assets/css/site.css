@@ -81,7 +81,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 .pb-nav{display:flex;align-items:center;gap:8px}
 .pb-nav__list{display:flex;align-items:center;gap:4px}
 .pb-nav__list > li{position:relative}
-.pb-nav__list a{display:flex;align-items:center;gap:6px;padding:10px 14px;border-radius:999px;font-size:.94rem;font-weight:500;color:var(--pb-dark);transition:background-color .2s ease,color .2s ease}
+.pb-nav__list a{display:flex;align-items:center;gap:6px;padding:10px 12px;white-space:nowrap;border-radius:999px;font-size:.94rem;font-weight:500;color:var(--pb-dark);transition:background-color .2s ease,color .2s ease}
 .pb-nav__list > li > a:hover,.pb-nav__list > li.pb-has-sub:hover > a{background:var(--pb-pink-soft);color:var(--pb-muted)}
 .pb-nav__cta{margin-left:8px}
 .pb-nav__sub{position:absolute;top:100%;left:0;min-width:240px;padding:10px;margin-top:6px;border-radius:16px;background:#fff;border:1px solid var(--pb-line);box-shadow:0 24px 48px -28px rgba(1,38,90,.35);opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .18s ease,transform .18s ease,visibility .18s ease}
@@ -91,7 +91,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 .pb-burger{display:none;width:44px;height:44px;border:1px solid var(--pb-line);border-radius:12px;background:#fff;align-items:center;justify-content:center}
 .pb-burger .pb-i{width:20px;height:20px}
 
-@media (max-width:1024px){
+@media (max-width:1240px){
   .pb-nav__list{display:none}
   .pb-nav__cta.pb-btn{display:none}
   .pb-burger{display:flex}
@@ -249,6 +249,48 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 .pb-values-row{display:flex;flex-wrap:wrap;gap:14px}
 .pb-values-row li{display:flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;background:#fff;border:1px solid var(--pb-line);font-family:var(--pb-font-head);font-weight:600;font-size:.95rem;color:var(--pb-dark)}
 .pb-values-row li .pb-i{width:18px;height:18px;color:var(--pb-pink)}
+
+/* =========================================================
+   BLOG — cards, listing, article
+========================================================= */
+.pb-blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:28px}
+@media (max-width:640px){.pb-blog-grid{grid-template-columns:1fr}}
+.pb-post-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--pb-line);border-radius:24px;background:#fff;transition:transform .25s ease,box-shadow .25s ease}
+.pb-post-card:hover{transform:translateY(-4px);box-shadow:0 28px 56px -32px rgba(1,38,90,.3)}
+.pb-post-card img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.pb-post-card__body{display:flex;flex:1;flex-direction:column;gap:12px;padding:26px 26px 28px}
+.pb-post-card h3{font-family:var(--pb-font-head);font-size:1.2rem;font-weight:700;line-height:1.3;letter-spacing:-.01em;color:var(--pb-dark)}
+.pb-post-card__body > p:not(.pb-post-meta){font-size:.94rem;color:var(--pb-body)}
+.pb-post-card .pb-link{align-self:flex-start;margin-top:auto}
+.pb-post-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:.82rem;color:var(--pb-muted)}
+.pb-post-tag{padding:4px 11px;border-radius:999px;background:var(--pb-pink-soft);color:var(--pb-slate);font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+
+.pb-post-feature{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:center;padding:clamp(18px,2vw,24px);border:1px solid var(--pb-line);border-radius:32px;background:#fff;transition:box-shadow .25s ease}
+.pb-post-feature:hover{box-shadow:0 32px 64px -36px rgba(1,38,90,.35)}
+.pb-post-feature img{width:100%;aspect-ratio:16/11;object-fit:cover;border-radius:22px}
+.pb-post-feature h2{margin-top:14px;font-family:var(--pb-font-head);font-size:clamp(1.6rem,2.8vw,2.3rem);font-weight:700;line-height:1.15;letter-spacing:-.02em;color:var(--pb-dark)}
+.pb-post-feature p:not(.pb-post-meta){margin-top:14px;font-size:1.02rem;color:var(--pb-body)}
+.pb-blog-subhead{margin:clamp(48px,6vw,72px) 0 24px;font-family:var(--pb-font-head);font-size:1.5rem;font-weight:700;color:var(--pb-dark)}
+@media (max-width:900px){.pb-post-feature{grid-template-columns:1fr}}
+
+.pb-article-head{padding-top:clamp(32px,5vw,56px);background:linear-gradient(180deg,#fff 0%,var(--pb-bg) 100%)}
+.pb-article-head .pb-wrap{max-width:900px}
+.pb-article-head h1{font-family:var(--pb-font-head);font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.1;letter-spacing:-.03em;color:var(--pb-dark)}
+.pb-article-head .pb-post-meta{margin-top:18px}
+.pb-article-head__img{width:100%;aspect-ratio:16/8;object-fit:cover;margin-top:32px;border-radius:28px;box-shadow:0 40px 80px -40px rgba(1,38,90,.35);transform:translateY(40px)}
+.pb-article{max-width:760px;padding-top:40px}
+.pb-article > p{margin-top:18px;font-size:1.08rem;line-height:1.75;color:var(--pb-body)}
+.pb-article h2{margin-top:44px;font-family:var(--pb-font-head);font-size:clamp(1.35rem,2.2vw,1.65rem);font-weight:700;line-height:1.25;letter-spacing:-.015em;color:var(--pb-dark)}
+.pb-article ul{margin-top:18px;padding-left:22px;list-style:disc}
+.pb-article li{margin-top:10px;font-size:1.05rem;line-height:1.7;color:var(--pb-body)}
+.pb-article li::marker{color:var(--pb-pink)}
+.pb-article b{color:var(--pb-dark);font-weight:600}
+.pb-callout{padding:22px 26px;border-left:4px solid var(--pb-pink);border-radius:0 18px 18px 0;background:var(--pb-bg)}
+.pb-callout p{font-size:1.06rem;line-height:1.7;color:var(--pb-dark)}
+.pb-callout b{color:#C45D7E}
+.pb-article__service{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;margin-top:56px;padding:28px;border:1px solid var(--pb-line);border-radius:24px}
+.pb-article__service h3{font-family:var(--pb-font-head);font-size:1.2rem;font-weight:700;color:var(--pb-dark)}
+.pb-article__service p{margin-top:6px;max-width:440px;font-size:.94rem;color:var(--pb-body)}
 
 /* =========================================================
    CONTACT FORM
