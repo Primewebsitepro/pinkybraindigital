@@ -192,7 +192,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 .pb-split .pb-mini-list{margin-top:24px;display:flex;flex-direction:column;gap:16px}
 .pb-split .pb-mini-list li{display:flex;gap:12px;font-size:.95rem;color:var(--pb-body)}
 .pb-split .pb-mini-list li::before{content:"";flex:none;margin-top:5px;width:18px;height:18px;border-radius:50%;background:var(--pb-pink-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2 5 8.5l4.5-5' fill='none' stroke='%2301265A' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/10px no-repeat}
-@media (max-width:1024px){.pb-split{grid-template-columns:1fr}}
+.pb-split--rev{direction:rtl}
+.pb-split--rev > *{direction:ltr}
+@media (max-width:1024px){.pb-split{grid-template-columns:1fr}.pb-split--rev{direction:ltr}}
 
 /* =========================================================
    FAQ ACCORDION
@@ -241,11 +243,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 .pb-quote-band span{display:block;margin-top:20px;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6)}
 
 .pb-approach-row{padding-block:clamp(48px,6vw,72px)}
-.pb-approach-row .pb-wrap{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:start}
-.pb-approach-row__num{font-family:var(--pb-font-head);font-size:.85rem;font-weight:700;letter-spacing:.1em;color:var(--pb-pink);margin-bottom:14px}
+.pb-approach-row__num{display:block;font-family:var(--pb-font-head);font-size:.85rem;font-weight:700;letter-spacing:.1em;color:var(--pb-pink);margin-bottom:10px}
 .pb-approach-row h2{font-size:clamp(1.5rem,2.4vw,1.9rem);line-height:1.2}
-.pb-approach-row p{margin-top:14px;font-size:1.02rem;color:var(--pb-body);max-width:640px}
-@media (max-width:768px){.pb-approach-row .pb-wrap{grid-template-columns:1fr}}
 
 .pb-values-row{display:flex;flex-wrap:wrap;gap:14px}
 .pb-values-row li{display:flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;background:#fff;border:1px solid var(--pb-line);font-family:var(--pb-font-head);font-weight:600;font-size:.95rem;color:var(--pb-dark)}

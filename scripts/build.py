@@ -1871,23 +1871,23 @@ APPROACH_SECTIONS = [
     ("Your needs come before our services",
      "We don&rsquo;t start with what we can sell you. We start with what you&rsquo;re trying to achieve. We look at what&rsquo;s important now, what can wait, what you can already manage and where you genuinely need help.",
      "Sometimes that means working alongside your existing team. Sometimes we&rsquo;ll bring in expertise from our wider network. And sometimes we&rsquo;ll tell you that you don&rsquo;t need to spend money on something yet. If we&rsquo;re not the right people for something, we&rsquo;ll be honest about that too. We&rsquo;d rather give you the right advice than sell you the wrong service.",
-     "users"),
+     "users", "website-design-development-process.webp", "Team reviewing a client's project requirements together"),
     ("Built around your business",
      "Every business is different. We stay flexible and adapt our approach around what you actually need, rather than trying to fit you into a standard package.",
      "As your business grows and changes, we want to grow and adapt with you.",
-     "target"),
+     "target", "ppc-digital-advertising-detail.webp", "A plan being built and tailored around one specific business"),
     ("Keeping you ahead",
      "Digital never stands still, and neither do we. We keep up with new technologies, platforms, tools and changes in the digital world so you don&rsquo;t have to.",
      "It&rsquo;s not about following every trend. It&rsquo;s about understanding what&rsquo;s changing, what matters to your business, and helping you take advantage of the right opportunities at the right time.",
-     "growth"),
+     "growth", "aeo-ai-search-hero.webp", "AI search interface representing new digital technology"),
     ("Transparency from the start",
      "You should know what we&rsquo;re doing, why we&rsquo;re doing it, what it costs and how things are progressing.",
      "We&rsquo;ll keep you updated, be open about what&rsquo;s working, and equally open when something needs to change.",
-     "doc"),
+     "doc", "google-ads-detail.webp", "Performance data and reporting being reviewed openly"),
     ("Here for the long term",
      "We don&rsquo;t expect trust because we have a website or make promises. We have to earn it through our work, communication, transparency and the way we treat people.",
      "We&rsquo;re not looking for a quick transaction. We want to become the digital team you trust and still want to call years from now.",
-     "shield"),
+     "shield", "ecommerce-store-design-detail.webp", "Ongoing work being reviewed together over time"),
 ]
 APPROACH_VALUES = ["Good work", "Fair advice", "Clear communication", "Always evolving", "Long-term relationships"]
 
@@ -1897,23 +1897,24 @@ def build_about_page():
     desc = "Digital is complicated. Trust shouldn't be. Meet Pinky Brain Digital and the approach behind every project we take on."
 
     rows_html = "".join("""
-<section class="pb-approach-row%(tint)s">
-  <div class="pb-wrap">
+<section class="pb-approach-row%(tint)s" id="approach-%(idx)s">
+  <div class="pb-wrap pb-split%(rev)s">
+    %(media)s
     <div>
-      <span class="pb-card__ic">%(icon)s</span>
       <p class="pb-approach-row__num">%(num)s &mdash; %(count)s</p>
       <h2>%(title)s</h2>
-    </div>
-    <div>
-      <p>%(p1)s</p>
+      <p style="margin-top:16px">%(p1)s</p>
       <p style="margin-top:16px">%(p2)s</p>
     </div>
   </div>
 </section>""" % {
         "tint": " pb-section--tint" if i % 2 else "",
-        "icon": icon(ic), "num": "%02d" % (i + 1), "count": "%02d" % len(APPROACH_SECTIONS),
+        "rev": " pb-split--rev" if i % 2 else "",
+        "idx": i + 1,
+        "media": '<img class="pb-split__img" src="%simages/%s" alt="%s" loading="lazy" decoding="async">' % (root, img, alt),
+        "num": "%02d" % (i + 1), "count": "%02d" % len(APPROACH_SECTIONS),
         "title": t, "p1": p1, "p2": p2,
-    } for i, (t, p1, p2, ic) in enumerate(APPROACH_SECTIONS))
+    } for i, (t, p1, p2, ic, img, alt) in enumerate(APPROACH_SECTIONS))
 
     values_html = "".join('<li>%s %s</li>' % (icon("check"), v) for v in APPROACH_VALUES)
 
@@ -1923,10 +1924,25 @@ def build_about_page():
     out.append(render_breadcrumb(root, [("Home", root + "index.html"), ("About Us", None)]))
     out.append("""
 <section class="pb-hero">
-  <div class="pb-wrap" style="max-width:820px">
-    <p class="pb-eyebrow">Our Approach</p>
-    <h1>Digital is complicated. Trust shouldn&rsquo;t be.</h1>
-    <p class="pb-lead">Just as you have a trusted accountant, mechanic or doctor, we believe every business needs a reliable digital partner &mdash; someone who understands the landscape, explains things clearly and has your best interests at heart. That&rsquo;s what we want Pinky Brain Digital to be.</p>
+  <div class="pb-wrap pb-hero__grid">
+    <div>
+      <p class="pb-eyebrow">Our Approach</p>
+      <h1>Digital is complicated. Trust shouldn&rsquo;t be.</h1>
+      <p class="pb-lead">Just as you have a trusted accountant, mechanic or doctor, we believe every business needs a reliable digital partner &mdash; someone who understands the landscape, explains things clearly and has your best interests at heart. That&rsquo;s what we want Pinky Brain Digital to be.</p>
+      <div class="pb-hero__actions">
+        <a class="pb-btn pb-btn--dark" href="contact-us.html">Book a free consultation %(arrow)s</a>
+        <a class="pb-btn pb-btn--line" href="#approach-1">Read our approach</a>
+      </div>
+      <ul class="pb-hero__ticks">
+        <li>Honest, plain-English advice</li>
+        <li>Flexible, not one-size-fits-all</li>
+        <li>A long-term digital partner</li>
+      </ul>
+    </div>
+    <div class="pb-hero__media">
+      <img class="pb-hero__img" src="images/about-pinky-brain-digital-team.webp" alt="Pinky Brain Digital team working together on a client project" width="900" height="792" loading="eager" decoding="async">
+      <div class="pb-hero__badge"><div><b>Trust, always</b><span>Our promise</span></div></div>
+    </div>
   </div>
 </section>
 <section class="pb-quote-band">
@@ -1946,7 +1962,7 @@ def build_about_page():
     <ul class="pb-values-row">%(values)s</ul>
   </div>
 </section>
-""" % {"rows": rows_html, "values": values_html})
+""" % {"rows": rows_html, "values": values_html, "arrow": icon("arrow")})
     out.append(render_cta("tell us about your business, and we&rsquo;ll reply within one business day with honest, straight-talking advice &mdash; not a sales pitch.", root=root))
     out.append(footer_html(root))
     out.append("</body></html>")
