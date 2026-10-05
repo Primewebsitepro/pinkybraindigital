@@ -1,74 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Content Marketing | Pinky Brain Digital</title>
 <meta name="description" content="Content marketing - blogs, guides and video built to attract, inform and convert customers over the long term.">
-<link rel="canonical" href="https://pinkybraindigital.com/content-marketing/">
-<link rel="icon" href="images/favicon-32.png" sizes="32x32">
-<link rel="icon" href="images/favicon-192.png" sizes="192x192">
+<link rel="canonical" href="https://pinkybraindigital.com/content-marketing.html">
+<meta name="theme-color" content="#01265A">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pinky Brain Digital">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="Content Marketing | Pinky Brain Digital">
+<meta property="og:description" content="Content marketing - blogs, guides and video built to attract, inform and convert customers over the long term.">
+<meta property="og:url" content="https://pinkybraindigital.com/content-marketing.html">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="images/favicon-32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="images/favicon-192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="images/favicon-180.png">
+<link rel="preload" href="assets/fonts/general-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/general-sans-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
+<a class="pb-skip" href="#main">Skip to main content</a>
 
 <header class="pb-header">
   <div class="pb-wrap pb-header__bar">
-    <a class="pb-header__logo" href="index.html">
-      <img src="images/logo.png" alt="Pinky Brain Digital logo" width="192" height="64">
+    <a class="pb-header__logo" href="index.html" aria-label="Pinky Brain Digital, home">
+      <img src="images/logo.png" alt="Pinky Brain Digital" width="192" height="64">
     </a>
-    <nav class="pb-nav" aria-label="Primary">
+    <nav class="pb-nav" aria-label="Main">
       <ul class="pb-nav__list">
-        <li><a href="seo-services.html">SEO Services</a></li>
-        <li><a href="website-design.html">Website Design</a></li>
-        <li><a href="social-media.html">Social Media</a></li>
-        <li class="pb-has-sub">
-          <a href="index.html#pbs-services">Digital Marketing <svg class="pb-i" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
-          <div class="pb-nav__sub"><a href="e-commerce-websites-design.html">E-commerce Websites</a><a href="aeo-ai-search.html">AEO (AI Search)</a><a href="ppc-digital-advertising.html">PPC & Digital Advertising</a><a href="google-ads.html">Google Ads</a></div>
+        <li class="pb-has-mega">
+          <a href="services.html" aria-current="page">Services</a>
+          <button type="button" class="pb-nav__toggle" aria-expanded="false" aria-controls="pb-mega" aria-label="Show the services menu"><svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="pb-mega" id="pb-mega">
+            <div class="pb-mega__panel">
+              <div class="pb-mega__grid"><div class="pb-mega__group"><p class="pb-mega__title">Search &amp; Advertising</p><ul><li><a href="seo-services.html">SEO Services</a></li><li><a href="aeo-ai-search.html">AEO (AI Search)</a></li><li><a href="local-seo.html">Local SEO &amp; Google Profile</a></li><li><a href="ppc-digital-advertising.html">PPC &amp; Digital Advertising</a></li><li><a href="google-ads.html">Google Ads</a></li></ul></div><div class="pb-mega__group"><p class="pb-mega__title">Websites &amp; Apps</p><ul><li><a href="website-design.html">Website Design</a></li><li><a href="e-commerce-websites-design.html">E-commerce Websites</a></li><li><a href="app-development.html">Web &amp; Mobile Apps</a></li><li><a href="custom-software.html">Custom Software</a></li></ul></div><div class="pb-mega__group"><p class="pb-mega__title">Marketing</p><ul><li><a href="social-media.html">Social Media Marketing</a></li><li><a href="content-marketing.html">Content Marketing</a></li><li><a href="email-marketing.html">Email Marketing</a></li><li><a href="lead-generation.html">Lead Generation</a></li></ul></div><div class="pb-mega__group"><p class="pb-mega__title">Branding &amp; Creative</p><ul><li><a href="branding.html">Branding &amp; Identity</a></li><li><a href="graphic-design.html">Graphic Design</a></li><li><a href="video-photography.html">Video &amp; Photography</a></li><li><a href="copywriting.html">Copywriting</a></li></ul></div><div class="pb-mega__group"><p class="pb-mega__title">Automation &amp; Security</p><ul><li><a href="ai-automation.html">AI Automation &amp; Chatbots</a></li><li><a href="crm.html">CRM Setup &amp; Integration</a></li><li><a href="cyber-security.html">Cyber Security</a></li><li><a href="website-maintenance.html">Website Care &amp; Hosting</a></li></ul></div><div class="pb-mega__group"><p class="pb-mega__title">Digital Consulting</p><ul><li><a href="digital-consulting.html">Digital Consulting</a></li></ul></div></div>
+              <div class="pb-mega__foot"><span>Not sure what you need? We&rsquo;ll point you in the right direction.</span><a class="pb-link" href="services.html">Explore our services <svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            </div>
+          </div>
         </li>
         <li><a href="locations.html">Locations</a></li>
         <li><a href="about-us.html">About Us</a></li>
-        <li><a href="blog.html">Blog</a></li>
+        <li><a href="blog.html">Insights</a></li>
       </ul>
-      <a class="pb-btn pb-btn--dark pb-nav__cta" href="contact-us.html">Book a free consultation</a>
-      <button class="pb-burger" aria-label="Open menu"><svg class="pb-i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <a class="pb-btn pb-btn--dark pb-nav__cta" href="contact-us.html">Let’s talk about your business</a>
+      <button type="button" class="pb-burger" aria-label="Open the menu" aria-expanded="false" aria-controls="pb-mobile-nav"><svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </nav>
   </div>
 </header>
-<div class="pb-mobile-nav">
+<div class="pb-mobile-nav" id="pb-mobile-nav" role="dialog" aria-modal="true" aria-label="Menu">
   <div class="pb-mobile-nav__top">
-    <a href="index.html"><img src="images/logo.png" alt="Pinky Brain Digital logo" width="138" height="46"></a>
-    <button class="pb-mobile-nav__close" aria-label="Close menu"><svg class="pb-i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <a href="index.html" aria-label="Pinky Brain Digital, home"><img src="images/logo.png" alt="Pinky Brain Digital" width="138" height="46"></a>
+    <button type="button" class="pb-mobile-nav__close" aria-label="Close the menu"><svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
   </div>
   <ul>
     <li><a href="index.html">Home</a></li>
-    <li><a href="seo-services.html">SEO Services</a></li>
-    <li><a href="website-design.html">Website Design</a></li>
-    <li><a href="social-media.html">Social Media</a></li>
-    <li><a href="index.html#pbs-services">Digital Marketing</a></li>
-    <li class="pb-mobile-sub"><a href="e-commerce-websites-design.html">E-commerce Websites</a></li><li class="pb-mobile-sub"><a href="aeo-ai-search.html">AEO (AI Search)</a></li><li class="pb-mobile-sub"><a href="ppc-digital-advertising.html">PPC & Digital Advertising</a></li><li class="pb-mobile-sub"><a href="google-ads.html">Google Ads</a></li>
+    <li><details><summary>Services</summary><div class="pb-mobile-groups"><a class="pb-mobile-all" href="services.html">All services</a><p class="pb-mobile-grouptitle">Search &amp; Advertising</p><ul><li><a href="seo-services.html">SEO Services</a></li><li><a href="aeo-ai-search.html">AEO (AI Search)</a></li><li><a href="local-seo.html">Local SEO &amp; Google Profile</a></li><li><a href="ppc-digital-advertising.html">PPC &amp; Digital Advertising</a></li><li><a href="google-ads.html">Google Ads</a></li></ul><p class="pb-mobile-grouptitle">Websites &amp; Apps</p><ul><li><a href="website-design.html">Website Design</a></li><li><a href="e-commerce-websites-design.html">E-commerce Websites</a></li><li><a href="app-development.html">Web &amp; Mobile Apps</a></li><li><a href="custom-software.html">Custom Software</a></li></ul><p class="pb-mobile-grouptitle">Marketing</p><ul><li><a href="social-media.html">Social Media Marketing</a></li><li><a href="content-marketing.html">Content Marketing</a></li><li><a href="email-marketing.html">Email Marketing</a></li><li><a href="lead-generation.html">Lead Generation</a></li></ul><p class="pb-mobile-grouptitle">Branding &amp; Creative</p><ul><li><a href="branding.html">Branding &amp; Identity</a></li><li><a href="graphic-design.html">Graphic Design</a></li><li><a href="video-photography.html">Video &amp; Photography</a></li><li><a href="copywriting.html">Copywriting</a></li></ul><p class="pb-mobile-grouptitle">Automation &amp; Security</p><ul><li><a href="ai-automation.html">AI Automation &amp; Chatbots</a></li><li><a href="crm.html">CRM Setup &amp; Integration</a></li><li><a href="cyber-security.html">Cyber Security</a></li><li><a href="website-maintenance.html">Website Care &amp; Hosting</a></li></ul><p class="pb-mobile-grouptitle">Digital Consulting</p><ul><li><a href="digital-consulting.html">Digital Consulting</a></li></ul></div></details></li>
     <li><a href="locations.html">Locations</a></li>
     <li><a href="about-us.html">About Us</a></li>
-    <li><a href="blog.html">Blog</a></li>
+    <li><a href="blog.html">Insights</a></li>
   </ul>
-  <a class="pb-btn pb-btn--dark" href="contact-us.html">Book a free consultation</a>
+  <a class="pb-btn pb-btn--dark" href="contact-us.html">Let’s talk about your business</a>
 </div>
-<div class="pb-wrap pb-crumb"><a href="index.html">Home</a><span>/</span><a href="index.html#pbs-services">Services</a><span>/</span><span style="color:var(--pb-dark);font-weight:600">Content Marketing</span></div>
+<main id="main">
+<nav class="pb-wrap pb-crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="pb-crumb__sep" aria-hidden="true">/</span><a href="services.html">Services</a><span class="pb-crumb__sep" aria-hidden="true">/</span><span aria-current="page">Content Marketing</span></nav>
 <section class="pb-hero">
   <div class="pb-wrap pb-hero__grid">
     <div>
       <p class="pb-eyebrow">Services · Content Marketing</p>
       <h1>Content that brings in customers for years, not days</h1>
-      <p class="pb-lead"><b>In a nutshell:</b> useful blogs, guides and video that bring in customers for years, not days &mdash; and support your SEO at the same time.</p>
+      <p class="pb-lead">We create useful blogs, guides and video that bring in customers for years, not days, and support your SEO at the same time.</p>
       <div class="pb-hero__actions">
-        <a class="pb-btn pb-btn--dark" href="mailto:hello@pinkybraindigital.com">Book a free consultation <svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="pb-btn pb-btn--line" href="#pb-faq">See FAQs</a>
+        <a class="pb-btn pb-btn--dark" href="contact-us.html">Let’s talk about your business <svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="pb-btn pb-btn--line" href="services.html">Explore our services</a>
       </div>
       <ul class="pb-hero__ticks"><li>Built to support SEO</li><li>Written for real customers</li><li>Blogs, guides &amp; video</li></ul>
     </div>
     <div class="pb-hero__media">
-      <img class="pb-hero__img" src="images/social-media-marketing-detail.webp" alt="Content calendar and blog article being planned" width="900" height="792" loading="eager" decoding="async">
+      <img class="pb-hero__img" src="images/social-media-marketing-detail.webp" alt="Content calendar and blog article being planned" width="900" height="792" fetchpriority="high" decoding="async">
       <div class="pb-hero__badge"><div><b>Years, not days</b><span>Built to last</span></div></div>
     </div>
   </div>
@@ -77,14 +88,24 @@
 <section class="pb-section">
   <div class="pb-wrap">
     <div class="pb-section__head">
-      <div><p class="pb-eyebrow">Why choose us</p><h2>Most content is written once and forgotten.</h2></div>
-      <p></p>
+      <div><p class="pb-eyebrow">Why choose us</p><h2>Why businesses choose us for Content Marketing</h2></div>
+      <p>Honest advice, a flexible approach and clear communication, from the first conversation to long after launch.</p>
     </div>
     <div class="pb-grid-4"><div class="pb-card"><span class="pb-card__ic"><svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.5 3.2-5.5 6.5-5.5s5.9 2 6.5 5.5M16 4.8a3.5 3.5 0 0 1 0 6.4M18.5 14.8c1.7.8 2.8 2.6 3 5.2"/></svg></span><h3>Most content is written once and forgotten.</h3><p>We plan content as an asset that keeps earning attention months and years after it&rsquo;s published.</p></div><div class="pb-card"><span class="pb-card__ic"><svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 3v6c0 4.8-3.4 8.2-8 9-4.6-.8-8-4.2-8-9V6z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></svg></span><h3>Every piece has a job.</h3><p>Awareness, education or conversion &mdash; each piece of content is planned around what it needs to achieve.</p></div><div class="pb-card"><span class="pb-card__ic"><svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><h3>Written for people, structured for search.</h3><p>Clear, useful writing that also follows the structure search engines and AI tools reward.</p></div><div class="pb-card"><span class="pb-card__ic"><svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".5"/></svg></span><h3>Quality over volume.</h3><p>One genuinely useful guide outperforms ten thin articles. We&rsquo;d rather do less, well.</p></div></div>
   </div>
 </section>
 
 <section class="pb-section pb-section--tint">
+  <div class="pb-wrap">
+    <div class="pb-section__head">
+      <div><p class="pb-eyebrow">Results that matter</p><h2>The results we work towards</h2></div>
+      <p>Good content keeps working long after the work of writing it is done. We start by understanding what you want to achieve, then recommend the right solution for your business, situation and budget, case by case. We never use a one-size-fits-all package.</p>
+    </div>
+    <div class="pb-grid-4"><div class="pb-card"><span class="pb-card__ic"><svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><h3>Authority in your field</h3><p>Content that shows you know your subject.</p></div><div class="pb-card"><span class="pb-card__ic"><svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.5 3.2-5.5 6.5-5.5s5.9 2 6.5 5.5M16 4.8a3.5 3.5 0 0 1 0 6.4M18.5 14.8c1.7.8 2.8 2.6 3 5.2"/></svg></span><h3>Steady organic traffic</h3><p>Pages that keep attracting visitors month after month.</p></div><div class="pb-card"><span class="pb-card__ic"><svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg></span><h3>Trust before first contact</h3><p>Prospects who have already learned from you.</p></div><div class="pb-card"><span class="pb-card__ic"><svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><h3>Leads over time</h3><p>Enquiries that build steadily rather than spiking and fading.</p></div></div>
+  </div>
+</section>
+
+<section class="pb-section">
   <div class="pb-wrap">
     <div class="pb-section__head">
       <div><p class="pb-eyebrow">What we do</p><h2>What we create.</h2></div>
@@ -94,7 +115,7 @@
   </div>
 </section>
 
-<section class="pb-section">
+<section class="pb-section pb-section--tint">
   <div class="pb-wrap">
     <div class="pb-section__head">
       <div><p class="pb-eyebrow">How we help</p><h2>How We Build Your Content Engine</h2></div>
@@ -106,12 +127,12 @@
 
 <section class="pb-section">
   <div class="pb-wrap pb-split">
-    <img class="pb-split__img" src="images/aeo-ai-search-detail.jpg" alt="Long-form article being written and structured" loading="lazy" decoding="async">
+    <img class="pb-split__img" src="images/aeo-ai-search-detail.webp" alt="Long-form article being written and structured" width="760" height="644" loading="lazy" decoding="async">
     <div>
       <p class="pb-eyebrow">Why it matters</p>
       <h2>Content Built to Compound</h2>
       <p>Good content keeps bringing in visitors long after the work of writing it is done.</p>
-      <ul class="pb-mini-list"><li>Answers Real Questions &mdash; Every piece solves a genuine problem your customers have.</li><li>Supports SEO &amp; AEO &mdash; Structured so it helps you rank on Google and get quoted by AI tools.</li><li>Consistent Brand Voice &mdash; Content sounds like your business, not a generic template.</li><li>Tracked &amp; Improved &mdash; We see what performs and refine the plan every month.</li></ul>
+      <ul class="pb-mini-list"><li>Answers Real Questions: Every piece solves a genuine problem your customers have.</li><li>Supports SEO &amp; AEO: Structured so it helps you rank on Google and get quoted by AI tools.</li><li>Consistent Brand Voice: Content sounds like your business, not a generic template.</li><li>Tracked &amp; Improved: We see what performs and refine the plan every month.</li></ul>
     </div>
   </div>
 </section>
@@ -130,68 +151,103 @@
   <div class="pb-wrap">
     <div class="pb-cta">
       <div class="pb-cta__solo">
-        <h2>Get in touch</h2>
-        <p><b>In a nutshell:</b> tell us about your business and your customers, and we&rsquo;ll reply within one business day with content ideas worth pursuing.</p>
+        <h2>Tell us what you want to achieve.</h2>
+        <p>Tell us about your business and your customers, and we&rsquo;ll reply within one business day with content ideas worth pursuing.</p>
         <div class="pb-cta__actions">
-          <a class="pb-btn pb-btn--pink" href="contact-us.html">Contact us <svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          <a class="pb-cta__mail" href="mailto:hello@pinkybraindigital.com">or email hello@pinkybraindigital.com directly</a>
+          <a class="pb-btn pb-btn--pink" href="contact-us.html">Let’s talk about your business <svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="pb-btn pb-btn--ghost" href="services.html">Explore our services</a>
         </div>
+        <p class="pb-cta__offer">Prefer to start small? Ask about our <a href="contact-us.html?interest=seo-ai-search-audit">Free SEO &amp; AI Search Audit</a>.</p>
+        <p class="pb-cta__small">Prefer email? <a href="mailto:hello@pinkybraindigital.com">hello@pinkybraindigital.com</a></p>
       </div>
     </div>
   </div>
 </section>
 
+</main>
 <footer class="pb-footer">
-  <div class="pb-wrap">
+  <div class="pb-wrap pb-footer__top">
     <div class="pb-footer__brand">
-      <img src="images/logo.png" alt="Pinky Brain Digital logo" width="174" height="58" style="filter:brightness(0) invert(1)">
-      <p>Most businesses juggle a web designer, an SEO freelancer, a social media manager and an ads specialist, and nobody owns the results. We bring every digital discipline into one team.</p>
-      <div class="pb-footer__social">
-        <a href="#" aria-label="Facebook"><svg class="pb-i" viewBox="0 0 24 24" width="16" height="16"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H9v3h2v7h3v-7h3l1-3h-4V9c0-.6.4-1 1-1z"/></svg></a>
-        <a href="#" aria-label="X (Twitter)"><svg class="pb-i" viewBox="0 0 24 24" width="16" height="16"><path d="M4 4l16 16M20 4 4 20"/></svg></a>
-        <a href="#" aria-label="YouTube"><svg class="pb-i" viewBox="0 0 24 24" width="16" height="16"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="m10 9 5 3-5 3z"/></svg></a>
-      </div>
+      <img src="images/logo.png" alt="Pinky Brain Digital" width="174" height="58" style="filter:brightness(0) invert(1)">
+      <p>One trusted digital team for your website, search, advertising, social media and AI, built around your business and your goals.</p>
+      
     </div>
-    <div>
-      <h4>Services</h4>
-      <ul><li><a href="seo-services.html">SEO Services</a></li><li><a href="website-design.html">Website Design</a></li><li><a href="e-commerce-websites-design.html">E-commerce Websites</a></li><li><a href="aeo-ai-search.html">AEO (AI Search)</a></li><li><a href="ppc-digital-advertising.html">PPC & Digital Advertising</a></li><li><a href="social-media.html">Social Media Marketing</a></li><li><a href="google-ads.html">Google Ads</a></li></ul>
-    </div>
-    <div>
-      <h4>Company</h4>
+    <nav aria-label="Services">
+      <p class="pb-footer__h">Services</p>
+      <ul><li><a href="seo-services.html">SEO Services</a></li><li><a href="website-design.html">Website Design</a></li><li><a href="e-commerce-websites-design.html">E-commerce Websites</a></li><li><a href="aeo-ai-search.html">AEO (AI Search)</a></li><li><a href="ppc-digital-advertising.html">PPC &amp; Digital Advertising</a></li><li><a href="social-media.html">Social Media Marketing</a></li><li><a href="google-ads.html">Google Ads</a></li><li><a href="services.html">All services</a></li></ul>
+    </nav>
+    <nav aria-label="Company">
+      <p class="pb-footer__h">Company</p>
       <ul>
         <li><a href="about-us.html">About Us</a></li>
-        <li><a href="index.html#pbs-industries">Industries</a></li>
+        <li><a href="industries.html">Industries</a></li>
         <li><a href="locations.html">Locations</a></li>
-        <li><a href="blog.html">Blog</a></li>
+        <li><a href="blog.html">Insights</a></li>
         <li><a href="index.html#pbs-faq">FAQs</a></li>
         <li><a href="contact-us.html">Contact Us</a></li>
-        <li><a href="sitemap.html">Sitemap</a></li>
       </ul>
-    </div>
+    </nav>
     <div>
-      <h4>Get In Touch</h4>
-      <ul>
-        <li>International House, 109–111 Fulham Palace Road, London, W6 8JA</li>
-        <li><a href="mailto:hello@pinkybraindigital.com">hello@pinkybraindigital.com</a></li>
-      </ul>
+      <p class="pb-footer__h">Get in touch</p>
+      <address>International House, 109–111 Fulham Palace Road, London, W6 8JA<br><a href="mailto:hello@pinkybraindigital.com">hello@pinkybraindigital.com</a></address>
     </div>
   </div>
   <div class="pb-wrap pb-footer__bottom">
-    <span>&copy; 2026 All Rights Reserved to Pinky Brain Digital</span>
+    <span>&copy; 2026 Pinky Brain Digital. All rights reserved.</span>
+    <ul>
+      <li><a href="privacy-policy.html">Privacy Policy</a></li>
+      <li><a href="sitemap.html">Sitemap</a></li>
+    </ul>
   </div>
 </footer>
-<script src="assets/js/site.js"></script>
+<script src="assets/js/site.js" defer></script>
+
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {"@type": "Question", "name": "How is content marketing different from copywriting?", "acceptedAnswer": {"@type": "Answer", "text": "Copywriting covers your core website pages. Content marketing is the ongoing blogs, guides and video that keep bringing in new visitors over time."}},
-    {"@type": "Question", "name": "How often should we publish?", "acceptedAnswer": {"@type": "Answer", "text": "Consistency matters more than frequency. We agree a realistic rhythm — often a few strong pieces a month rather than daily filler."}},
-    {"@type": "Question", "name": "Will content marketing help my SEO?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Well-structured, useful content is one of the strongest long-term ranking signals, alongside technical SEO and links."}},
-    {"@type": "Question", "name": "Can you write in our brand voice?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We learn how your business communicates and write to match, then you review everything before it’s published."}},
-    {"@type": "Question", "name": "How long until content marketing shows results?", "acceptedAnswer": {"@type": "Answer", "text": "Early pieces can bring traffic within weeks, but content marketing is a compounding, long-term investment that builds over 6–12 months."}}
-  ]
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How is content marketing different from copywriting?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Copywriting covers your core website pages. Content marketing is the ongoing blogs, guides and video that keep bringing in new visitors over time."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How often should we publish?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Consistency matters more than frequency. We agree a realistic rhythm — often a few strong pieces a month rather than daily filler."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Will content marketing help my SEO?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. Well-structured, useful content is one of the strongest long-term ranking signals, alongside technical SEO and links."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can you write in our brand voice?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. We learn how your business communicates and write to match, then you review everything before it’s published."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How long until content marketing shows results?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Early pieces can bring traffic within weeks, but content marketing is a compounding, long-term investment that builds over 6–12 months."
+   }
+  }
+ ]
 }
 </script>
 </body></html>

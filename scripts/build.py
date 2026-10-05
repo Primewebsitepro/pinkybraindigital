@@ -9,20 +9,24 @@ Reads the two CSVs + the content data below and writes:
 Run: python scripts/build.py   (from the project root, or anywhere - paths are resolved relative to this file)
 """
 import csv
+import html
+import json
 import os
 import re
+
+from content import (
+    CTA_PRIMARY, CTA_SECONDARY, CASE_BY_CASE, SERVICE_GROUPS, SERVICE_BLURB, OUTCOMES,
+    FREE_OFFERS, SERVICE_OFFER, SECTOR_NOTES, CITY_PROFILES, INDUSTRIES,
+)
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 SITE_NAME = "Pinky Brain Digital"
+SITE_URL = "https://pinkybraindigital.com"
 SITE_EMAIL = "hello@pinkybraindigital.com"
 SITE_ADDRESS = "International House, 109–111 Fulham Palace Road, London, W6 8JA"
 
-# Cities featured in the header's Website Design / SEO Services dropdowns.
-CURATED_NAV_CITIES = ["New York", "Los Angeles", "London", "Toronto", "Chicago", "Manchester", "Miami"]
 
-# Populated once in main() from the Location CSV; read by header_html().
-ALL_LOCATIONS = []
 
 # ---------------------------------------------------------------------------
 # ICONS (reused from the homepage's own icon vocabulary, for visual consistency)
@@ -59,11 +63,11 @@ SERVICES = {
         "name": "Website Design & Development",
         "eyebrow": "Services · Website Design",
         "h1": "Websites that turn visitors into enquiries",
-        "lead": "a fast, modern website built around your customers &mdash; mobile-first, easy for you to update, and designed to convert visitors into real enquiries.",
+        "lead": "we design fast, modern websites built around your customers: mobile-first, easy for you to update and designed to turn visitors into real enquiries.",
         "meta": "Fast, mobile-first website design and development that turns visitors into enquiries. Built around your customers, SEO-ready from day one.",
         "ticks": ["Mobile-first design", "SEO-ready from day one", "Launch support included"],
         "badge": ("Page speed", "96 / 100", "Mobile &middot; Desktop &middot; Tablet"),
-        "hero_img": "website-design-service-hero.jpg",
+        "hero_img": "website-design-service-hero.webp",
         "hero_alt": "Website design and development mock-up for a business homepage",
         "split_img": "website-design-development-process.webp",
         "split_alt": "Website design and development process shown on a laptop screen",
@@ -121,11 +125,11 @@ SERVICES = {
         "name": "E-commerce Websites",
         "eyebrow": "Services · E-commerce Websites",
         "h1": "Online stores built to turn browsers into buyers",
-        "lead": "an online shop that loads fast, works beautifully on a phone and makes checkout simple &mdash; so more of your visitors become paying customers.",
-        "meta": "E-commerce website design for WooCommerce and Shopify. Mobile-first stores with fast checkout, built to sell across the USA, Canada, UK and Europe.",
-        "ticks": ["Mobile-first shopping experience", "SEO-ready product pages", "Selling across USA, Canada, UK & Europe"],
+        "lead": "we build online shops that load quickly, work beautifully on a phone and make checkout simple, so more of your visitors become paying customers.",
+        "meta": "E-commerce website design for WooCommerce and Shopify. Mobile-first stores with fast checkout, built to sell across the UK, Europe, the USA and Canada.",
+        "ticks": ["Mobile-first shopping experience", "SEO-ready product pages", "Selling across UK, Europe, USA & Canada"],
         "badge": ("Secure checkout", "3 steps", "Cart &middot; Details &middot; Pay"),
-        "hero_img": "ecommerce-website-design-hero.jpg",
+        "hero_img": "ecommerce-website-design-hero.webp",
         "hero_alt": "E-commerce website design showing a product catalogue and checkout",
         "split_img": "ecommerce-store-design-detail.webp",
         "split_alt": "Online store product and checkout page design detail",
@@ -153,7 +157,7 @@ SERVICES = {
             ("Clear Product Presentation", "Strong images, clear descriptions, sizing, delivery information and reviews placed where shoppers need them, so they can decide with confidence."),
             ("Frictionless Checkout", "A short, simple path from basket to payment, with guest checkout and the payment methods customers in each country expect."),
             ("Search-Ready Catalogue", "Sensible categories, clean URLs, product schema and internal linking help search engines understand and rank your products."),
-            ("Ready for Multiple Markets", "Currencies, shipping zones and tax settings can be set up for selling across the USA, Canada, the UK and Europe as you grow."),
+            ("Ready for Multiple Markets", "Currencies, shipping zones and tax settings can be set up for selling across the UK, Europe, the USA and Canada as you grow."),
         ],
         "g4_title": "Designed Around How People Actually Shop Online",
         "g4_intro": "Your customers don&rsquo;t want to hunt for information or guess what happens after they click &ldquo;Buy&rdquo;. We build stores that answer their questions early and make every next step obvious.",
@@ -166,7 +170,7 @@ SERVICES = {
         "faq": [
             ("How long does it take to build an e-commerce website?", "Most online stores take around 6&ndash;10 weeks from approved design to launch, depending on the number of products, integrations (payments, shipping, stock) and how much content is ready. You&rsquo;ll get a clear timeline in your proposal."),
             ("Which platform do you build on &mdash; WooCommerce or Shopify?", "We recommend the platform that fits your products, budget and how you want to manage the store. WooCommerce suits businesses that want full control on WordPress; Shopify suits those who want a simple, hosted setup. We&rsquo;ll explain the trade-offs in plain English before you decide."),
-            ("Can my store sell to customers in the USA, Canada, the UK and Europe?", "Yes. We can set up multiple currencies, shipping zones, tax and VAT options and the payment methods customers expect in each market. Tax rules vary by country, so we&rsquo;ll always suggest confirming the details with your accountant."),
+            ("Can my store sell to customers in the UK, Europe, the USA and Canada?", "Yes. We can set up multiple currencies, shipping zones, tax and VAT options and the payment methods customers expect in each market. Tax rules vary by country, so we&rsquo;ll always suggest confirming the details with your accountant."),
             ("Will I be able to manage products and orders myself?", "Yes. We build the store so you can add products, change prices, manage stock and process orders without a developer, and we&rsquo;ll show you how during a handover session."),
             ("Can you help with product photos and descriptions?", "We can guide you on the images and descriptions that sell best, and help write or edit product copy. If you&rsquo;d like us to handle it, we&rsquo;ll include it in your quote."),
         ],
@@ -183,24 +187,24 @@ SERVICES = {
         "name": "SEO Services",
         "eyebrow": "Services · SEO Services",
         "h1": "SEO that puts your business in front of customers ready to buy",
-        "lead": "we help your website appear on Google when people search for what you sell &mdash; so you get more of the right visitors, not just more visitors.",
-        "meta": "SEO services covering technical, content and local SEO. Plain-English monthly reporting, ranking businesses across the USA, Canada, UK and Europe.",
-        "ticks": ["Technical, local & content SEO", "Plain-English monthly reports", "Ranking in USA, Canada, UK & Europe"],
+        "lead": "we help your business rank higher, get seen by the right people and turn that visibility into enquiries, customers and growth.",
+        "meta": "SEO services for better rankings, more visibility, relevant traffic and more enquiries. Technical, content and local SEO with plain-English reporting.",
+        "ticks": ["Technical, local & content SEO", "Plain-English monthly reports", "Ranking in UK, Europe, USA & Canada"],
         "badge": ("What we improve", "Technical &middot; Content &middot; Local", ""),
         "hero_img": "seo-services-hero.webp",
         "hero_alt": "SEO services dashboard showing search rankings improving",
         "split_img": "ecommerce-store-design-detail.webp",
         "split_alt": "SEO content and keyword strategy being planned on screen",
-        "why_title": "Rankings aren&rsquo;t the goal. Customers are.",
+        "why_title": "Better rankings. More visibility. More opportunities to grow.",
         "why_cards": [
-            ("Rankings aren&rsquo;t the goal. Customers are.", "We measure success by enquiries, calls and sales, not by how many keywords we can list in a report."),
+            ("Better rankings. More visibility. More opportunities to grow.", "We care about the complete result: higher rankings and visibility, relevant traffic, enquiries, customers and, ultimately, growth for your business. We report on all of it, not just a list of keywords."),
             ("We tell you what&rsquo;s realistic.", "Some searches can be won in months, others take a year or more. We show you which is which before you commit."),
             ("No secret tricks.", "We don&rsquo;t buy spammy links or hide behind jargon. Everything we do follows Google&rsquo;s guidelines, and we explain it in plain English."),
             ("Reports you&rsquo;ll actually read.", "A short monthly summary of what we did, what changed and what happens next &mdash; no 40-page data dumps."),
         ],
         "core_title": "Four things that decide whether Google sends you customers.",
         "core_sub": "Technical health, useful content, local presence and trusted links.",
-        "core_intro": "SEO isn&rsquo;t one trick. It&rsquo;s technical health, useful content, local presence and trusted links working together. We look after all four for businesses across the USA, Canada, the UK and Europe, so search engines understand your website and customers can find it.",
+        "core_intro": "SEO isn&rsquo;t one trick. It&rsquo;s technical health, useful content, local presence and trusted links working together. We look after all four for businesses across the UK, Europe, the USA and Canada, so search engines understand your website and customers can find it.",
         "core_cards": [
             ("Technical SEO", "We fix the behind-the-scenes issues &mdash; speed, crawl errors, mobile usability and site structure &mdash; that stop Google reading your website properly."),
             ("Content and on-page SEO", "We plan and optimise pages around the words your customers actually search, so each page has a clear job and a clear reason to rank."),
@@ -228,7 +232,7 @@ SERVICES = {
         "faq": [
             ("How long does SEO take to work?", "SEO is a long-term investment. Many businesses see early movement within 3&ndash;4 months, with stronger results building over 6&ndash;12 months, depending on competition, your website and your starting point. We&rsquo;ll set realistic expectations before we begin."),
             ("Can you guarantee first-page rankings?", "No &mdash; and be cautious of any agency that does. Nobody outside Google controls its results. What we can do is follow best practice, focus on the searches most likely to bring customers and report honestly on progress."),
-            ("Can you help my business rank in more than one country?", "Yes. We work with businesses across the USA, Canada, the UK and Europe, and adapt keywords, spelling, local listings and location pages for each market you want to reach."),
+            ("Can you help my business rank in more than one country?", "Yes. We work with businesses across the UK, Europe, the USA and Canada, and adapt keywords, spelling, local listings and location pages for each market you want to reach."),
             ("What&rsquo;s the difference between SEO and local SEO?", "SEO helps your website rank for searches anywhere. Local SEO focuses on &ldquo;near me&rdquo; and city-based searches and your Google Business Profile, which matters most if customers visit you or you serve a specific area."),
             ("Will I get reports I can understand?", "Yes. Every month you&rsquo;ll receive a plain-English report covering what we did, how your visibility and enquiries changed and what&rsquo;s planned next."),
         ],
@@ -245,13 +249,13 @@ SERVICES = {
         "name": "AEO (AI Search)",
         "eyebrow": "Services · AEO (AI Search)",
         "h1": "Be the answer when your customers ask AI",
-        "lead": "AEO &mdash; answer engine optimisation &mdash; helps AI tools like ChatGPT, Google AI Overviews and Perplexity understand your business, so they&rsquo;re more likely to mention you when people ask questions.",
-        "meta": "AEO (Answer Engine Optimisation) to help ChatGPT, Google AI Overviews and Perplexity understand and recommend your business across the USA, Canada, UK and Europe.",
-        "ticks": ["Built for AI and traditional search", "Clear, answer-ready content", "Visible in USA, Canada, UK & Europe"],
+        "lead": "AEO (answer engine optimisation) helps AI tools such as ChatGPT, Google AI Overviews and Perplexity understand your business, so they are more likely to mention you when people ask questions.",
+        "meta": "AEO (Answer Engine Optimisation) helps ChatGPT, Google AI Overviews and Perplexity understand and recommend your business.",
+        "ticks": ["Built for AI and traditional search", "Clear, answer-ready content", "Visible in UK, Europe, USA & Canada"],
         "badge": ("Customers ask AI", "&ldquo;Who can help grow my business online?&rdquo;", "We make your answer easy to find"),
         "hero_img": "aeo-ai-search-hero.webp",
         "hero_alt": "AI chat interface showing an answer engine recommending a business",
-        "split_img": "aeo-ai-search-detail.jpg",
+        "split_img": "aeo-ai-search-detail.webp",
         "split_alt": "Structured content and schema markup being reviewed for AI search",
         "why_title": "Customers are asking AI, not just searching.",
         "why_cards": [
@@ -262,7 +266,7 @@ SERVICES = {
         ],
         "core_title": "How we get your business into AI answers.",
         "core_sub": "Preparing your website and content to be clear, credible and easy to cite.",
-        "core_intro": "AI search tools pull answers from websites they can understand and trust. We prepare your website, content and online presence so your business is clear, credible and easy to cite &mdash; for customers across the USA, Canada, the UK and Europe.",
+        "core_intro": "AI search tools pull answers from websites they can understand and trust. We prepare your website, content and online presence so your business is clear, credible and easy to cite &mdash; for customers across the UK, Europe, the USA and Canada.",
         "core_cards": [
             ("Answer-ready content", "We rewrite and structure your pages to answer the questions customers really ask, in clear, direct language that AI tools can quote."),
             ("Structured data and schema", "We add behind-the-scenes markup that tells search engines and AI tools exactly who you are, what you offer and where you operate."),
@@ -284,14 +288,14 @@ SERVICES = {
         "g4_cards": [
             ("Natural-Language Answers", "Content written the way customers actually ask and speak."),
             ("Built for Every AI Tool", "Designed to support visibility across Google AI Overviews, ChatGPT, Perplexity, Gemini and Microsoft Copilot."),
-            ("Clear About Where You Operate", "Precise location and service details for customers in the USA, Canada, the UK and Europe."),
+            ("Clear About Where You Operate", "Precise location and service details for customers in the UK, Europe, the USA and Canada."),
             ("Kept Current as AI Changes", "AI search is evolving fast, so your content and data stay structured, up to date and adaptable."),
         ],
         "faq": [
             ("What is AEO?", "AEO stands for Answer Engine Optimisation. It&rsquo;s the practice of structuring your website and content so AI tools and answer engines &mdash; such as ChatGPT, Google AI Overviews, Perplexity and Microsoft Copilot &mdash; can understand your business and include it in their answers."),
             ("How is AEO different from SEO?", "SEO helps your pages rank in a list of search results. AEO helps your business be understood and referenced inside a direct answer. They share the same foundations &mdash; quality content, clear structure and trust &mdash; so we treat them as one joined-up strategy."),
             ("Can you guarantee ChatGPT or Google AI will mention my business?", "No. AI tools decide their own answers and nobody outside them can control that. What we can do is improve your clarity, structure and credibility so you&rsquo;re more likely to be included, and measure how that changes."),
-            ("Does AEO work for businesses outside the USA?", "Yes. AI tools answer questions in every market, so we help businesses in the USA, Canada, the UK and Europe make their locations, services and language clear for the customers they want to reach."),
+            ("Does AEO work for businesses outside the USA?", "Yes. AI tools answer questions in every market, so we help businesses in the UK, Europe, the USA and Canada make their locations, services and language clear for the customers they want to reach."),
             ("How long does AEO take to show results?", "Some improvements, such as better-structured content, can be picked up within weeks, but changes in AI answers usually build over several months. We agree how we&rsquo;ll measure progress at the start."),
         ],
         "cta_intro": "tell us what you do and who you serve, and we&rsquo;ll reply within one business day with a straight-talking view on where to start.",
@@ -307,9 +311,9 @@ SERVICES = {
         "name": "PPC & Digital Advertising",
         "eyebrow": "Services · PPC & Digital Advertising",
         "h1": "Advertising that brings customers, not just clicks",
-        "lead": "we plan, run and improve your paid ads across the platforms your customers use, and track your results &mdash; so you can see what your budget is actually bringing in.",
-        "meta": "PPC and digital advertising management across Google Ads, Meta and LinkedIn, tracked to enquiries and sales for businesses in the USA, Canada, UK and Europe.",
-        "ticks": ["Google, Meta & LinkedIn campaigns", "Tracked to enquiries and sales", "Advertising in USA, Canada, UK & Europe"],
+        "lead": "we plan, run and improve your paid ads across the platforms your customers use, and track the results, so you can see what your budget is actually bringing in.",
+        "meta": "PPC and digital advertising management across Google Ads, Meta and LinkedIn, tracked to enquiries and sales for businesses in the UK, Europe, the USA and Canada.",
+        "ticks": ["Google, Meta & LinkedIn campaigns", "Tracked to enquiries and sales", "Advertising in UK, Europe, USA & Canada"],
         "badge": ("Where we advertise", "Google &middot; Meta &middot; LinkedIn", ""),
         "hero_img": "ppc-digital-advertising-hero.webp",
         "hero_alt": "Paid advertising campaign dashboard showing clicks and conversions",
@@ -324,7 +328,7 @@ SERVICES = {
         ],
         "core_title": "Where your ad budget goes &mdash; and what comes back.",
         "core_sub": "Strategy, setup, creative, tracking and ongoing optimisation.",
-        "core_intro": "Paid advertising can grow a business quickly &mdash; or drain a budget just as fast. We manage the whole process: strategy, setup, creative, tracking and ongoing optimisation, for businesses advertising across the USA, Canada, the UK and Europe.",
+        "core_intro": "Paid advertising can grow a business quickly &mdash; or drain a budget just as fast. We manage the whole process: strategy, setup, creative, tracking and ongoing optimisation, for businesses advertising across the UK, Europe, the USA and Canada.",
         "core_cards": [
             ("Search and display advertising", "We put your business in front of people actively searching for your services, and remind others as they browse."),
             ("Paid social advertising", "We run targeted campaigns on Meta (Facebook and Instagram), LinkedIn and other platforms to reach the right audience where they spend their time."),
@@ -345,7 +349,7 @@ SERVICES = {
         "g4_intro": "Your customers see hundreds of ads a day. We focus on being useful and relevant at the moment they&rsquo;re ready to act, with messages that speak to real needs in each market you serve.",
         "g4_cards": [
             ("Say It Clearly", "Ads that state what you do, who it&rsquo;s for and what to do next."),
-            ("Right Person, Right Place", "Reach customers by location, interest, intent and behaviour across the USA, Canada, the UK and Europe."),
+            ("Right Person, Right Place", "Reach customers by location, interest, intent and behaviour across the UK, Europe, the USA and Canada."),
             ("Every Campaign Has a Goal", "Each one is tied to a measurable result &mdash; enquiries, bookings or sales."),
             ("Scale Only What Works", "Budgets rise gradually, and only behind campaigns that have proved themselves."),
         ],
@@ -353,7 +357,7 @@ SERVICES = {
             ("How much should I spend on advertising?", "It depends on your industry, competition and goals. We&rsquo;ll recommend a starting budget based on realistic costs and expected enquiries, and you stay in control of what you spend. Ad spend is paid to the advertising platforms and is separate from our management fee."),
             ("How quickly will I see results?", "Ads can start bringing traffic within days of launch, but the first few weeks are for learning what works. Most campaigns become more efficient after 6&ndash;8 weeks of testing and optimisation."),
             ("Which platforms do you advertise on?", "We typically use Google Ads, Microsoft Advertising, Meta (Facebook and Instagram) and LinkedIn, and recommend only the ones that fit your customers and budget."),
-            ("Can you run one campaign across several countries?", "Yes. We set up location targeting, language and currency for the USA, Canada, the UK and Europe, and can advise on regional requirements such as cookie consent, so each market sees the right message."),
+            ("Can you run one campaign across several countries?", "Yes. We set up location targeting, language and currency for the UK, Europe, the USA and Canada, and can advise on regional requirements such as cookie consent, so each market sees the right message."),
             ("How will I know if my ads are working?", "We track calls, form submissions and sales &mdash; not just clicks &mdash; and send a clear report showing spend, results and what we&rsquo;ll do next."),
         ],
         "cta_intro": "tell us your goals and a rough budget, and we&rsquo;ll reply within one business day with a sensible starting plan.",
@@ -370,8 +374,8 @@ SERVICES = {
         "eyebrow": "Services · Social Media Marketing",
         "h1": "Social media that builds trust and brings enquiries",
         "lead": "we plan, create and manage your social media so your business shows up consistently, looks professional and gives followers a reason to get in touch.",
-        "meta": "Social media marketing and management &mdash; content planning, on-brand posting and community replies for businesses in the USA, Canada, UK and Europe.",
-        "ticks": ["Content planned around your goals", "Consistent, on-brand posting", "Content for USA, Canada, UK & Europe"],
+        "meta": "Social media marketing and management &mdash; content planning, on-brand posting and community replies for businesses in the UK, Europe, the USA and Canada.",
+        "ticks": ["Content planned around your goals", "Consistent, on-brand posting", "Content for UK, Europe, USA & Canada"],
         "badge": ("What we handle", "Planning &middot; Posting &middot; Replies", ""),
         "hero_img": "social-media-marketing-hero.webp",
         "hero_alt": "Social media content calendar and posts being planned",
@@ -386,7 +390,7 @@ SERVICES = {
         ],
         "core_title": "Your social media, handled from plan to post.",
         "core_sub": "Strategy, content and day-to-day management, all in one place.",
-        "core_intro": "Social media works when it&rsquo;s consistent, on-brand and built around your customers. We handle the strategy, content and day-to-day management for businesses across the USA, Canada, the UK and Europe, so you can focus on running your business.",
+        "core_intro": "Social media works when it&rsquo;s consistent, on-brand and built around your customers. We handle the strategy, content and day-to-day management for businesses across the UK, Europe, the USA and Canada, so you can focus on running your business.",
         "core_cards": [
             ("Social strategy and planning", "We choose the right platforms, topics and posting rhythm for your audience, so your effort goes where it counts."),
             ("Content creation", "We design graphics, write captions and plan short-form video ideas that look professional and sound like you."),
@@ -415,7 +419,7 @@ SERVICES = {
             ("Which social media platforms should my business be on?", "It depends on where your customers spend time. Service businesses often do well on Facebook, Instagram and LinkedIn, while product brands may add TikTok or Pinterest. We&rsquo;ll recommend the few that make sense rather than spreading you thin."),
             ("How often will you post?", "We agree a posting schedule that fits your goals and budget &mdash; typically a few high-quality posts a week rather than daily filler. You&rsquo;ll see the plan in advance."),
             ("Will I approve content before it&rsquo;s published?", "Yes. You&rsquo;ll receive the content calendar for approval before anything goes live, so nothing is posted without your say-so."),
-            ("Should my content be different for the USA, UK and Europe?", "Often, yes. Spelling, humour, timing and references vary between markets. For businesses in the USA, Canada, the UK and Europe we adapt the tone and schedule for each audience rather than posting the same thing everywhere."),
+            ("Should my content be different for the USA, UK and Europe?", "Often, yes. Spelling, humour, timing and references vary between markets. For businesses in the UK, Europe, the USA and Canada we adapt the tone and schedule for each audience rather than posting the same thing everywhere."),
             ("Can social media generate enquiries, or is it only for awareness?", "Both. Organic social builds trust and awareness, and with clear calls to action it can also generate enquiries. If you want faster results, we can add paid social ads to the mix."),
         ],
         "cta_intro": "tell us about your business and your audience, and we&rsquo;ll reply within one business day with ideas for where to start.",
@@ -431,9 +435,9 @@ SERVICES = {
         "name": "Google Ads",
         "eyebrow": "Services · Google Ads",
         "h1": "Google Ads that put you in front of customers the moment they search",
-        "lead": "we set up and manage your Google Ads so your business appears when people search for what you offer &mdash; and we track every click through to real enquiries and sales.",
-        "meta": "Google Ads management &mdash; Search, Shopping and Performance Max campaigns with conversion tracking, for businesses across the USA, Canada, UK and Europe.",
-        "ticks": ["Search, Shopping and Performance Max", "Conversion tracking set up", "Campaigns in USA, Canada, UK & Europe"],
+        "lead": "we set up and manage your Google Ads so your business appears when people search for what you offer, then track every click through to real enquiries and sales.",
+        "meta": "Google Ads management &mdash; Search, Shopping and Performance Max campaigns with conversion tracking, for businesses across the UK, Europe, the USA and Canada.",
+        "ticks": ["Search, Shopping and Performance Max", "Conversion tracking set up", "Campaigns in UK, Europe, USA & Canada"],
         "badge": ("What we manage", "Search &middot; Shopping &middot; Tracking", ""),
         "hero_img": "google-ads-hero.webp",
         "hero_alt": "Google Ads campaign dashboard showing search results performance",
@@ -448,7 +452,7 @@ SERVICES = {
         ],
         "core_title": "What we set up, fix and manage in your account.",
         "core_sub": "Account structure, keywords, landing pages and tracking, all handled.",
-        "core_intro": "Google Ads is powerful, but it&rsquo;s easy to overspend without expert setup. We handle everything &mdash; account structure, keyword research, ad copy, landing pages, tracking and ongoing optimisation &mdash; for businesses advertising across the USA, Canada, the UK and Europe.",
+        "core_intro": "Google Ads is powerful, but it&rsquo;s easy to overspend without expert setup. We handle everything &mdash; account structure, keyword research, ad copy, landing pages, tracking and ongoing optimisation &mdash; for businesses advertising across the UK, Europe, the USA and Canada.",
         "core_cards": [
             ("Google Search campaigns", "We show your ads to people actively searching for your services, in the cities and countries you want to reach."),
             ("Shopping and Performance Max", "For online stores, we set up product ads and automated campaigns that can appear across Google Search, Shopping, YouTube and more."),
@@ -476,7 +480,7 @@ SERVICES = {
         "faq": [
             ("How much does Google Ads cost?", "You pay Google for clicks (your ad spend) and a management fee to us. Ad spend depends on your industry, competition and location &mdash; we&rsquo;ll recommend a starting budget based on realistic costs before you commit."),
             ("How long before I see results from Google Ads?", "Ads can generate traffic almost immediately, but it usually takes a few weeks of data to optimise properly. We review results regularly and share what we learn."),
-            ("Can you run Google Ads in several countries at once?", "Yes. We set up location, language and currency targeting for the USA, Canada, the UK and Europe, and can run separate campaigns for each country so the message and budget suit each market."),
+            ("Can you run Google Ads in several countries at once?", "Yes. We set up location, language and currency targeting for the UK, Europe, the USA and Canada, and can run separate campaigns for each country so the message and budget suit each market."),
             ("What&rsquo;s the difference between Google Ads and SEO?", "Google Ads gives you paid placement, so you can appear straight away and pay for each click. SEO builds organic rankings that take longer but keep working without paying per click. Many businesses use both."),
             ("Will I own my Google Ads account?", "Yes. Your ad account is set up in your name and you keep full access to it and your data."),
         ],
@@ -499,7 +503,7 @@ EXTRA_SERVICES = {
         "slug": "app-development", "nav_label": "Web & Mobile Apps", "name": "Web & Mobile Apps",
         "eyebrow": "Services · Web & Mobile Apps",
         "h1": "Apps that make life easier for your customers and your team",
-        "lead": "an app for your customers or your team, on iPhone, Android and web &mdash; built around the job it needs to do.",
+        "lead": "we build apps for your customers or your team, on iPhone, Android and the web, shaped around the job each one needs to do.",
         "meta": "Web and mobile app development for iOS, Android and the web, built around real workflows rather than trends.",
         "ticks": ["iOS, Android &amp; web", "Built around real workflows", "Ongoing support included"],
         "badge": ("Built for", "iOS &middot; Android &middot; Web", ""),
@@ -548,7 +552,7 @@ EXTRA_SERVICES = {
         "slug": "custom-software", "nav_label": "Custom Software", "name": "Custom Software",
         "eyebrow": "Services · Custom Software",
         "h1": "Software built around the way your team already works",
-        "lead": "tools built around the way you already work, so your team saves time instead of fighting a system that doesn&rsquo;t fit.",
+        "lead": "we build tools around the way you already work, so your team saves time instead of fighting a system that doesn’t fit.",
         "meta": "Custom software and internal tools built around your team's real workflow, replacing spreadsheets and disconnected systems.",
         "ticks": ["Built around your workflow", "Replaces spreadsheets &amp; email chains", "Grows as you grow"],
         "badge": ("Built for", "Your exact workflow", ""),
@@ -597,7 +601,7 @@ EXTRA_SERVICES = {
         "slug": "local-seo", "nav_label": "Local SEO & Google Profile", "name": "Local SEO & Google Profile",
         "eyebrow": "Services · Local SEO",
         "h1": "Show up on Google Maps when nearby customers search",
-        "lead": "show up on Google Maps so nearby customers find you first &mdash; ahead of competitors down the road.",
+        "lead": "we help your business show up on Google Maps and in local searches, so nearby customers find you first, ahead of the competition down the road.",
         "meta": "Local SEO and Google Business Profile management to help nearby customers find and choose your business first.",
         "ticks": ["Google Business Profile setup", "Maps &amp; “near me” visibility", "Local reviews &amp; citations"],
         "badge": ("Local pack", "Top 3 on Maps", ""),
@@ -646,12 +650,12 @@ EXTRA_SERVICES = {
         "slug": "content-marketing", "nav_label": "Content Marketing", "name": "Content Marketing",
         "eyebrow": "Services · Content Marketing",
         "h1": "Content that brings in customers for years, not days",
-        "lead": "useful blogs, guides and video that bring in customers for years, not days &mdash; and support your SEO at the same time.",
+        "lead": "we create useful blogs, guides and video that bring in customers for years, not days, and support your SEO at the same time.",
         "meta": "Content marketing - blogs, guides and video built to attract, inform and convert customers over the long term.",
         "ticks": ["Built to support SEO", "Written for real customers", "Blogs, guides &amp; video"],
         "badge": ("Built to last", "Years, not days", ""),
         "hero_img": "social-media-marketing-detail.webp", "hero_alt": "Content calendar and blog article being planned",
-        "split_img": "aeo-ai-search-detail.jpg", "split_alt": "Long-form article being written and structured",
+        "split_img": "aeo-ai-search-detail.webp", "split_alt": "Long-form article being written and structured",
         "why_title": "Most content is written once and forgotten.",
         "why_cards": [
             ("Most content is written once and forgotten.", "We plan content as an asset that keeps earning attention months and years after it&rsquo;s published."),
@@ -695,7 +699,7 @@ EXTRA_SERVICES = {
         "slug": "email-marketing", "nav_label": "Email Marketing", "name": "Email Marketing",
         "eyebrow": "Services · Email Marketing",
         "h1": "Stay in touch with past enquiries and turn them into repeat sales",
-        "lead": "stay in touch with past enquiries and turn them into repeat sales, without spamming your list into unsubscribing.",
+        "lead": "we help you stay in touch with past enquiries and customers and turn them into repeat sales, without spamming your list into unsubscribing.",
         "meta": "Email marketing campaigns and automated flows that turn past enquiries and customers into repeat business.",
         "ticks": ["Automated welcome &amp; follow-up flows", "Segmented, relevant sending", "Clear open &amp; click reporting"],
         "badge": ("Automated flows", "Welcome &middot; Follow-up &middot; Repeat", ""),
@@ -744,7 +748,7 @@ EXTRA_SERVICES = {
         "slug": "lead-generation", "nav_label": "Lead Generation", "name": "Lead Generation",
         "eyebrow": "Services · Lead Generation",
         "h1": "Campaigns and landing pages designed to fill your enquiry inbox",
-        "lead": "campaigns and landing pages designed to fill your enquiry inbox with people actually ready to buy.",
+        "lead": "we design campaigns and landing pages that fill your enquiry inbox with people who are genuinely ready to buy.",
         "meta": "Lead generation campaigns and landing pages built to turn traffic into qualified enquiries, not just clicks.",
         "ticks": ["Landing pages built to convert", "Qualified leads, not just clicks", "Tracked from click to enquiry"],
         "badge": ("Focus", "Qualified leads", ""),
@@ -793,7 +797,7 @@ EXTRA_SERVICES = {
         "slug": "branding", "nav_label": "Branding & Identity", "name": "Branding & Identity",
         "eyebrow": "Services · Branding & Identity",
         "h1": "A brand that makes your business feel established and trustworthy",
-        "lead": "a logo and look that makes your business feel established and trustworthy from the very first impression.",
+        "lead": "we create a logo and visual identity that make your business feel established and trustworthy from the very first impression.",
         "meta": "Branding and visual identity design - logo, colours and guidelines that make your business feel established and trustworthy.",
         "ticks": ["Logo &amp; visual identity", "Brand guidelines included", "Consistent across every touchpoint"],
         "badge": ("Delivered", "Logo + guidelines", ""),
@@ -842,7 +846,7 @@ EXTRA_SERVICES = {
         "slug": "graphic-design", "nav_label": "Graphic Design", "name": "Graphic Design",
         "eyebrow": "Services · Graphic Design",
         "h1": "Brochures, packs and social graphics that all look properly on brand",
-        "lead": "brochures, property packs and social graphics that all look properly on brand &mdash; consistent, wherever they appear.",
+        "lead": "we design brochures, property packs and social graphics that stay consistently on brand, wherever they appear.",
         "meta": "Graphic design for brochures, property packs, social graphics and marketing materials, kept consistently on brand.",
         "ticks": ["Print &amp; digital design", "Kept consistently on brand", "Fast turnaround available"],
         "badge": ("Design for", "Print &amp; Digital", ""),
@@ -891,7 +895,7 @@ EXTRA_SERVICES = {
         "slug": "video-photography", "nav_label": "Video & Photography", "name": "Video & Photography",
         "eyebrow": "Services · Video & Photography",
         "h1": "Photos and video that show your property, product or team at its best",
-        "lead": "photos and video that show your property, product or team at its best &mdash; the kind that make people stop scrolling.",
+        "lead": "we produce photos and video that show your property, product or team at its best, the kind of content that makes people stop scrolling.",
         "meta": "Professional photography and video production for property, product and brand marketing.",
         "ticks": ["Property, product &amp; brand shoots", "Edited &amp; ready to publish", "Licensed for your marketing"],
         "badge": ("Delivered", "Edited &amp; ready to use", ""),
@@ -940,11 +944,11 @@ EXTRA_SERVICES = {
         "slug": "copywriting", "nav_label": "Copywriting", "name": "Copywriting",
         "eyebrow": "Services · Copywriting",
         "h1": "Clear words that explain what you do and persuade people to get in touch",
-        "lead": "clear words that explain what you do and persuade people to get in touch, without sounding like everyone else.",
+        "lead": "we write clear copy that explains what you do and persuades people to get in touch, without sounding like everyone else.",
         "meta": "Copywriting for websites, brochures and marketing that explains what you do clearly and persuades people to act.",
         "ticks": ["Written for your customers", "Clear, jargon-free English", "SEO-aware from the start"],
         "badge": ("Written for", "Clarity &amp; conversion", ""),
-        "hero_img": "aeo-ai-search-detail.jpg", "hero_alt": "Website copy being written and edited on screen",
+        "hero_img": "aeo-ai-search-detail.webp", "hero_alt": "Website copy being written and edited on screen",
         "split_img": "social-media-marketing-detail.webp", "split_alt": "Marketing copy being reviewed and refined",
         "why_title": "Confusing copy costs you customers.",
         "why_cards": [
@@ -989,7 +993,7 @@ EXTRA_SERVICES = {
         "slug": "ai-automation", "nav_label": "AI Automation & Chatbots", "name": "AI Automation & Chatbots",
         "eyebrow": "Services · AI Automation & Chatbots",
         "h1": "Let AI answer common questions and follow up leads while you sleep",
-        "lead": "let AI answer common questions and follow up leads while you sleep, so no enquiry waits until Monday morning.",
+        "lead": "we set up AI to answer common questions and follow up leads while you sleep, so no enquiry waits until Monday morning.",
         "meta": "AI automation and chatbots that answer common questions and follow up leads automatically, day or night.",
         "ticks": ["Answers common questions instantly", "Follows up leads automatically", "Handed over when it&rsquo;s complex"],
         "badge": ("Always on", "24/7 response", ""),
@@ -1038,7 +1042,7 @@ EXTRA_SERVICES = {
         "slug": "crm", "nav_label": "CRM Setup & Integration", "name": "CRM Setup & Integration",
         "eyebrow": "Services · CRM Setup & Integration",
         "h1": "One place to track every enquiry, so no customer slips through the cracks",
-        "lead": "one place to track every enquiry, so no customer slips through the cracks between email, phone and forms.",
+        "lead": "we set up one place to track every enquiry, so no customer slips through the cracks between email, phone and forms.",
         "meta": "CRM setup and integration to track every enquiry in one place, connected to your website and marketing tools.",
         "ticks": ["One system for every enquiry", "Connected to your website &amp; ads", "Set up around your sales process"],
         "badge": ("One inbox", "For every enquiry", ""),
@@ -1087,12 +1091,12 @@ EXTRA_SERVICES = {
         "slug": "cyber-security", "nav_label": "Cyber Security", "name": "Cyber Security",
         "eyebrow": "Services · Cyber Security",
         "h1": "Protect your website and customer data from hackers and downtime",
-        "lead": "protect your website and customer data from hackers and downtime, with plain-English advice, not scare tactics.",
+        "lead": "we protect your website and customer data from hackers and downtime, with plain-English advice rather than scare tactics.",
         "meta": "Cyber security for websites and customer data - monitoring, hardening and plain-English advice, not scare tactics.",
         "ticks": ["Security monitoring &amp; hardening", "Backups &amp; recovery plans", "Plain-English advice"],
         "badge": ("Monitored", "Around the clock", ""),
-        "hero_img": "website-design-service-hero.jpg", "hero_alt": "Website security dashboard shown on a laptop",
-        "split_img": "aeo-ai-search-detail.jpg", "split_alt": "Security review being carried out on a website",
+        "hero_img": "website-design-service-hero.webp", "hero_alt": "Website security dashboard shown on a laptop",
+        "split_img": "aeo-ai-search-detail.webp", "split_alt": "Security review being carried out on a website",
         "why_title": "Most attacks target easy targets, not big ones.",
         "why_cards": [
             ("Most attacks target easy targets, not big ones.", "Automated attacks scan for unpatched, poorly configured websites &mdash; size rarely matters."),
@@ -1136,7 +1140,7 @@ EXTRA_SERVICES = {
         "slug": "website-maintenance", "nav_label": "Website Care & Hosting", "name": "Website Care & Hosting",
         "eyebrow": "Services · Website Care & Hosting",
         "h1": "We keep your site fast, updated and online, so you don&rsquo;t have to",
-        "lead": "we keep your site fast, updated, backed up and online, so you don&rsquo;t have to think about it.",
+        "lead": "we keep your site fast, updated, backed up and online, so you don’t have to think about it.",
         "meta": "Website care plans and hosting - updates, backups, speed and uptime monitoring, so your site is always looked after.",
         "ticks": ["Managed hosting", "Updates &amp; backups handled", "Fast, plain-English support"],
         "badge": ("Uptime", "Monitored 24/7", ""),
@@ -1185,7 +1189,7 @@ EXTRA_SERVICES = {
         "slug": "digital-consulting", "nav_label": "Digital Consulting", "name": "Digital Consulting",
         "eyebrow": "Services · Digital Consulting",
         "h1": "Not sure what you actually need? Let&rsquo;s find out, honestly",
-        "lead": "not sure what you actually need? We look at your website and marketing, then tell you plainly where your money is best spent, and what can wait.",
+        "lead": "not sure what you actually need? We look at your website and marketing, then tell you plainly where your money is best spent and what can wait.",
         "meta": "Digital consulting - a plain-English review of your website and marketing, with a prioritised, honest plan.",
         "ticks": ["Plain-English review", "Prioritised plan with costs", "No jargon, no obligation"],
         "badge": ("Delivered", "A clear, honest plan", ""),
@@ -1280,209 +1284,252 @@ def get_process_content(key):
         return s["g3_title"], s["g3_sub"], s["g3_intro"], s["g3_cards"]
     return None, None, None, None
 
-# Which services get location (city) landing pages, and the local copy for each.
+# Which services get location (city) landing pages
 LOCATION_SERVICE_KEY = {
     "Website Design": "website-design",
     "SEO Services": "seo-services",
 }
-LOCAL_COPY = {
-    "website-design": {
-        "reasons": [
-            "Local market knowledge of {city} and the wider {region_full}",
-            "Mobile-first, fast-loading websites that turn local visitors into enquiries",
-            "One team for design, SEO and everything else digital, so nothing gets lost between suppliers",
-        ],
-        "faq": [
-            ("Do you build websites for businesses in {city}?", "Yes. We design and build websites for businesses across {city} and the wider {region_full}, using the same process we use everywhere &mdash; mobile-first, SEO-ready and built around your customers."),
-            ("How long does a website for a {city} business take to launch?", "Most Starter and Growth websites take around 3&ndash;6 weeks from approved design to launch, whether you&rsquo;re based in {city} or anywhere else we work."),
-        ],
-    },
-    "seo-services": {
-        "reasons": [
-            "Local SEO for {city} &mdash; Google Business Profile, maps and location pages, not just national rankings",
-            "Technical and content SEO that helps {city} customers find you first",
-            "Plain-English monthly reporting so you can see real progress, not just jargon",
-        ],
-        "faq": [
-            ("Can you help my {city} business rank locally?", "Yes. Alongside national SEO, we optimise your Google Business Profile, local listings and location pages so people searching in {city} find you first."),
-            ("Do you work with businesses outside {city} too?", "Yes. We work with businesses across {region_full} and internationally, adapting keywords, spelling and local listings for each market."),
-        ],
-    },
-}
-INTRO_TEMPLATES = [
-    "Businesses in {city} need more than a generic {service_lower} &mdash; they need a team that understands the local market and delivers real results. {lead_cap}",
-    "If you run a business in {city}, {region_full}, your {service_lower} should work as hard as you do. {lead_cap}",
-    "{city} is a competitive market, and a strong {service_lower} strategy helps you stand out from nearby competitors. {lead_cap}",
-]
 REGION_FULL = {"USA": "the United States", "Canada": "Canada", "UK": "the United Kingdom", "Europe": "Europe"}
-CITY_COUNTRY_OVERRIDE = {"Berlin": "Germany"}
+
+WHY_INTRO = "Honest advice, a flexible approach and clear communication, from the first conversation to long after launch."
+OUTCOME_ICONS = ['growth', 'users', 'check', 'chart']
+
+# Fill these in when the details exist; the footer / contact form pick them up automatically.
+SOCIAL_LINKS = {}      # e.g. {"LinkedIn": "https://www.linkedin.com/company/..."}
+FORM_ENDPOINT = ""     # e.g. a Formspree / Web3Forms URL. Empty = the form opens the visitor's email app instead.
 
 # ---------------------------------------------------------------------------
-# HEADER / FOOTER
+# SHARED HELPERS
 # ---------------------------------------------------------------------------
-DIGITAL_MARKETING_KEYS = ["e-commerce-websites-design", "aeo-ai-search", "ppc-digital-advertising", "google-ads"]
+def cap_first(s):
+    return s[0].upper() + s[1:] if s and s[0].isalpha() else s
 
-def _digital_marketing_dropdown(root, bare=True):
-    tag_open, tag_close = ("", "") if bare else ('<li class="pb-mobile-sub">', "</li>")
-    return "".join(
-        '%s<a href="%s%s.html">%s</a>%s' % (tag_open, root, k, SERVICES[k]["nav_label"], tag_close)
-        for k in DIGITAL_MARKETING_KEYS
-    )
+def lc_first(s):
+    return s[0].lower() + s[1:] if s else s
 
-def header_html(root):
-    dm_sub = _digital_marketing_dropdown(root)
-    dm_sub_m = _digital_marketing_dropdown(root, bare=False)
-    chevron = '<svg class="pb-i" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>'
-    return """
-<header class="pb-header">
-  <div class="pb-wrap pb-header__bar">
-    <a class="pb-header__logo" href="%(root)sindex.html">
-      <img src="%(root)simages/logo.png" alt="Pinky Brain Digital logo" width="192" height="64">
-    </a>
-    <nav class="pb-nav" aria-label="Primary">
-      <ul class="pb-nav__list">
-        <li><a href="%(root)sseo-services.html">SEO Services</a></li>
-        <li><a href="%(root)swebsite-design.html">Website Design</a></li>
-        <li><a href="%(root)ssocial-media.html">Social Media</a></li>
-        <li class="pb-has-sub">
-          <a href="%(root)sindex.html#pbs-services">Digital Marketing %(chevron)s</a>
-          <div class="pb-nav__sub">%(dm_sub)s</div>
-        </li>
-        <li><a href="%(root)slocations.html">Locations</a></li>
-        <li><a href="%(root)sabout-us.html">About Us</a></li>
-        <li><a href="%(root)sblog.html">Blog</a></li>
-      </ul>
-      <a class="pb-btn pb-btn--dark pb-nav__cta" href="%(root)scontact-us.html">Book a free consultation</a>
-      <button class="pb-burger" aria-label="Open menu"><svg class="pb-i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-    </nav>
-  </div>
-</header>
-<div class="pb-mobile-nav">
-  <div class="pb-mobile-nav__top">
-    <a href="%(root)sindex.html"><img src="%(root)simages/logo.png" alt="Pinky Brain Digital logo" width="138" height="46"></a>
-    <button class="pb-mobile-nav__close" aria-label="Close menu"><svg class="pb-i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-  </div>
-  <ul>
-    <li><a href="%(root)sindex.html">Home</a></li>
-    <li><a href="%(root)sseo-services.html">SEO Services</a></li>
-    <li><a href="%(root)swebsite-design.html">Website Design</a></li>
-    <li><a href="%(root)ssocial-media.html">Social Media</a></li>
-    <li><a href="%(root)sindex.html#pbs-services">Digital Marketing</a></li>
-    %(dm_sub_m)s
-    <li><a href="%(root)slocations.html">Locations</a></li>
-    <li><a href="%(root)sabout-us.html">About Us</a></li>
-    <li><a href="%(root)sblog.html">Blog</a></li>
-  </ul>
-  <a class="pb-btn pb-btn--dark" href="%(root)scontact-us.html">Book a free consultation</a>
-</div>
-""" % {"root": root, "dm_sub": dm_sub, "dm_sub_m": dm_sub_m, "chevron": chevron}
+def join_list(items):
+    items = list(items)
+    if len(items) <= 1:
+        return "".join(items)
+    return ", ".join(items[:-1]) + " and " + items[-1]
 
-def footer_html(root):
-    services_links = "".join(
-        '<li><a href="%s%s.html">%s</a></li>' % (root, s, SERVICES[s]["nav_label"])
-        for s in SERVICE_ORDER
-    )
-    return """
-<footer class="pb-footer">
-  <div class="pb-wrap">
-    <div class="pb-footer__brand">
-      <img src="%(root)simages/logo.png" alt="Pinky Brain Digital logo" width="174" height="58" style="filter:brightness(0) invert(1)">
-      <p>Most businesses juggle a web designer, an SEO freelancer, a social media manager and an ads specialist, and nobody owns the results. We bring every digital discipline into one team.</p>
-      <div class="pb-footer__social">
-        <a href="#" aria-label="Facebook"><svg class="pb-i" viewBox="0 0 24 24" width="16" height="16"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H9v3h2v7h3v-7h3l1-3h-4V9c0-.6.4-1 1-1z"/></svg></a>
-        <a href="#" aria-label="X (Twitter)"><svg class="pb-i" viewBox="0 0 24 24" width="16" height="16"><path d="M4 4l16 16M20 4 4 20"/></svg></a>
-        <a href="#" aria-label="YouTube"><svg class="pb-i" viewBox="0 0 24 24" width="16" height="16"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="m10 9 5 3-5 3z"/></svg></a>
-      </div>
-    </div>
-    <div>
-      <h4>Services</h4>
-      <ul>%(services_links)s</ul>
-    </div>
-    <div>
-      <h4>Company</h4>
-      <ul>
-        <li><a href="%(root)sabout-us.html">About Us</a></li>
-        <li><a href="%(root)sindex.html#pbs-industries">Industries</a></li>
-        <li><a href="%(root)slocations.html">Locations</a></li>
-        <li><a href="%(root)sblog.html">Blog</a></li>
-        <li><a href="%(root)sindex.html#pbs-faq">FAQs</a></li>
-        <li><a href="%(root)scontact-us.html">Contact Us</a></li>
-        <li><a href="%(root)ssitemap.html">Sitemap</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Get In Touch</h4>
-      <ul>
-        <li>%(address)s</li>
-        <li><a href="mailto:%(email)s">%(email)s</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="pb-wrap pb-footer__bottom">
-    <span>&copy; 2026 All Rights Reserved to Pinky Brain Digital</span>
-  </div>
-</footer>
-<script src="%(root)sassets/js/site.js"></script>
-""" % {"root": root, "services_links": services_links, "email": SITE_EMAIL, "address": SITE_ADDRESS}
+def esc_amp(s):
+    return re.sub(r"&(?!#?\w+;)", "&amp;", s)
 
-def head_html(root, title, description, canonical_path):
+def finalize_html(doc):
+    """Escape bare ampersands in markup, leaving <script> and <style> untouched."""
+    parts = re.split(r"(<script\b.*?</script>|<style\b.*?</style>)", doc, flags=re.S | re.I)
+    return "".join(p if i % 2 else esc_amp(p) for i, p in enumerate(parts))
+
+def write_page(filename, doc):
+    path = os.path.join(ROOT, filename)
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
+        f.write(finalize_html(doc))
+    return path
+
+class Alt:
+    """Alternates section backgrounds white / tinted."""
+    def __init__(self, start=False):
+        self.v = start
+    def next(self):
+        v = self.v
+        self.v = not self.v
+        return v
+
+def page_url(filename):
+    return SITE_URL + ("/" if filename == "index.html" else "/" + filename)
+
+# ---------------------------------------------------------------------------
+# HEAD / HEADER / FOOTER
+# ---------------------------------------------------------------------------
+def head_html(root, title, description, filename, noindex=False, extra_head=""):
+    canon = page_url(filename)
+    t_text = html.escape(html.unescape(title), quote=False)
+    t_attr = html.escape(html.unescape(title), quote=True)
+    d_attr = html.escape(html.unescape(description), quote=True)
+    robots = '<meta name="robots" content="noindex, follow">\n' if noindex else ""
     return """<!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>%(title)s</title>
-<meta name="description" content="%(description)s">
-<link rel="canonical" href="https://pinkybraindigital.com%(canonical)s">
-<link rel="icon" href="%(root)simages/favicon-32.png" sizes="32x32">
-<link rel="icon" href="%(root)simages/favicon-192.png" sizes="192x192">
+<title>%(t_text)s</title>
+<meta name="description" content="%(d)s">
+%(extra_head)s%(robots)s<link rel="canonical" href="%(canon)s">
+<meta name="theme-color" content="#01265A">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pinky Brain Digital">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="%(t_attr)s">
+<meta property="og:description" content="%(d)s">
+<meta property="og:url" content="%(canon)s">
+<link rel="icon" href="%(root)sfavicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="%(root)simages/favicon-32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="%(root)simages/favicon-192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="%(root)simages/favicon-180.png">
+<link rel="preload" href="%(root)sassets/fonts/general-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="%(root)sassets/fonts/general-sans-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="%(root)sassets/css/site.css">
 </head>
 <body>
-""" % {"title": title, "description": description, "canonical": canonical_path, "root": root}
+<a class="pb-skip" href="#main">Skip to main content</a>
+""" % {"t_text": t_text, "t_attr": t_attr, "d": d_attr, "robots": robots, "canon": canon, "root": root, "extra_head": extra_head}
+
+def _mega_html(root):
+    groups = []
+    for gname, slugs in SERVICE_GROUPS:
+        links = "".join('<li><a href="%s%s.html">%s</a></li>' % (root, sl, SERVICES[sl]["nav_label"]) for sl in slugs)
+        groups.append('<div class="pb-mega__group"><p class="pb-mega__title">%s</p><ul>%s</ul></div>' % (gname, links))
+    return "".join(groups)
+
+def _mobile_groups_html(root):
+    out = ['<a class="pb-mobile-all" href="%sservices.html">All services</a>' % root]
+    for gname, slugs in SERVICE_GROUPS:
+        links = "".join('<li><a href="%s%s.html">%s</a></li>' % (root, sl, SERVICES[sl]["nav_label"]) for sl in slugs)
+        out.append('<p class="pb-mobile-grouptitle">%s</p><ul>%s</ul>' % (gname, links))
+    return "".join(out)
+
+def header_html(root, current=None):
+    def cur(name):
+        return ' aria-current="page"' if current == name else ""
+    chevron = '<svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>'
+    return """
+<header class="pb-header">
+  <div class="pb-wrap pb-header__bar">
+    <a class="pb-header__logo" href="%(root)sindex.html" aria-label="Pinky Brain Digital, home">
+      <img src="%(root)simages/logo.png" alt="Pinky Brain Digital" width="192" height="64">
+    </a>
+    <nav class="pb-nav" aria-label="Main">
+      <ul class="pb-nav__list">
+        <li class="pb-has-mega">
+          <a href="%(root)sservices.html"%(c_services)s>Services</a>
+          <button type="button" class="pb-nav__toggle" aria-expanded="false" aria-controls="pb-mega" aria-label="Show the services menu">%(chevron)s</button>
+          <div class="pb-mega" id="pb-mega">
+            <div class="pb-mega__panel">
+              <div class="pb-mega__grid">%(mega)s</div>
+              <div class="pb-mega__foot"><span>Not sure what you need? We&rsquo;ll point you in the right direction.</span><a class="pb-link" href="%(root)sservices.html">%(secondary)s %(arrow)s</a></div>
+            </div>
+          </div>
+        </li>
+        <li><a href="%(root)slocations.html"%(c_locations)s>Locations</a></li>
+        <li><a href="%(root)sabout-us.html"%(c_about)s>About Us</a></li>
+        <li><a href="%(root)sblog.html"%(c_insights)s>Insights</a></li>
+      </ul>
+      <a class="pb-btn pb-btn--dark pb-nav__cta" href="%(root)scontact-us.html">%(primary)s</a>
+      <button type="button" class="pb-burger" aria-label="Open the menu" aria-expanded="false" aria-controls="pb-mobile-nav"><svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </nav>
+  </div>
+</header>
+<div class="pb-mobile-nav" id="pb-mobile-nav" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="pb-mobile-nav__top">
+    <a href="%(root)sindex.html" aria-label="Pinky Brain Digital, home"><img src="%(root)simages/logo.png" alt="Pinky Brain Digital" width="138" height="46"></a>
+    <button type="button" class="pb-mobile-nav__close" aria-label="Close the menu"><svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <ul>
+    <li><a href="%(root)sindex.html">Home</a></li>
+    <li><details><summary>Services</summary><div class="pb-mobile-groups">%(mobile_groups)s</div></details></li>
+    <li><a href="%(root)slocations.html">Locations</a></li>
+    <li><a href="%(root)sabout-us.html">About Us</a></li>
+    <li><a href="%(root)sblog.html">Insights</a></li>
+  </ul>
+  <a class="pb-btn pb-btn--dark" href="%(root)scontact-us.html">%(primary)s</a>
+</div>
+<main id="main">
+""" % {"root": root, "chevron": chevron, "mega": _mega_html(root), "mobile_groups": _mobile_groups_html(root),
+       "primary": CTA_PRIMARY, "secondary": CTA_SECONDARY, "arrow": icon("arrow"),
+       "c_services": cur("services"), "c_locations": cur("locations"), "c_about": cur("about"), "c_insights": cur("insights")}
+
+def footer_html(root, scripts=""):
+    services_links = "".join('<li><a href="%s%s.html">%s</a></li>' % (root, s, SERVICES[s]["nav_label"]) for s in SERVICE_ORDER)
+    services_links += '<li><a href="%sservices.html">All services</a></li>' % root
+    social = ""
+    if SOCIAL_LINKS:
+        social = '<ul class="pb-footer__social">%s</ul>' % "".join(
+            '<li><a href="%s" target="_blank" rel="noopener">%s</a></li>' % (u, n) for n, u in SOCIAL_LINKS.items())
+    return """
+</main>
+<footer class="pb-footer">
+  <div class="pb-wrap pb-footer__top">
+    <div class="pb-footer__brand">
+      <img src="%(root)simages/logo.png" alt="Pinky Brain Digital" width="174" height="58" style="filter:brightness(0) invert(1)">
+      <p>One trusted digital team for your website, search, advertising, social media and AI, built around your business and your goals.</p>
+      %(social)s
+    </div>
+    <nav aria-label="Services">
+      <p class="pb-footer__h">Services</p>
+      <ul>%(services_links)s</ul>
+    </nav>
+    <nav aria-label="Company">
+      <p class="pb-footer__h">Company</p>
+      <ul>
+        <li><a href="%(root)sabout-us.html">About Us</a></li>
+        <li><a href="%(root)sindustries.html">Industries</a></li>
+        <li><a href="%(root)slocations.html">Locations</a></li>
+        <li><a href="%(root)sblog.html">Insights</a></li>
+        <li><a href="%(root)sindex.html#pbs-faq">FAQs</a></li>
+        <li><a href="%(root)scontact-us.html">Contact Us</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p class="pb-footer__h">Get in touch</p>
+      <address>%(address)s<br><a href="mailto:%(email)s">%(email)s</a></address>
+    </div>
+  </div>
+  <div class="pb-wrap pb-footer__bottom">
+    <span>&copy; 2026 Pinky Brain Digital. All rights reserved.</span>
+    <ul>
+      <li><a href="%(root)sprivacy-policy.html">Privacy Policy</a></li>
+      <li><a href="%(root)ssitemap.html">Sitemap</a></li>
+    </ul>
+  </div>
+</footer>
+<script src="%(root)sassets/js/site.js" defer></script>
+%(scripts)s
+""" % {"root": root, "services_links": services_links, "social": social, "address": SITE_ADDRESS,
+       "email": SITE_EMAIL, "scripts": scripts}
 
 # ---------------------------------------------------------------------------
 # COMPONENT RENDERERS
 # ---------------------------------------------------------------------------
-def render_hero(root, data, eyebrow, h1, lead, ticks, hero_img, hero_alt, badge, cta_label="Book a free consultation"):
+def render_hero(root, eyebrow, h1, lead, ticks, hero_img, hero_alt, badge=None, secondary=None):
+    secondary = secondary or (root + "services.html", CTA_SECONDARY)
     ticks_html = "".join("<li>%s</li>" % t for t in ticks)
     badge_html = ""
     if badge:
         b0, b1, b2 = badge
-        badge_html = """<div class="pb-hero__badge"><div><b>%s</b><span>%s</span>%s</div></div>""" % (
-            b1, b0, ("<div style='margin-top:4px;font-size:.72rem;color:#7A818D'>%s</div>" % b2) if b2 else "")
+        badge_html = '<div class="pb-hero__badge"><div><b>%s</b><span>%s</span>%s</div></div>' % (
+            b1, b0, ("<div style='margin-top:4px;font-size:.72rem;color:#5B6472'>%s</div>" % b2) if b2 else "")
     return """
 <section class="pb-hero">
   <div class="pb-wrap pb-hero__grid">
     <div>
       <p class="pb-eyebrow">%(eyebrow)s</p>
       <h1>%(h1)s</h1>
-      <p class="pb-lead"><b>In a nutshell:</b> %(lead)s</p>
+      <p class="pb-lead">%(lead)s</p>
       <div class="pb-hero__actions">
-        <a class="pb-btn pb-btn--dark" href="mailto:%(email)s">%(cta)s %(arrow)s</a>
-        <a class="pb-btn pb-btn--line" href="#pb-faq">See FAQs</a>
+        <a class="pb-btn pb-btn--dark" href="%(root)scontact-us.html">%(primary)s %(arrow)s</a>
+        <a class="pb-btn pb-btn--line" href="%(sec_href)s">%(sec_label)s</a>
       </div>
       <ul class="pb-hero__ticks">%(ticks)s</ul>
     </div>
     <div class="pb-hero__media">
-      <img class="pb-hero__img" src="%(root)simages/%(img)s" alt="%(alt)s" width="900" height="792" loading="eager" decoding="async">
+      <img class="pb-hero__img" src="%(root)simages/%(img)s" alt="%(alt)s" width="900" height="792" fetchpriority="high" decoding="async">
       %(badge)s
     </div>
   </div>
 </section>
-""" % {"eyebrow": eyebrow, "h1": h1, "lead": lead, "ticks": ticks_html, "root": root,
-       "img": hero_img, "alt": hero_alt, "badge": badge_html, "email": SITE_EMAIL,
-       "cta": cta_label, "arrow": icon("arrow")}
+""" % {"eyebrow": eyebrow, "h1": h1, "lead": cap_first(lead), "ticks": ticks_html, "root": root,
+       "img": hero_img, "alt": hero_alt, "badge": badge_html, "primary": CTA_PRIMARY, "arrow": icon("arrow"),
+       "sec_href": secondary[0], "sec_label": secondary[1]}
 
-def render_cards(cards, icons_cycle, numbered=False):
+def render_cards(cards, icons_cycle):
     out = []
     for i, (title, text) in enumerate(cards):
         ic = icons_cycle[i % len(icons_cycle)]
-        out.append("""<div class="pb-card"><span class="pb-card__ic">%s</span><h3>%s</h3><p>%s</p></div>""" % (icon(ic), title, text))
+        out.append('<div class="pb-card"><span class="pb-card__ic">%s</span><h3>%s</h3><p>%s</p></div>' % (icon(ic), title, text))
     return "".join(out)
 
-def render_section(eyebrow, title, sub, intro, cards, icons_cycle, tint=False, numbered=False, extra_title_tag="h2"):
+def render_section(eyebrow, title, intro, cards, icons_cycle, tint=False, numbered=False):
     cls = "pb-section pb-section--tint" if tint else "pb-section"
     grid_cls = "pb-grid-4 pb-process" if numbered else "pb-grid-4"
     return """
@@ -1498,28 +1545,34 @@ def render_section(eyebrow, title, sub, intro, cards, icons_cycle, tint=False, n
 """ % {"cls": cls, "eyebrow": eyebrow, "title": title, "intro": intro,
        "grid_cls": grid_cls, "cards": render_cards(cards, icons_cycle)}
 
-def render_split(img_root, img, alt, title, intro, reasons):
+def render_outcomes(key, tint=False, city=None):
+    intro, items = OUTCOMES[key]
+    title = "The results we work towards" if not city else "What %s businesses can expect" % city
+    return render_section("Results that matter", title, intro + " " + CASE_BY_CASE, items, OUTCOME_ICONS, tint=tint)
+
+def render_split(root, img, alt, title, intro, reasons, tint=False, eyebrow="Why it matters"):
     items = "".join("<li>%s</li>" % r for r in reasons)
     return """
-<section class="pb-section">
+<section class="pb-section%(tint)s">
   <div class="pb-wrap pb-split">
-    <img class="pb-split__img" src="%(root)simages/%(img)s" alt="%(alt)s" loading="lazy" decoding="async">
+    <img class="pb-split__img" src="%(root)simages/%(img)s" alt="%(alt)s" width="760" height="644" loading="lazy" decoding="async">
     <div>
-      <p class="pb-eyebrow">Why it matters</p>
+      <p class="pb-eyebrow">%(eyebrow)s</p>
       <h2>%(title)s</h2>
       <p>%(intro)s</p>
       <ul class="pb-mini-list">%(items)s</ul>
     </div>
   </div>
 </section>
-""" % {"root": img_root, "img": img, "alt": alt, "title": title, "intro": intro, "items": items}
+""" % {"root": root, "img": img, "alt": alt, "title": title, "intro": intro, "items": items,
+       "tint": " pb-section--tint" if tint else "", "eyebrow": eyebrow}
 
-def render_faq(faq_items, faq_id="pb-faq"):
+def render_faq(faq_items, tint=True, faq_id="pb-faq"):
     items = []
     for i, (q, a) in enumerate(faq_items):
         items.append('<details%s><summary><h3>%s</h3></summary><p>%s</p></details>' % (" open" if i == 0 else "", q, a))
     return """
-<section id="%(id)s" class="pb-section pb-section--tint pb-faq">
+<section id="%(id)s" class="pb-section%(tint)s pb-faq">
   <div class="pb-wrap">
     <div class="pb-section__head">
       <div><p class="pb-eyebrow">FAQs</p><h2>Frequently asked questions</h2></div>
@@ -1528,88 +1581,123 @@ def render_faq(faq_items, faq_id="pb-faq"):
     <div class="pb-faq__list">%(items)s</div>
   </div>
 </section>
-""" % {"id": faq_id, "items": "".join(items)}
+""" % {"id": faq_id, "items": "".join(items), "tint": " pb-section--tint" if tint else ""}
 
 def faq_jsonld(faq_items):
-    def esc(s):
-        s = re.sub(r"&mdash;", "—", s)
-        s = re.sub(r"&ndash;", "–", s)
-        s = re.sub(r"&rsquo;", "’", s)
-        s = re.sub(r"&ldquo;", "“", s)
-        s = re.sub(r"&rdquo;", "”", s)
-        s = re.sub(r"&hellip;", "…", s)
-        s = re.sub(r"&middot;", "·", s)
-        s = s.replace('"', '\\"')
-        return s
-    entities = ",\n    ".join(
-        '{"@type": "Question", "name": "%s", "acceptedAnswer": {"@type": "Answer", "text": "%s"}}' % (esc(q), esc(a))
-        for q, a in faq_items
-    )
-    return """<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    %s
-  ]
-}
-</script>
-""" % entities
+    data = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {"@type": "Question", "name": html.unescape(q),
+             "acceptedAnswer": {"@type": "Answer", "text": html.unescape(a)}}
+            for q, a in faq_items
+        ],
+    }
+    return '<script type="application/ld+json">\n%s\n</script>\n' % json.dumps(data, ensure_ascii=False, indent=1)
 
-def render_cta(intro, root="", extra_note=""):
+def offer_by_key(key):
+    for o in FREE_OFFERS:
+        if o[0] == key:
+            return o
+    return None
+
+def render_cta(intro, root="", offer_key=None):
+    offer_html = ""
+    o = offer_by_key(offer_key) if offer_key else None
+    if o:
+        offer_html = '<p class="pb-cta__offer">Prefer to start small? Ask about our <a href="%scontact-us.html?interest=%s">%s</a>.</p>' % (root, o[0], o[1])
     return """
 <section class="pb-section">
   <div class="pb-wrap">
     <div class="pb-cta">
       <div class="pb-cta__solo">
-        <h2>Get in touch</h2>
-        <p><b>In a nutshell:</b> %(intro)s</p>
+        <h2>Tell us what you want to achieve.</h2>
+        <p>%(intro)s</p>
         <div class="pb-cta__actions">
-          <a class="pb-btn pb-btn--pink" href="%(root)scontact-us.html">Contact us %(arrow)s</a>
-          <a class="pb-cta__mail" href="mailto:%(email)s">or email %(email)s directly</a>
+          <a class="pb-btn pb-btn--pink" href="%(root)scontact-us.html">%(primary)s %(arrow)s</a>
+          <a class="pb-btn pb-btn--ghost" href="%(root)sservices.html">%(secondary)s</a>
         </div>
+        %(offer)s
+        <p class="pb-cta__small">Prefer email? <a href="mailto:%(email)s">%(email)s</a></p>
       </div>
     </div>
   </div>
 </section>
-""" % {"intro": intro, "email": SITE_EMAIL, "arrow": icon("arrow"), "root": root}
+""" % {"intro": cap_first(intro), "email": SITE_EMAIL, "arrow": icon("arrow"), "root": root,
+       "primary": CTA_PRIMARY, "secondary": CTA_SECONDARY, "offer": offer_html}
 
-def render_breadcrumb(root, trail):
+def render_free_offers(root="", eyebrow="Start with something free", title="Not sure where to start? Ask for a free review.",
+                       intro="Pick the one that fits and we’ll tell you honestly what we find, with no pressure to buy anything.", tint=True):
+    cards = "".join(
+        '<a class="pb-offer" href="%scontact-us.html?interest=%s"><span class="pb-card__ic">%s</span><h3>%s</h3><p>%s</p>'
+        '<span class="pb-link"><span>Ask about this</span> %s</span></a>' % (root, k, icon(ic), t, d, icon("arrow"))
+        for k, t, ic, d in FREE_OFFERS)
+    return """
+<section class="pb-section%(tint)s" id="free-reviews">
+  <div class="pb-wrap">
+    <div class="pb-section__head">
+      <div><p class="pb-eyebrow">%(eyebrow)s</p><h2>%(title)s</h2></div>
+      <p>%(intro)s</p>
+    </div>
+    <div class="pb-offers">%(cards)s</div>
+  </div>
+</section>
+""" % {"tint": " pb-section--tint" if tint else "", "eyebrow": eyebrow, "title": title, "intro": intro, "cards": cards}
+
+def render_breadcrumb(trail):
     parts = []
     for i, (label, href) in enumerate(trail):
         if href:
             parts.append('<a href="%s">%s</a>' % (href, label))
         else:
-            parts.append('<span style="color:var(--pb-dark);font-weight:600">%s</span>' % label)
-    return '<div class="pb-wrap pb-crumb">' + '<span>/</span>'.join(parts) + '</div>'
+            parts.append('<span aria-current="page">%s</span>' % label)
+    return ('<nav class="pb-wrap pb-crumb" aria-label="Breadcrumb">'
+            + '<span class="pb-crumb__sep" aria-hidden="true">/</span>'.join(parts) + '</nav>')
+
+def render_jsonld(data):
+    return '<script type="application/ld+json">\n%s\n</script>\n' % json.dumps(data, ensure_ascii=False, indent=1)
+
+ORG_JSONLD = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Pinky Brain Digital",
+    "url": SITE_URL + "/",
+    "logo": SITE_URL + "/images/logo.png",
+    "email": SITE_EMAIL,
+    "address": {"@type": "PostalAddress", "streetAddress": "International House, 109–111 Fulham Palace Road",
+                "addressLocality": "London", "postalCode": "W6 8JA", "addressCountry": "GB"},
+}
 
 # ---------------------------------------------------------------------------
 # BUILD: SERVICE PAGES
 # ---------------------------------------------------------------------------
-def build_service_page(key, all_locations):
+def build_service_page(key):
     s = SERVICES[key]
     root = ""
-    out = []
-    out.append(head_html(root, "%s | Pinky Brain Digital" % s["name"], s["meta"], "/%s/" % s["slug"]))
-    out.append(header_html(root))
-    out.append(render_breadcrumb(root, [("Home", root + "index.html"), ("Services", root + "index.html#pbs-services"), (s["nav_label"], None)]))
-    out.append(render_hero(root, s, s["eyebrow"], s["h1"], s["lead"], s["ticks"], s["hero_img"], s["hero_alt"], s["badge"]))
-    out.append(render_section("Why choose us", s["why_title"], "", "", s["why_cards"], WHY_ICONS))
-    out.append(render_section("What we do", s["core_title"], s["core_sub"], s["core_intro"], s["core_cards"], CORE_ICONS, tint=True))
-    out.append(render_section("How we help" if s["g3_numbered"] else "Our approach", s["g3_title"], s["g3_sub"], s["g3_intro"], s["g3_cards"], STEP_ICONS, numbered=s["g3_numbered"]))
+    alt = Alt(False)
+    fname = s["slug"] + ".html"
+    out = [
+        head_html(root, "%s | Pinky Brain Digital" % s["name"], s["meta"], fname),
+        header_html(root, current="services"),
+        render_breadcrumb([("Home", "index.html"), ("Services", "services.html"), (s["nav_label"], None)]),
+        render_hero(root, s["eyebrow"], s["h1"], s["lead"], s["ticks"], s["hero_img"], s["hero_alt"], s["badge"]),
+        render_section("Why choose us", "Why businesses choose us for %s" % s["name"], WHY_INTRO, s["why_cards"], WHY_ICONS, tint=alt.next()),
+        render_outcomes(key, tint=alt.next()),
+        render_section("What we do", s["core_title"], s["core_intro"], s["core_cards"], CORE_ICONS, tint=alt.next()),
+        render_section("How we help" if s["g3_numbered"] else "Our approach", s["g3_title"], s["g3_intro"], s["g3_cards"],
+                       STEP_ICONS, tint=alt.next(), numbered=s["g3_numbered"]),
+    ]
     if key in PROCESS_CONTENT:
-        pt, psub, pintro, psteps = get_process_content(key)
-        out.append(render_section("How we work", pt, psub, pintro, psteps, STEP_ICONS, tint=True, numbered=True))
-    out.append(render_split(root, s["split_img"], s["split_alt"], s["g4_title"], s["g4_intro"], [c[0] + " &mdash; " + c[1] for c in s["g4_cards"]]))
-    out.append(render_faq(s["faq"]))
-    out.append(render_cta(s["cta_intro"], root=root))
+        pt, _sub, pintro, psteps = get_process_content(key)
+        out.append(render_section("How we work", pt, pintro, psteps, STEP_ICONS, tint=alt.next(), numbered=True))
+    out.append(render_split(root, s["split_img"], s["split_alt"], s["g4_title"], s["g4_intro"],
+                            [c[0] + ": " + c[1] for c in s["g4_cards"]], tint=alt.next()))
+    out.append(render_faq(s["faq"], tint=alt.next()))
+    out.append(render_cta(s["cta_intro"], root=root, offer_key=SERVICE_OFFER.get(key)))
     out.append(footer_html(root))
     out.append(faq_jsonld(s["faq"]))
     out.append("</body></html>")
-    path = os.path.join(ROOT, s["slug"] + ".html")
-    with open(path, "w", encoding="utf-8") as f:
-        f.write("".join(out))
-    return path
+    return write_page(fname, "".join(out))
 
 # ---------------------------------------------------------------------------
 # BUILD: LOCATION PAGES
@@ -1618,103 +1706,156 @@ def read_locations():
     path = os.path.join(ROOT, "Pinky Brain Digital - Location.csv")
     rows = []
     with open(path, encoding="utf-8-sig") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
+        for row in csv.DictReader(f):
             url = (row.get("URL") or "").strip()
             city = (row.get("City") or "").strip()
             service = (row.get("Service") or "").strip()
-            region = (row.get("Region") or "").strip()
-            title = (row.get("Page title") or "").strip()
             if not url or not city or service not in LOCATION_SERVICE_KEY:
                 continue
-            folder = url.strip("/")
             rows.append({
                 "no": row.get("No", "").strip(),
-                "region": region,
+                "region": (row.get("Region") or "").strip(),
                 "city": city,
                 "service": service,
                 "service_key": LOCATION_SERVICE_KEY[service],
-                "title": title,
+                "title": (row.get("Page title") or "").strip(),
                 "url": url,
-                "folder": folder,
+                "folder": url.strip("/"),
             })
     return rows
 
-def build_location_page(loc, idx, all_locations):
-    s = SERVICES[loc["service_key"]]
+WEB_LEADS = [
+    "Fast, modern websites for {city} businesses, built around your customers and designed to turn visitors into enquiries.",
+    "A professional website that earns trust, works beautifully on mobile and gives {city} customers a clear reason to get in touch.",
+    "Websites for {city} businesses that look credible, load quickly and convert more of the people who visit.",
+]
+SEO_LEADS = [
+    "Get found by the right customers in {city}, with better rankings, more visibility and more enquiries.",
+    "Search visibility for {city} businesses: more of the right visitors, more enquiries and steady, measurable growth.",
+    "Rank higher, be seen more often and turn local searches in {city} into real customers.",
+]
+WEB_H2 = [
+    "Website design for {city} businesses",
+    "A website that works as hard as your {city} business",
+    "Websites built for the way {city} customers search",
+]
+SEO_H2 = [
+    "SEO that gets {city} businesses found",
+    "Be the business {city} customers find first",
+    "Search visibility built around {city}",
+]
+
+SECTOR_INTROS = [
+    "Every project starts with your goals rather than a template. These are some of the sectors we most often support in {city}.",
+    "We don’t work from a fixed package. Here are a few of the {city} sectors where we regularly help businesses {goal}.",
+    "From {s1} to {s2}, {city} businesses have different customers and different priorities, so we shape the work around each one.",
+]
+PROCESS_INTROS = {
+    "website-design": [
+        "Every website follows the same clear process, so you always know what happens next and when.",
+        "However big or small the project, you will always know what is happening, what comes next and who to ask.",
+        "A simple, staged process keeps your {city} project on time, on budget and free of surprises.",
+    ],
+    "seo-services": [
+        "Good SEO is a long-term asset, so we follow a clear process that builds search performance month after month.",
+        "SEO works best when it is steady and measured, so every client gets the same clear, staged process.",
+        "We keep SEO simple and transparent, with clear steps and a plain-English update after each one.",
+    ],
+}
+
+def build_location_page(loc, idx):
+    key = loc["service_key"]
+    s = SERVICES[key]
     root = ""
-    city = loc["city"]
-    region = loc["region"]
-    region_full = REGION_FULL.get(region, region)
-    country = CITY_COUNTRY_OVERRIDE.get(city, region_full)
-    service_lower = s["name"].lower()
+    city, region = loc["city"], loc["region"]
+    prof = CITY_PROFILES[city]
+    web = key == "website-design"
+    areas = prof["areas"]
+    sectors = prof["sectors"]
+    v = idx % 3
+    alt = Alt(False)
 
-    lead_plain = re.sub(r"&mdash;", "-", s["lead"])
-    lead_plain = re.sub(r"&rsquo;", "'", lead_plain)
-    lead_plain = re.sub(r"&ldquo;|&rdquo;", '"', lead_plain)
-    lead_cap = lead_plain[0].upper() + lead_plain[1:]
+    lead = (WEB_LEADS if web else SEO_LEADS)[v].format(city=city)
+    h2 = (WEB_H2 if web else SEO_H2)[v].format(city=city)
+    local_note = prof["web" if web else "seo"]
+    ticks = (["Mobile-first design", "Built around your customers", "Serving %s and nearby" % city] if web else
+             ["Better rankings and visibility", "Local and technical SEO", "Serving %s and nearby" % city])
 
-    tmpl = INTRO_TEMPLATES[idx % len(INTRO_TEMPLATES)]
-    intro_para = tmpl.format(city=city, region_full=country, service_lower=service_lower, lead_cap=lead_cap)
+    sector_cards = []
+    for i, sec in enumerate(sectors):
+        note = SECTOR_NOTES[sec][0 if web else 1]
+        verb = "We build " if web else "We focus on "
+        sector_cards.append((sec, verb + note))
 
-    local = LOCAL_COPY[loc["service_key"]]
-    reasons = [r.format(city=city, region_full=country) for r in local["reasons"]]
-    local_faq = [(q.format(city=city), a.format(city=city, region_full=country)) for q, a in local["faq"]]
+    local_faq = [
+        ("Do you only work with businesses in central %s?" % city,
+         "No. We work with businesses across %s and the surrounding area, including %s. We usually work remotely by video call and email, and can arrange to meet where it makes sense." % (city, join_list(areas[:4]))),
+        ("What kinds of businesses do you work with in %s?" % city,
+         "A broad mix. In %s that often includes %s businesses, but every project starts with your goals rather than a template." % (city, join_list([lc_first(x) for x in sectors[:3]]))),
+    ]
+    if web and city == "Berlin":
+        local_faq.append(("Can you help with German legal requirements such as the Impressum?",
+                          "We build the pages and structure a German website needs, including an Impressum, privacy policy and cookie consent. You should always have the final wording checked by a legal adviser."))
+    elif not web:
+        local_faq.append(("How do you help a %s business show up in local searches?" % city,
+                          "We optimise your Google Business Profile, build pages around the services and areas you cover, and strengthen your reviews and listings. That helps you appear for searches that combine your service with %s or a neighbourhood such as %s or %s." % (city, areas[0], areas[1])))
+    shared = s["faq"]
+    faq = local_faq + [shared[idx % len(shared)]]
 
-    h1 = loc["title"]
-    eyebrow = "%s &middot; %s" % (region, city)
-    ticks = list(s["ticks"])
-    if ticks:
-        ticks[-1] = "Serving %s and %s" % (city, region_full)
+    meta = None
+    for n_sectors in (2, 1):
+        meta_sectors = join_list([lc_first(x) for x in sectors[:n_sectors]])
+        if web:
+            meta = "Website design in %s: fast, mobile-first websites for %s and other local businesses, built to win enquiries." % (city, meta_sectors)
+        else:
+            meta = "SEO services in %s: better rankings, more visibility and more enquiries for %s and other local businesses." % (city, meta_sectors)
+        if len(meta) <= 158:
+            break
 
-    title_tag = "%s | Pinky Brain Digital" % h1
-    meta_desc = "%s in %s. %s" % (s["name"], city, s["meta"])
-    if len(meta_desc) > 300:
-        meta_desc = meta_desc[:297] + "..."
+    pt, _sub, _pintro, psteps = get_process_content(key)
+    pintro = PROCESS_INTROS[key][v].format(city=city)
+    process_title = pt if city in pt else "%s in %s" % (pt, city)
+    sector_intro = SECTOR_INTROS[v].format(
+        city=city, goal="get more from their website" if web else "be found online",
+        s1=lc_first(sectors[0]), s2=lc_first(sectors[1]))
 
-    out = []
-    out.append(head_html(root, title_tag, meta_desc, "/%s" % loc["url"]))
-    out.append(header_html(root))
-    out.append(render_breadcrumb(root, [("Home", root + "index.html"), (s["nav_label"], root + s["slug"] + ".html"), (city, None)]))
-    out.append(render_hero(root, s, eyebrow, h1, lead_cap.rstrip("."), ticks, s["hero_img"], s["hero_alt"], None, cta_label="Book a free consultation"))
-    out.append("""
-<section class="pb-section">
+    out = [
+        head_html(root, "%s | Pinky Brain Digital" % loc["title"], meta, loc["folder"] + ".html"),
+        header_html(root, current="locations"),
+        render_breadcrumb([("Home", "index.html"), ("Locations", "locations.html"), (loc["title"], None)]),
+        render_hero(root, "%s &middot; %s" % (region, city), loc["title"], lead, ticks, s["hero_img"], s["hero_alt"]),
+        """
+<section class="pb-section%(tint)s">
   <div class="pb-wrap">
     <div class="pb-section__head">
-      <div><p class="pb-eyebrow">%(city)s</p><h2>%(service)s built for businesses in %(city)s</h2></div>
-      <p>%(intro)s</p>
+      <div><p class="pb-eyebrow">%(city)s</p><h2>%(h2)s</h2></div>
+      <div><p>%(intro)s</p><p>%(note)s</p><p>%(more)s</p></div>
     </div>
-    <div class="pb-grid-4">%(cards)s</div>
+    <p class="pb-areas-label">Areas we serve around %(city)s</p>
+    <ul class="pb-chips">%(chips)s</ul>
   </div>
 </section>
-""" % {"city": city, "service": s["name"], "intro": intro_para, "cards": render_cards(s["core_cards"], CORE_ICONS)})
-    pt, psub, pintro, psteps = get_process_content(loc["service_key"])
-    if pt:
-        local_title = pt if city in pt else "%s in %s" % (pt, city)
-        out.append(render_section("Our process", local_title, psub, pintro, psteps, STEP_ICONS, tint=True, numbered=True))
-    out.append(render_split(root, s["split_img"], s["split_alt"],
-                             "Why %s businesses choose Pinky Brain Digital" % city,
-                             "%s does more for your %s than a one-size-fits-all package." % (s["name"], "website" if loc["service_key"] == "website-design" else "search visibility"),
-                             reasons))
-    out.append(render_faq(s["faq"][:3] + local_faq, faq_id="pb-faq"))
-    cta_intro = "tell us about your %s business and we&rsquo;ll reply within one business day with real next steps." % city
-    out.append(render_cta(cta_intro, root=root))
-    out.append(footer_html(root))
-    out.append(faq_jsonld(s["faq"][:3] + local_faq))
-    out.append("</body></html>")
-
-    path = os.path.join(ROOT, loc["folder"] + ".html")
-    with open(path, "w", encoding="utf-8") as f:
-        f.write("".join(out))
-    return path
+""" % {"tint": " pb-section--tint" if alt.next() else "", "city": city, "h2": h2, "intro": prof["intro"], "note": local_note, "more": prof["more"],
+       "chips": "".join("<li>%s</li>" % cap_first(a) for a in areas)},
+        render_section("Who we help in %s" % city, "Businesses we work with in %s" % city,
+                       sector_intro, sector_cards, CORE_ICONS, tint=alt.next()),
+        render_section("Our process", process_title, pintro, psteps, STEP_ICONS, tint=alt.next(), numbered=True),
+        render_faq(faq, tint=alt.next()),
+        render_cta("Tell us about your %s business and what you want to achieve, and we’ll reply within one business day with honest, practical next steps." % city,
+                   root=root, offer_key=SERVICE_OFFER.get(key)),
+        footer_html(root),
+        faq_jsonld(faq),
+        "</body></html>",
+    ]
+    return write_page(loc["folder"] + ".html", "".join(out))
 
 # ---------------------------------------------------------------------------
-# BUILD: HOMEPAGE (wrap existing fragment)
+# BUILD: HOMEPAGE (wrap the hand-written fragment)
 # ---------------------------------------------------------------------------
 IMG_REMAP = {
     "2149273705.webp": "homepage-hero-digital-agency-team.webp",
     "10539.webp": "about-pinky-brain-digital-team.webp",
-    "2149241210.jpg": "luxury-real-estate-interior.jpg",
+    "2149241210.jpg": "luxury-real-estate-interior.webp",
     "favii.png": "pinky-brain-digital-badge-icon.png",
     "photo-1600585154526-990dced4db0d.webp": "luxury-property-marketing.webp",
     "Modern-dental-clinic-treatment-room.avif": "dental-clinic-marketing.avif",
@@ -1725,153 +1866,236 @@ IMG_REMAP = {
     "service.avif": "professional-services-marketing.avif",
 }
 
+INDUSTRY_ANCHORS = {
+    "/industries/real-estate-marketing/": "real-estate",
+    "/industries/property-developers/": "property-developers",
+    "/industries/luxury-brands/": "luxury-brands",
+    "/industries/dental-marketing/": "dental-clinics",
+    "/industries/trades-marketing/": "trades",
+    "/industries/restaurant-marketing/": "restaurants",
+    "/industries/retail-marketing/": "retail",
+    "/industries/ecommerce-marketing/": "online-businesses",
+    "/industries/professional-services-marketing/": "professional-services",
+}
+
+def _fix_text_nodes(frag):
+    """Typographic apostrophes in visible text only (never inside tags, <style> or <script>)."""
+    parts = re.split(r"(<style\b.*?</style>|<script\b.*?</script>|<[^>]+>)", frag, flags=re.S | re.I)
+    for i in range(0, len(parts), 2):
+        parts[i] = re.sub(r"(?<=[A-Za-z])'(?=[A-Za-z])", "&rsquo;", parts[i])
+    return "".join(parts)
+
 def build_homepage():
     frag_source = os.path.join(ROOT, "_ref", "index.homepage-fragment.html")
-    frag_path = os.path.join(ROOT, "index.html")
     with open(frag_source, encoding="utf-8") as f:
         frag = f.read()
     for old, new in IMG_REMAP.items():
-        frag = frag.replace(
-            "https://pinkybraindigital.com/wp-content/uploads/2026/09/%s" % old,
-            "images/%s" % new,
-        )
-    # fix internal links that pointed to non-existent WP pages, to real local pages
-    link_fix = {
-        "/services/website-design/": "website-design.html",
+        frag = frag.replace("https://pinkybraindigital.com/wp-content/uploads/2026/09/%s" % old, "images/%s" % new)
+
+    link_fix = {"/services/%s/" % sl: "%s.html" % sl for sl in ALL_SERVICE_SLUGS}
+    link_fix.update({
         "/services/ecommerce/": "e-commerce-websites-design.html",
-        "/services/app-development/": "app-development.html",
-        "/services/custom-software/": "custom-software.html",
         "/services/seo/": "seo-services.html",
         "/services/aeo/": "aeo-ai-search.html",
-        "/services/local-seo/": "local-seo.html",
         "/services/ppc-management/": "ppc-digital-advertising.html",
         "/services/social-media-marketing/": "social-media.html",
-        "/services/content-marketing/": "content-marketing.html",
-        "/services/email-marketing/": "email-marketing.html",
-        "/services/lead-generation/": "lead-generation.html",
-        "/services/branding/": "branding.html",
-        "/services/graphic-design/": "graphic-design.html",
-        "/services/video-photography/": "video-photography.html",
-        "/services/copywriting/": "copywriting.html",
-        "/services/ai-automation/": "ai-automation.html",
-        "/services/crm/": "crm.html",
-        "/services/cyber-security/": "cyber-security.html",
-        "/services/website-maintenance/": "website-maintenance.html",
-        "/services/digital-consulting/": "digital-consulting.html",
-        "/website-design-packages/": "website-design.html",
+        "/services/": "services.html",
+        "/industries/": "industries.html",
         "/about/": "about-us.html",
-        "/case-studies/": "index.html#pbs-industries",
-        "/contact/": "mailto:%s" % SITE_EMAIL,
-    }
+        "/case-studies/": "industries.html",
+        "/contact/": "contact-us.html",
+    })
+    for old, anchor in INDUSTRY_ANCHORS.items():
+        link_fix[old] = "industries.html#%s" % anchor
     for old, new in link_fix.items():
         frag = frag.replace('href="%s"' % old, 'href="%s"' % new)
 
+    # new sections, placed after the testimonials: free reviews, then insights, then the FAQ
     faq_marker = "<!--\n  SECTION 13"
-    if faq_marker in frag:
-        frag = frag.replace(faq_marker, render_blog_teaser() + faq_marker, 1)
-    else:
-        frag += render_blog_teaser()
+    assert faq_marker in frag, "faq marker missing"
+    frag = frag.replace(faq_marker, render_free_offers("") + render_blog_teaser() + faq_marker, 1)
 
+    frag = re.sub(r"<!--.*?-->", "", frag, flags=re.S)
+    frag = _fix_text_nodes(frag)
+
+    title = "Pinky Brain Digital | Your Digital Partner, Built for Growth"
+    desc = ("Full-service digital agency for websites, SEO, advertising, social media and AI. "
+            "One trusted team for businesses in the UK, Europe, USA and Canada.")
+    out = [head_html("", title, desc, "index.html"), header_html("", current="home"), frag,
+           footer_html(""), render_jsonld(ORG_JSONLD), "</body></html>"]
+    return write_page("index.html", "".join(out))
+
+# ---------------------------------------------------------------------------
+# BUILD: SERVICES HUB
+# ---------------------------------------------------------------------------
+GROUP_INTROS = {
+    "Search & Advertising": "Be found by the right people on Google, in Maps and in AI answers, and pay to reach them when it makes sense.",
+    "Websites & Apps": "Websites, shops and software that look credible, work smoothly and turn visitors into customers.",
+    "Marketing": "Social, content, email and lead generation that build visibility, engagement and a steady flow of enquiries.",
+    "Branding & Creative": "Identity, design, photography and writing that make your business look and sound established.",
+    "Automation & Security": "Smart tools, tidy systems and solid protection that save time and keep your business safe.",
+    "Digital Consulting": "Not sure where to start? Honest, plain-English advice on where your money is best spent.",
+}
+GROUP_ICONS = {"Search & Advertising": "search", "Websites & Apps": "doc", "Marketing": "growth",
+               "Branding & Creative": "target", "Automation & Security": "shield", "Digital Consulting": "users"}
+
+def build_services_page():
     root = ""
-    title = "Pinky Brain Digital | Full-Service Digital Agency &mdash; Websites, SEO, AEO & Marketing"
-    desc = "Pinky Brain Digital is a full-service digital agency for the UK, Europe, USA and Canada &mdash; websites, e-commerce, SEO & AEO, social media, advertising, branding and AI automation."
-    out = []
-    out.append(head_html(root, title, desc, "/"))
-    out.append(header_html(root))
-    out.append(frag)
-    out.append(footer_html(root))
-    out.append("</body></html>")
-    with open(frag_path, "w", encoding="utf-8") as f:
-        f.write("".join(out))
-    return frag_path
+    alt = Alt(False)
+    sections = []
+    for gname, slugs in SERVICE_GROUPS:
+        cards = "".join(
+            '<a class="pb-card pb-card--link" href="%s.html"><span class="pb-card__ic">%s</span><h3>%s</h3><p>%s</p>'
+            '<span class="pb-link">Find out more %s</span></a>'
+            % (sl, icon(GROUP_ICONS[gname]), SERVICES[sl]["nav_label"], SERVICE_BLURB[sl], icon("arrow"))
+            for sl in slugs)
+        sections.append("""
+<section class="pb-section%s">
+  <div class="pb-wrap">
+    <div class="pb-section__head">
+      <div><p class="pb-eyebrow">%s</p><h2>%s</h2></div>
+      <p>%s</p>
+    </div>
+    <div class="pb-grid-4">%s</div>
+  </div>
+</section>""" % (" pb-section--tint" if alt.next() else "", gname, gname, GROUP_INTROS[gname], cards))
+    out = [
+        head_html(root, "Our Services | Pinky Brain Digital",
+                  "SEO, websites, advertising, social media, branding, AI automation and more. Every service explained in plain English, with the results it should deliver.",
+                  "services.html"),
+        header_html(root, current="services"),
+        render_breadcrumb([("Home", "index.html"), ("Services", None)]),
+        """
+<section class="pb-hero" style="padding-bottom:clamp(40px,5vw,64px)">
+  <div class="pb-wrap pb-narrow">
+    <p class="pb-eyebrow">Our services</p>
+    <h1>Everything your business needs digitally, from one trusted team.</h1>
+    <p class="pb-lead">%s</p>
+  </div>
+</section>""" % CASE_BY_CASE,
+        "".join(sections),
+        render_free_offers(root, tint=alt.next()),
+        render_cta("Tell us what you want to achieve, and we’ll recommend the right place to start.", root=root),
+        footer_html(root),
+        "</body></html>",
+    ]
+    return write_page("services.html", "".join(out))
+
+# ---------------------------------------------------------------------------
+# BUILD: INDUSTRIES HUB
+# ---------------------------------------------------------------------------
+def build_industries_page():
+    root = ""
+    blocks = []
+    for anchor, name, lead, body, slugs in INDUSTRIES:
+        links = "".join('<li><a class="pb-link" href="%s.html">%s %s</a></li>' % (sl, SERVICES[sl]["nav_label"], icon("arrow")) for sl in slugs)
+        blocks.append("""
+<div class="pb-industry" id="%s">
+  <div><h2>%s</h2><p class="pb-industry__lead">%s</p><p>%s</p></div>
+  <div><h3>Services we often recommend</h3><ul class="pb-chips" style="flex-direction:column;align-items:flex-start;gap:12px">%s</ul></div>
+</div>""" % (anchor, name, lead, body, links))
+    out = [
+        head_html(root, "Industries We Serve | Pinky Brain Digital",
+                  "Digital marketing for estate agents, developers, luxury brands, clinics, trades, restaurants, retailers, online businesses and professional services.",
+                  "industries.html"),
+        header_html(root),
+        render_breadcrumb([("Home", "index.html"), ("Industries", None)]),
+        """
+<section class="pb-hero" style="padding-bottom:clamp(40px,5vw,64px)">
+  <div class="pb-wrap pb-narrow">
+    <p class="pb-eyebrow">Industries we serve</p>
+    <h1>Specialists in luxury real estate. Trusted by local businesses.</h1>
+    <p class="pb-lead">We understand the difference between selling a £5 million penthouse and filling a dentist’s diary. Every sector needs a different approach, so we start with your business and your goals.</p>
+  </div>
+</section>
+<section class="pb-section"><div class="pb-wrap">%s</div></section>""" % "".join(blocks),
+        render_cta("Tell us about your sector and what you want to achieve, and we’ll reply within one business day.", root=root),
+        footer_html(root),
+        "</body></html>",
+    ]
+    return write_page("industries.html", "".join(out))
 
 # ---------------------------------------------------------------------------
 # BUILD: CONTACT US PAGE
 # ---------------------------------------------------------------------------
 def build_contact_page():
     root = ""
-    title = "Contact Us | Pinky Brain Digital"
-    desc = "Get in touch with Pinky Brain Digital. Email, call or send a message and we'll reply within one business day."
-    service_options = "".join('<option value="%s">%s</option>' % (SERVICES[k]["name"], SERVICES[k]["name"]) for k in SERVICE_ORDER)
-
-    out = []
-    out.append(head_html(root, title, desc, "/contact-us/"))
-    out.append(header_html(root))
-    out.append(render_breadcrumb(root, [("Home", root + "index.html"), ("Contact", None)]))
-    out.append("""
+    offer_opts = "".join('<option value="%s">%s</option>' % (k, t) for k, t, _i, _d in FREE_OFFERS)
+    service_opts = "".join('<option value="%s">%s</option>' % (sl, SERVICES[sl]["name"]) for sl in ALL_SERVICE_SLUGS)
+    out = [
+        head_html(root, "Contact Us | Pinky Brain Digital",
+                  "Tell us what you want to achieve. Send a message or ask for a free review, and we’ll reply within one business day.",
+                  "contact-us.html"),
+        header_html(root),
+        render_breadcrumb([("Home", "index.html"), ("Contact", None)]),
+        """
 <section class="pb-hero">
   <div class="pb-wrap pb-hero__grid">
     <div>
       <p class="pb-eyebrow">Get in touch</p>
-      <h1>Let&rsquo;s talk about your business</h1>
-      <p class="pb-lead"><b>In a nutshell:</b> tell us what you need and we&rsquo;ll reply within one business day with real next steps &mdash; not a scripted sales call.</p>
+      <h1>Let&rsquo;s talk about your business.</h1>
+      <p class="pb-lead">Tell us what you want to achieve and we&rsquo;ll reply within one business day with real next steps, not a scripted sales call.</p>
       <ul class="pb-hero__ticks">
         <li>Real replies, no chatbots</li>
-        <li>Free 15&ndash;20 minute call</li>
+        <li>Free 20-minute consultation</li>
         <li>No obligation</li>
       </ul>
     </div>
     <div class="pb-card" style="padding:32px">
-      <h3 style="margin-bottom:16px">Head Office</h3>
-      <p style="font-size:.98rem;color:var(--pb-body)">%(address)s</p>
+      <h2 style="margin-bottom:16px;font-size:1.25rem">Head office</h2>
+      <address style="font-style:normal;font-size:.98rem;color:var(--pb-body)">%(address)s</address>
       <p style="margin-top:20px"><a class="pb-link" href="mailto:%(email)s">%(email)s</a></p>
     </div>
   </div>
 </section>
 <section class="pb-section">
-  <div class="pb-wrap" style="max-width:820px">
+  <div class="pb-wrap pb-narrow">
     <div class="pb-section__head" style="display:block">
       <p class="pb-eyebrow">Send a message</p>
       <h2>Tell us about your project</h2>
     </div>
-    <form class="pb-form" id="pb-contact-form">
+    <form class="pb-form" id="pb-contact-form" data-endpoint="%(endpoint)s" data-email="%(email)s">
       <div>
         <label for="pb-name">Your name*</label>
-        <input id="pb-name" name="name" type="text" required>
+        <input id="pb-name" name="name" type="text" autocomplete="name" required>
       </div>
       <div>
         <label for="pb-email">Email address*</label>
-        <input id="pb-email" name="email" type="email" required>
+        <input id="pb-email" name="email" type="email" autocomplete="email" required>
       </div>
       <div>
         <label for="pb-phone">Phone number</label>
-        <input id="pb-phone" name="phone" type="tel">
+        <input id="pb-phone" name="phone" type="tel" autocomplete="tel">
       </div>
       <div>
-        <label for="pb-service">Service you&rsquo;re interested in</label>
-        <select id="pb-service" name="service">
+        <label for="pb-interest">What would you like help with?</label>
+        <select id="pb-interest" name="interest">
           <option value="">Not sure yet</option>
-          %(service_options)s
+          <optgroup label="Free reviews and audits">%(offers)s</optgroup>
+          <optgroup label="Services">%(services)s</optgroup>
         </select>
       </div>
       <div class="pb-field--full">
         <label for="pb-message">Your message*</label>
         <textarea id="pb-message" name="message" required></textarea>
       </div>
+      <div class="pb-form__hp" aria-hidden="true"><label for="pb-website">Leave this field empty</label><input id="pb-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+      <p class="pb-form__note">By sending this message you agree to us using your details to reply, as described in our <a class="pb-link" href="privacy-policy.html">Privacy Policy</a>.</p>
       <div class="pb-form__actions">
         <button type="submit" class="pb-btn pb-btn--dark">Send message %(arrow)s</button>
         <span class="pb-form__note" style="margin:0">We reply within one business day.</span>
       </div>
+      <p class="pb-form__status" id="pb-form-status" role="status" aria-live="polite"></p>
     </form>
   </div>
 </section>
-<script>
-document.getElementById('pb-contact-form').addEventListener('submit', function (e) {
-  e.preventDefault();
-  var f = e.target;
-  var subject = 'Website enquiry' + (f.service.value ? ' - ' + f.service.value : '');
-  var body = 'Name: ' + f.name.value + '%%0D%%0AEmail: ' + f.email.value + '%%0D%%0APhone: ' + f.phone.value + '%%0D%%0A%%0D%%0A' + f.message.value;
-  window.location.href = 'mailto:%(email)s?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body).replace(/%%250D%%250A/g, '%%0D%%0A');
-});
-</script>
-""" % {"address": SITE_ADDRESS, "email": SITE_EMAIL, "service_options": service_options, "arrow": icon("arrow")})
-    out.append(footer_html(root))
-    out.append("</body></html>")
-
-    path = os.path.join(ROOT, "contact-us.html")
-    with open(path, "w", encoding="utf-8") as f:
-        f.write("".join(out))
-    return path
+""" % {"address": SITE_ADDRESS, "email": SITE_EMAIL, "endpoint": FORM_ENDPOINT, "offers": offer_opts,
+       "services": service_opts, "arrow": icon("arrow")},
+        footer_html(root, scripts='<script src="assets/js/contact.js" defer></script>'),
+        render_jsonld(ORG_JSONLD),
+        "</body></html>",
+    ]
+    return write_page("contact-us.html", "".join(out))
 
 # ---------------------------------------------------------------------------
 # BUILD: ABOUT US PAGE
@@ -1900,17 +2124,19 @@ APPROACH_SECTIONS = [
 ]
 APPROACH_VALUES = ["Good work", "Fair advice", "Clear communication", "Always evolving", "Long-term relationships"]
 
+
 def build_about_page():
     root = ""
     title = "About Us | Pinky Brain Digital"
-    desc = "Digital is complicated. Trust shouldn't be. Meet Pinky Brain Digital and the approach behind every project we take on."
+    desc = "Digital is complicated. Trust shouldn’t be. Meet Pinky Brain Digital and the honest, flexible, long-term approach behind every project."
+    alt = Alt(False)
 
     rows_html = "".join("""
 <section class="pb-approach-row%(tint)s" id="approach-%(idx)s">
   <div class="pb-wrap pb-split%(rev)s">
-    %(media)s
+    <img class="pb-split__img" src="images/%(img)s" alt="%(alt)s" width="760" height="644" loading="lazy" decoding="async">
     <div>
-      <p class="pb-approach-row__num">%(num)s &mdash; %(count)s</p>
+      <p class="pb-approach-row__num">%(num)s of %(count)s</p>
       <h2>%(title)s</h2>
       <p style="margin-top:16px">%(p1)s</p>
       <p style="margin-top:16px">%(p2)s</p>
@@ -1919,28 +2145,27 @@ def build_about_page():
 </section>""" % {
         "tint": " pb-section--tint" if i % 2 else "",
         "rev": " pb-split--rev" if i % 2 else "",
-        "idx": i + 1,
-        "media": '<img class="pb-split__img" src="%simages/%s" alt="%s" loading="lazy" decoding="async">' % (root, img, alt),
+        "idx": i + 1, "img": img, "alt": ialt,
         "num": "%02d" % (i + 1), "count": "%02d" % len(APPROACH_SECTIONS),
         "title": t, "p1": p1, "p2": p2,
-    } for i, (t, p1, p2, ic, img, alt) in enumerate(APPROACH_SECTIONS))
+    } for i, (t, p1, p2, ic, img, ialt) in enumerate(APPROACH_SECTIONS))
 
-    values_html = "".join('<li>%s %s</li>' % (icon("check"), v) for v in APPROACH_VALUES)
+    values_html = "".join("<li>%s %s</li>" % (icon("check"), v) for v in APPROACH_VALUES)
 
-    out = []
-    out.append(head_html(root, title, desc, "/about-us/"))
-    out.append(header_html(root))
-    out.append(render_breadcrumb(root, [("Home", root + "index.html"), ("About Us", None)]))
-    out.append("""
+    out = [
+        head_html(root, title, desc, "about-us.html"),
+        header_html(root, current="about"),
+        render_breadcrumb([("Home", "index.html"), ("About Us", None)]),
+        """
 <section class="pb-hero">
   <div class="pb-wrap pb-hero__grid">
     <div>
-      <p class="pb-eyebrow">Our Approach</p>
+      <p class="pb-eyebrow">Our approach</p>
       <h1>Digital is complicated. Trust shouldn&rsquo;t be.</h1>
-      <p class="pb-lead">Just as you have a trusted accountant, mechanic or doctor, we believe every business needs a reliable digital partner &mdash; someone who understands the landscape, explains things clearly and has your best interests at heart. That&rsquo;s what we want Pinky Brain Digital to be.</p>
+      <p class="pb-lead">Just as you have a trusted accountant, mechanic or doctor, we believe every business needs a reliable digital partner: someone who understands the landscape, explains things clearly and has your best interests at heart. That&rsquo;s what we want Pinky Brain Digital to be.</p>
       <div class="pb-hero__actions">
-        <a class="pb-btn pb-btn--dark" href="contact-us.html">Book a free consultation %(arrow)s</a>
-        <a class="pb-btn pb-btn--line" href="#approach-1">Read our approach</a>
+        <a class="pb-btn pb-btn--dark" href="contact-us.html">%(primary)s %(arrow)s</a>
+        <a class="pb-btn pb-btn--line" href="services.html">%(secondary)s</a>
       </div>
       <ul class="pb-hero__ticks">
         <li>Honest, plain-English advice</li>
@@ -1949,14 +2174,14 @@ def build_about_page():
       </ul>
     </div>
     <div class="pb-hero__media">
-      <img class="pb-hero__img" src="images/about-pinky-brain-digital-team.webp" alt="Pinky Brain Digital team working together on a client project" width="900" height="792" loading="eager" decoding="async">
+      <img class="pb-hero__img" src="images/about-pinky-brain-digital-team.webp" alt="The Pinky Brain Digital team working together on a client project" width="900" height="792" fetchpriority="high" decoding="async">
       <div class="pb-hero__badge"><div><b>Trust, always</b><span>Our promise</span></div></div>
     </div>
   </div>
 </section>
 <section class="pb-quote-band">
   <div class="pb-wrap">
-    <span class="pb-mark">&ldquo;</span>
+    <span class="pb-mark" aria-hidden="true">&ldquo;</span>
     <p>Good work. Fair advice. Clear communication. Always evolving. Long-term relationships.</p>
     <span>That&rsquo;s the Pinky Brain approach</span>
   </div>
@@ -1966,96 +2191,98 @@ def build_about_page():
   <div class="pb-wrap">
     <div class="pb-section__head" style="display:block">
       <p class="pb-eyebrow">What we stand for</p>
-      <h2>The Pinky Brain approach, in five words</h2>
+      <h2>The Pinky Brain approach, in five phrases</h2>
     </div>
     <ul class="pb-values-row">%(values)s</ul>
   </div>
 </section>
-""" % {"rows": rows_html, "values": values_html, "arrow": icon("arrow")})
-    out.append(render_cta("tell us about your business, and we&rsquo;ll reply within one business day with honest, straight-talking advice &mdash; not a sales pitch.", root=root))
-    out.append(footer_html(root))
-    out.append("</body></html>")
-
-    path = os.path.join(ROOT, "about-us.html")
-    with open(path, "w", encoding="utf-8") as f:
-        f.write("".join(out))
-    return path
+""" % {"rows": rows_html, "values": values_html, "primary": CTA_PRIMARY, "secondary": CTA_SECONDARY, "arrow": icon("arrow")},
+        render_cta("Tell us about your business and what you want to achieve, and we’ll reply within one business day with honest, straight-talking advice, not a sales pitch.", root=root),
+        footer_html(root),
+        render_jsonld(ORG_JSONLD),
+        "</body></html>",
+    ]
+    return write_page("about-us.html", "".join(out))
 
 # ---------------------------------------------------------------------------
 # BUILD: LOCATIONS PAGE
 # ---------------------------------------------------------------------------
-LOCATIONS_REGION_ORDER = ["UK", "USA", "Canada", "Europe"]
-LOCATIONS_REGION_LABEL = {"UK": "United Kingdom", "USA": "United States", "Canada": "Canada", "Europe": "Europe"}
+LOCATIONS_REGIONS = [
+    ("UK", "United Kingdom", "Our home market, with local pages for the major cities across England."),
+    ("Europe", "Europe", "Websites and search visibility for the European market, with local and legal requirements in mind."),
+    ("USA", "United States", "Local expertise across the US’s biggest business hubs, from the East Coast to the West."),
+    ("Canada", "Canada", "Support for businesses across Canada’s largest cities."),
+]
 
 def build_locations_page(locations):
     root = ""
-    title = "Locations We Cover | Pinky Brain Digital"
-    desc = "Every city and region Pinky Brain Digital serves across the UK, USA, Canada and Europe, for website design and SEO services."
-
     by_region = {}
     for l in locations:
         by_region.setdefault(l["region"], {}).setdefault(l["city"], []).append(l)
-
-    region_blocks = []
-    for region in LOCATIONS_REGION_ORDER:
+    alt = Alt(False)
+    blocks = []
+    for region, label, blurb in LOCATIONS_REGIONS:
         cities = by_region.get(region)
         if not cities:
             continue
-        city_cards = []
-        for city in sorted(cities.keys()):
-            entries = cities[city]
-            links = "".join(
-                '<a class="pb-link" href="%s.html" style="margin-right:18px">%s %s</a>'
-                % (e["folder"], SERVICES[e["service_key"]]["nav_label"], icon("arrow"))
-                for e in entries
-            )
-            city_cards.append('<div class="pb-card"><h3>%s</h3><div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:10px 4px">%s</div></div>' % (city, links))
-        region_blocks.append("""
-<div style="margin-bottom:48px">
-  <p class="pb-eyebrow">%(region)s</p>
-  <div class="pb-grid-4">%(cards)s</div>
-</div>""" % {"region": LOCATIONS_REGION_LABEL.get(region, region), "cards": "".join(city_cards)})
-
-    out = []
-    out.append(head_html(root, title, desc, "/locations/"))
-    out.append(header_html(root))
-    out.append(render_breadcrumb(root, [("Home", root + "index.html"), ("Locations", None)]))
-    out.append("""
-<section class="pb-hero">
-  <div class="pb-wrap" style="max-width:820px">
+        cards = []
+        for city in sorted(cities):
+            links = "".join('<li><a class="pb-link" href="%s.html">%s %s</a></li>' % (e["folder"], SERVICES[e["service_key"]]["nav_label"], icon("arrow")) for e in cities[city])
+            cards.append('<div class="pb-card"><h3>%s</h3><ul style="margin-top:14px;display:flex;flex-direction:column;align-items:flex-start;gap:10px">%s</ul></div>' % (city, links))
+        blocks.append("""
+<section class="pb-section%s">
+  <div class="pb-wrap">
+    <div class="pb-section__head">
+      <div><p class="pb-eyebrow">%d %s</p><h2>%s</h2></div>
+      <p>%s</p>
+    </div>
+    <div class="pb-grid-4">%s</div>
+  </div>
+</section>""" % (" pb-section--tint" if alt.next() else "", len(cities), "city" if len(cities) == 1 else "cities", label, blurb, "".join(cards)))
+    out = [
+        head_html(root, "Locations We Cover | Pinky Brain Digital",
+                  "Website design and SEO for businesses across the UK, Europe, the United States and Canada, plus international clients. Find your city.",
+                  "locations.html"),
+        header_html(root, current="locations"),
+        render_breadcrumb([("Home", "index.html"), ("Locations", None)]),
+        """
+<section class="pb-hero" style="padding-bottom:clamp(40px,5vw,64px)">
+  <div class="pb-wrap pb-narrow">
     <p class="pb-eyebrow">Where we work</p>
     <h1>Locations we cover</h1>
-    <p class="pb-lead"><b>In a nutshell:</b> website design and SEO for businesses across the UK, USA, Canada and Europe &mdash; wherever you&rsquo;re based, we work the same way.</p>
+    <p class="pb-lead">We work with businesses across the UK, Europe, the United States and Canada, and with international clients remotely. Choose your city to see how we help businesses like yours locally.</p>
   </div>
-</section>
-<section class="pb-section">
+</section>""",
+        "".join(blocks),
+        """
+<section class="pb-section%s">
   <div class="pb-wrap">
-    %(regions)s
-    <p style="font-size:.95rem;color:var(--pb-body)">Don&rsquo;t see your city listed? We work with businesses everywhere across these markets &mdash; <a class="pb-link" href="contact-us.html">get in touch</a> and we&rsquo;ll confirm we can help.</p>
+    <div class="pb-section__head">
+      <div><p class="pb-eyebrow">International</p><h2>Based somewhere else?</h2></div>
+      <p>Most of our work is done remotely, so location is rarely a barrier. If you operate in another country or sell internationally, tell us where your customers are and we&rsquo;ll plan around them.</p>
+    </div>
+    <a class="pb-btn pb-btn--dark" href="contact-us.html">%s %s</a>
   </div>
-</section>
-""" % {"regions": "".join(region_blocks)})
-    out.append(render_cta("tell us where you&rsquo;re based, and we&rsquo;ll reply within one business day to confirm how we can help.", root=root))
-    out.append(footer_html(root))
-    out.append("</body></html>")
-
-    path = os.path.join(ROOT, "locations.html")
-    with open(path, "w", encoding="utf-8") as f:
-        f.write("".join(out))
-    return path
+</section>""" % (" pb-section--tint" if alt.next() else "", CTA_PRIMARY, icon("arrow")),
+        footer_html(root),
+        "</body></html>",
+    ]
+    return write_page("locations.html", "".join(out))
 
 # ---------------------------------------------------------------------------
-# BLOG
+# BLOG (shown to visitors as "Insights")
 # Post bodies are lists of (kind, content) blocks: "p", "h2", "ul", "callout".
 # ---------------------------------------------------------------------------
 BLOG_POSTS = [
     {
         "slug": "do-you-need-a-new-website",
+        "title_tag": "Do You Need a New Website? 7 Questions",
+        "meta": "A rebuild is a big investment and not always the answer. Seven honest questions to help you decide whether you need a new website or a few targeted fixes.",
         "title": "Do You Really Need a New Website? 7 Honest Questions to Ask First",
         "date": "2026-09-29",
         "category": "Website Design",
         "read": "5 min read",
-        "image": "website-design-service-hero.jpg",
+        "image": "website-design-service-hero.webp",
         "image_alt": "Business owner reviewing their current website on a laptop",
         "excerpt": "A rebuild is a big investment, and it isn&rsquo;t always the answer. These seven questions help you work out whether you need a new website &mdash; or just a few targeted fixes.",
         "service": "website-design",
@@ -2086,6 +2313,8 @@ BLOG_POSTS = [
     },
     {
         "slug": "seo-vs-aeo-what-your-business-needs",
+        "title_tag": "SEO vs AEO: What’s the Difference?",
+        "meta": "More customers now ask ChatGPT and Google’s AI for recommendations. Here is how SEO and AEO differ, and whether your business needs both.",
         "title": "SEO vs AEO: What&rsquo;s the Difference, and Does Your Business Need Both?",
         "date": "2026-09-22",
         "category": "SEO &amp; AEO",
@@ -2136,6 +2365,7 @@ BLOG_POSTS = [
     },
 ]
 
+
 def _fmt_date(iso):
     y, m, d = iso.split("-")
     months = ["January", "February", "March", "April", "May", "June", "July",
@@ -2143,14 +2373,11 @@ def _fmt_date(iso):
     return "%d %s %s" % (int(d), months[int(m) - 1], y)
 
 def _plain(s):
-    for ent, ch in (("&mdash;", "—"), ("&ndash;", "–"), ("&rsquo;", "’"), ("&lsquo;", "‘"),
-                    ("&ldquo;", "“"), ("&rdquo;", "”"), ("&amp;", "&")):
-        s = s.replace(ent, ch)
-    return s
+    return html.unescape(s)
 
 def render_post_card(post, root=""):
     return """<a class="pb-post-card" href="%(root)s%(slug)s.html">
-  <img src="%(root)simages/%(img)s" alt="%(alt)s" loading="lazy" decoding="async">
+  <img src="%(root)simages/%(img)s" alt="%(alt)s" width="640" height="400" loading="lazy" decoding="async">
   <div class="pb-post-card__body">
     <p class="pb-post-meta"><span class="pb-post-tag">%(cat)s</span> %(date)s &middot; %(read)s</p>
     <h3>%(title)s</h3>
@@ -2167,10 +2394,10 @@ def render_blog_teaser(root=""):
 <section class="pb-section">
   <div class="pb-wrap">
     <div class="pb-section__head">
-      <div><p class="pb-eyebrow">From the blog</p><h2>Insights &amp; advice</h2></div>
+      <div><p class="pb-eyebrow">Insights</p><h2>Plain-English advice for growing businesses</h2></div>
       <div>
-        <p>Plain-English guides on websites, search and marketing &mdash; written to help, not to sell.</p>
-        <a class="pb-link" href="%(root)sblog.html" style="margin-top:14px">View all posts %(arrow)s</a>
+        <p>Guides on websites, search and marketing, written to help you decide, not to sell.</p>
+        <a class="pb-link" href="%(root)sblog.html" style="margin-top:14px">Read all insights %(arrow)s</a>
       </div>
     </div>
     <div class="pb-blog-grid">%(cards)s</div>
@@ -2195,23 +2422,26 @@ def build_blog_post(post):
     root = ""
     s = SERVICES[post["service"]]
     others = [p for p in BLOG_POSTS if p["slug"] != post["slug"]]
-    jsonld = """<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","headline":"%s","datePublished":"%s","image":"https://pinkybraindigital.com/images/%s","author":{"@type":"Organization","name":"Pinky Brain Digital"},"publisher":{"@type":"Organization","name":"Pinky Brain Digital"},"description":"%s"}
-</script>
-""" % (_plain(post["title"]).replace('"', '\\"'), post["date"], post["image"], _plain(post["excerpt"]).replace('"', '\\"'))
-
-    out = []
-    out.append(head_html(root, "%s | Pinky Brain Digital" % _plain(post["title"]), _plain(post["excerpt"]), "/%s/" % post["slug"]))
-    out.append(header_html(root))
-    out.append(render_breadcrumb(root, [("Home", "index.html"), ("Blog", "blog.html"), (post["category"], None)]))
-    out.append("""
+    jsonld = render_jsonld({
+        "@context": "https://schema.org", "@type": "BlogPosting",
+        "headline": _plain(post["title"]), "datePublished": post["date"],
+        "image": SITE_URL + "/images/" + post["image"],
+        "author": {"@type": "Organization", "name": "Pinky Brain Digital"},
+        "publisher": {"@type": "Organization", "name": "Pinky Brain Digital", "logo": {"@type": "ImageObject", "url": SITE_URL + "/images/logo.png"}},
+        "description": _plain(post["excerpt"]), "mainEntityOfPage": page_url(post["slug"] + ".html"),
+    })
+    out = [
+        head_html(root, "%s | Pinky Brain Digital" % post.get("title_tag", _plain(post["title"])), post.get("meta", _plain(post["excerpt"])), post["slug"] + ".html"),
+        header_html(root, current="insights"),
+        render_breadcrumb([("Home", "index.html"), ("Insights", "blog.html"), (post["category"], None)]),
+        """
 <article>
   <header class="pb-article-head">
     <div class="pb-wrap">
       <p class="pb-eyebrow">%(cat)s</p>
       <h1>%(title)s</h1>
       <p class="pb-post-meta">By the Pinky Brain Digital team &middot; %(date)s &middot; %(read)s</p>
-      <img class="pb-article-head__img" src="images/%(img)s" alt="%(alt)s" loading="eager" decoding="async">
+      <img class="pb-article-head__img" src="images/%(img)s" alt="%(alt)s" width="900" height="450" fetchpriority="high" decoding="async">
     </div>
   </header>
   <div class="pb-section" style="padding-top:clamp(40px,5vw,64px)">
@@ -2220,7 +2450,7 @@ def build_blog_post(post):
       <div class="pb-article__service">
         <div>
           <p class="pb-eyebrow" style="margin-bottom:8px">Related service</p>
-          <h3>%(sname)s</h3>
+          <h2 style="margin:0;font-size:1.2rem">%(sname)s</h2>
           <p>%(slead)s</p>
         </div>
         <a class="pb-btn pb-btn--dark" href="%(sslug)s.html">Explore %(slabel)s %(arrow)s</a>
@@ -2232,45 +2462,43 @@ def build_blog_post(post):
   <div class="pb-wrap">
     <div class="pb-section__head" style="display:block">
       <p class="pb-eyebrow">Keep reading</p>
-      <h2>More from the blog</h2>
+      <h2>More insights</h2>
     </div>
     <div class="pb-blog-grid">%(more)s</div>
   </div>
 </section>
 """ % {"cat": post["category"], "title": post["title"], "date": _fmt_date(post["date"]), "read": post["read"],
        "img": post["image"], "alt": post["image_alt"], "body": _render_post_body(post["body"]),
-       "sname": s["name"], "slead": s["lead"][0].upper() + s["lead"][1:], "sslug": s["slug"], "slabel": s["nav_label"],
-       "arrow": icon("arrow"), "more": "".join(render_post_card(p) for p in others)})
-    out.append(render_cta("tell us what you&rsquo;re working on, and we&rsquo;ll reply within one business day with honest, plain-English advice.", root=root))
-    out.append(footer_html(root))
-    out.append(jsonld)
-    out.append("</body></html>")
-
-    path = os.path.join(ROOT, post["slug"] + ".html")
-    with open(path, "w", encoding="utf-8") as f:
-        f.write("".join(out))
-    return path
+       "sname": s["name"], "slead": cap_first(s["lead"]), "sslug": s["slug"], "slabel": s["nav_label"],
+       "arrow": icon("arrow"), "more": "".join(render_post_card(p) for p in others)},
+        render_cta("Tell us what you’re working on, and we’ll reply within one business day with honest, plain-English advice.", root=root,
+                   offer_key=SERVICE_OFFER.get(post["service"])),
+        footer_html(root),
+        jsonld,
+        "</body></html>",
+    ]
+    return write_page(post["slug"] + ".html", "".join(out))
 
 def build_blog_index():
     root = ""
     featured, rest = BLOG_POSTS[0], BLOG_POSTS[1:]
-    out = []
-    out.append(head_html(root, "Blog | Pinky Brain Digital",
-                         "Plain-English guides on websites, SEO, AI search and digital marketing from the Pinky Brain Digital team.", "/blog/"))
-    out.append(header_html(root))
-    out.append(render_breadcrumb(root, [("Home", "index.html"), ("Blog", None)]))
-    out.append("""
+    out = [
+        head_html(root, "Insights | Pinky Brain Digital",
+                  "Plain-English guides on websites, SEO, AI search and digital marketing from the Pinky Brain Digital team.", "blog.html"),
+        header_html(root, current="insights"),
+        render_breadcrumb([("Home", "index.html"), ("Insights", None)]),
+        """
 <section class="pb-hero" style="padding-bottom:clamp(40px,5vw,64px)">
-  <div class="pb-wrap" style="max-width:820px">
+  <div class="pb-wrap pb-narrow">
     <p class="pb-eyebrow">Insights &amp; advice</p>
-    <h1>The Pinky Brain blog</h1>
-    <p class="pb-lead"><b>In a nutshell:</b> honest, plain-English guides on websites, search and marketing &mdash; written to help you make better decisions, not to sell you something.</p>
+    <h1>Insights</h1>
+    <p class="pb-lead">Honest, plain-English guides on websites, search and marketing, written to help you make better decisions, not to sell you something.</p>
   </div>
 </section>
 <section class="pb-section" style="padding-top:clamp(40px,5vw,64px)">
   <div class="pb-wrap">
     <a class="pb-post-feature" href="%(fslug)s.html">
-      <img src="images/%(fimg)s" alt="%(falt)s" loading="eager" decoding="async">
+      <img src="images/%(fimg)s" alt="%(falt)s" width="900" height="620" fetchpriority="high" decoding="async">
       <div>
         <p class="pb-post-meta"><span class="pb-post-tag">Latest</span> %(fcat)s &middot; %(fdate)s &middot; %(fread)s</p>
         <h2>%(ftitle)s</h2>
@@ -2285,111 +2513,165 @@ def build_blog_index():
        "fcat": featured["category"], "fdate": _fmt_date(featured["date"]), "fread": featured["read"],
        "ftitle": featured["title"], "fexcerpt": featured["excerpt"], "arrow": icon("arrow"),
        "rest": ('<h2 class="pb-blog-subhead">More articles</h2><div class="pb-blog-grid">%s</div>'
-                % "".join(render_post_card(p) for p in rest)) if rest else ""})
-    out.append(render_cta("have a question we haven&rsquo;t answered here? Ask us, and we&rsquo;ll reply within one business day.", root=root))
-    out.append(footer_html(root))
-    out.append("</body></html>")
-
-    path = os.path.join(ROOT, "blog.html")
-    with open(path, "w", encoding="utf-8") as f:
-        f.write("".join(out))
-    return path
+                % "".join(render_post_card(p) for p in rest)) if rest else ""},
+        render_cta("Have a question we haven’t answered here? Ask us, and we’ll reply within one business day.", root=root),
+        footer_html(root),
+        "</body></html>",
+    ]
+    return write_page("blog.html", "".join(out))
 
 # ---------------------------------------------------------------------------
-# BUILD: SITEMAP PAGE + sitemap.xml
+# BUILD: PRIVACY POLICY, 404, SITEMAP, ROBOTS
 # ---------------------------------------------------------------------------
+def build_privacy_page():
+    root = ""
+    body = """
+<h2>Who we are</h2>
+<p>Pinky Brain Digital (&ldquo;we&rdquo;, &ldquo;us&rdquo;) is a digital agency based at %(address)s. We are the controller of the personal information described in this policy. You can contact us at <a href="mailto:%(email)s">%(email)s</a>.</p>
+<h2>What information we collect</h2>
+<ul>
+<li><b>Enquiries.</b> If you use our contact form or email us, we collect your name, email address, phone number (if you give it), the service you are interested in and the message you send.</li>
+<li><b>Technical information.</b> Like most websites, our hosting provider may record technical details such as your IP address, browser type and the pages you request, for security and to keep the site running.</li>
+</ul>
+<h2>How we use it</h2>
+<ul>
+<li>To reply to your enquiry and, if you ask us to, prepare a quote, audit or proposal.</li>
+<li>To keep the website secure and working properly.</li>
+<li>To meet our legal and accounting obligations if you become a client.</li>
+</ul>
+<p>We do not sell your information, and we do not use it for automated decision-making.</p>
+<h2>Our lawful basis</h2>
+<p>We use your details to respond to your enquiry and take steps at your request before a contract (UK GDPR Article 6(1)(b)), and for our legitimate interests in running and securing our business (Article 6(1)(f)). Where we ask for consent, for example for marketing emails, you can withdraw it at any time.</p>
+<h2>Who we share it with</h2>
+<p>We only share personal information with trusted service providers who help us run the business, such as website hosting and email providers, and only as far as needed for them to do so. We may also share information where the law requires it.</p>
+<h2>How long we keep it</h2>
+<p>We keep enquiry details for as long as is needed to deal with your request and any follow-up, and for as long as the law or our legitimate business needs require. We review and delete information we no longer need.</p>
+<h2>Cookies and tracking</h2>
+<p>This website does not currently use analytics, advertising or other non-essential cookies, and our fonts are hosted on our own server. If we add tools that set non-essential cookies in future, we will ask for your consent first and update this policy.</p>
+<h2>Your rights</h2>
+<p>Under UK data protection law you have the right to ask for a copy of your information, to have inaccurate information corrected, to ask us to delete or restrict our use of it, to object to our use of it and to ask for it in a portable format. To use any of these rights, email <a href="mailto:%(email)s">%(email)s</a>.</p>
+<p>If you are unhappy with how we handle your information, you can complain to the Information Commissioner&rsquo;s Office at <a href="https://ico.org.uk" rel="noopener">ico.org.uk</a> or on 0303 123 1113. We would appreciate the chance to put things right first.</p>
+<h2>International transfers</h2>
+<p>Some of our service providers may process information outside the UK. Where they do, we make sure appropriate safeguards are in place.</p>
+<h2>Changes to this policy</h2>
+<p>We may update this policy from time to time. The latest version will always be on this page.</p>
+""" % {"address": SITE_ADDRESS, "email": SITE_EMAIL}
+    out = [
+        head_html(root, "Privacy Policy | Pinky Brain Digital",
+                  "How Pinky Brain Digital collects, uses and protects your personal information, and your rights under UK data protection law.",
+                  "privacy-policy.html"),
+        header_html(root),
+        render_breadcrumb([("Home", "index.html"), ("Privacy Policy", None)]),
+        """
+<section class="pb-section">
+  <div class="pb-wrap"><div class="pb-prose">
+    <p class="pb-eyebrow">Legal</p>
+    <h1 style="font-family:var(--pb-font-head);font-size:clamp(2rem,4vw,3rem);line-height:1.1;letter-spacing:-.03em">Privacy Policy</h1>
+    <p class="pb-updated">Last updated: 5 October 2026</p>
+    %s
+  </div></div>
+</section>""" % body,
+        footer_html(root),
+        "</body></html>",
+    ]
+    return write_page("privacy-policy.html", "".join(out))
+
+# The 404 page is served from whatever URL was mistyped, so relative links need a base:
+# "/<repo>/" on a github.io project site, "/" on a normal domain.
+BASE_FIX = (
+    "<script>document.write('<base href=\"' + (location.hostname.slice(-10) === '.github.io' ? "
+    "'/' + location.pathname.split('/')[1] + '/' : '/') + '\">');</script>\n")
+
+def build_404_page():
+    root = ""
+    out = [
+        head_html(root, "Page Not Found | Pinky Brain Digital", "Sorry, we couldn’t find that page. Try our services, locations or contact page.", "404.html", noindex=True,
+                  extra_head=BASE_FIX),
+        header_html(root),
+        """
+<section class="pb-404">
+  <div class="pb-wrap" style="max-width:640px">
+    <p class="pb-404__code" aria-hidden="true">404</p>
+    <h1 style="font-family:var(--pb-font-head);font-size:clamp(1.8rem,3.5vw,2.6rem);line-height:1.15;margin-top:12px">We can&rsquo;t find that page.</h1>
+    <p class="pb-lead" style="margin:16px auto 0">The link may be out of date, or the page may have moved. Try one of these instead.</p>
+    <div class="pb-hero__actions">
+      <a class="pb-btn pb-btn--dark" href="index.html">Back to the homepage</a>
+      <a class="pb-btn pb-btn--line" href="services.html">%s</a>
+    </div>
+    <p style="margin-top:28px;font-size:.95rem"><a class="pb-link" href="contact-us.html">%s</a></p>
+  </div>
+</section>""" % (CTA_SECONDARY, CTA_PRIMARY),
+        footer_html(root),
+        "</body></html>",
+    ]
+    return write_page("404.html", "".join(out))
+
 def build_sitemap_page(locations):
     root = ""
-    title = "Sitemap | Pinky Brain Digital"
-    desc = "A complete list of every page on the Pinky Brain Digital website."
 
     def col(heading, links, anchor_id=""):
         items = "".join('<li><a href="%s">%s</a></li>' % (href, label) for label, href in links)
         anchor = ' id="%s"' % anchor_id if anchor_id else ""
-        return '<div%s><h3>%s</h3><ul>%s</ul></div>' % (anchor, heading, items)
+        return '<div%s><h2>%s</h2><ul>%s</ul></div>' % (anchor, heading, items)
 
-    company_links = [
-        ("Home", "index.html"), ("About Us", "about-us.html"),
-        ("Industries", "index.html#pbs-industries"), ("FAQs", "index.html#pbs-faq"),
-        ("Locations", "locations.html"), ("Blog", "blog.html"), ("Contact Us", "contact-us.html"), ("Sitemap", "sitemap.html"),
-    ] + [(_plain(p["title"]), "%s.html" % p["slug"]) for p in BLOG_POSTS]
-    service_links = [(SERVICES[k]["name"], "%s.html" % k) for k in ALL_SERVICE_SLUGS]
-    wd_links = [(l["city"], "%s.html" % l["folder"]) for l in locations if l["service_key"] == "website-design"]
-    seo_links = [(l["city"], "%s.html" % l["folder"]) for l in locations if l["service_key"] == "seo-services"]
-
-    cols = (
-        col("Company", company_links)
-        + col("Services", service_links)
-        + col("Website Design &mdash; Locations", wd_links, anchor_id="website-design")
-        + col("SEO Services &mdash; Locations", seo_links, anchor_id="seo-services")
-    )
-
-    out = []
-    out.append(head_html(root, title, desc, "/sitemap/"))
-    out.append(header_html(root))
-    out.append(render_breadcrumb(root, [("Home", root + "index.html"), ("Sitemap", None)]))
-    out.append("""
+    company = [("Home", "index.html"), ("About Us", "about-us.html"), ("Services", "services.html"),
+               ("Industries", "industries.html"), ("Locations", "locations.html"), ("Insights", "blog.html"),
+               ("Contact Us", "contact-us.html"), ("Privacy Policy", "privacy-policy.html"), ("Sitemap", "sitemap.html")]
+    services = [(SERVICES[k]["name"], "%s.html" % k) for k in ALL_SERVICE_SLUGS]
+    posts = [(_plain(p["title"]), "%s.html" % p["slug"]) for p in BLOG_POSTS]
+    wd = [(l["city"], "%s.html" % l["folder"]) for l in locations if l["service_key"] == "website-design"]
+    seo = [(l["city"], "%s.html" % l["folder"]) for l in locations if l["service_key"] == "seo-services"]
+    cols = (col("Company", company) + col("Services", services) + col("Insights", posts)
+            + col("Website design locations", wd, "website-design") + col("SEO locations", seo, "seo-services"))
+    out = [
+        head_html(root, "Sitemap | Pinky Brain Digital", "A complete list of every page on the Pinky Brain Digital website: services, locations, industries, insights and company pages.", "sitemap.html"),
+        header_html(root),
+        render_breadcrumb([("Home", "index.html"), ("Sitemap", None)]),
+        """
 <section class="pb-section">
   <div class="pb-wrap">
     <div class="pb-section__head" style="display:block">
       <p class="pb-eyebrow">Every page</p>
-      <h2>Sitemap</h2>
+      <h1 style="font-family:var(--pb-font-head);font-size:clamp(2rem,4vw,3rem);line-height:1.1;letter-spacing:-.03em">Sitemap</h1>
     </div>
     <div class="pb-sitemap-grid">%s</div>
   </div>
-</section>
-""" % cols)
-    out.append(footer_html(root))
-    out.append("</body></html>")
-
-    path = os.path.join(ROOT, "sitemap.html")
-    with open(path, "w", encoding="utf-8") as f:
-        f.write("".join(out))
-    return path
+</section>""" % cols,
+        footer_html(root),
+        "</body></html>",
+    ]
+    return write_page("sitemap.html", "".join(out))
 
 def build_sitemap_xml(locations):
-    base = "https://pinkybraindigital.com"
-    urls = (["/"] + ["/%s/" % k for k in ALL_SERVICE_SLUGS]
-            + ["/contact-us/", "/about-us/", "/locations/", "/blog/", "/sitemap/"] + ["/%s/" % p["slug"] for p in BLOG_POSTS] + [l["url"] for l in locations])
-    body = "".join('  <url><loc>%s%s</loc></url>\n' % (base, u) for u in urls)
+    files = (["index.html", "about-us.html", "services.html", "industries.html", "locations.html", "blog.html",
+              "contact-us.html", "privacy-policy.html"]
+             + ["%s.html" % k for k in ALL_SERVICE_SLUGS]
+             + ["%s.html" % p["slug"] for p in BLOG_POSTS]
+             + ["%s.html" % l["folder"] for l in locations])
+    body = "".join("  <url><loc>%s</loc></url>\n" % page_url(f) for f in files)
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n%s</urlset>\n' % body
-    path = os.path.join(ROOT, "sitemap.xml")
-    with open(path, "w", encoding="utf-8") as f:
+    with open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf-8", newline="\n") as f:
         f.write(xml)
-    return path
+    with open(os.path.join(ROOT, "robots.txt"), "w", encoding="utf-8", newline="\n") as f:
+        f.write("User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n" % SITE_URL)
+    return os.path.join(ROOT, "sitemap.xml")
 
 # ---------------------------------------------------------------------------
 # MAIN
 # ---------------------------------------------------------------------------
 def main():
-    global ALL_LOCATIONS
     locations = read_locations()
-    ALL_LOCATIONS = locations
-    print("Loaded %d location rows" % len(locations))
+    missing = sorted({l["city"] for l in locations} - set(CITY_PROFILES))
+    assert not missing, "no city profile for: %s" % missing
 
-    built = []
-    built.append(build_homepage())
-    print("Built homepage")
-
-    for key in ALL_SERVICE_SLUGS:
-        built.append(build_service_page(key, locations))
-    print("Built %d service pages" % len(ALL_SERVICE_SLUGS))
-
-    for i, loc in enumerate(locations):
-        built.append(build_location_page(loc, i, locations))
-    print("Built %d location pages" % len(locations))
-
-    built.append(build_contact_page())
-    built.append(build_about_page())
-    built.append(build_locations_page(locations))
-    built.append(build_blog_index())
-    for post in BLOG_POSTS:
-        built.append(build_blog_post(post))
-    built.append(build_sitemap_page(locations))
-    built.append(build_sitemap_xml(locations))
-    print("Built contact + about + locations + sitemap")
-
-    print("Total files written: %d" % len(built))
+    built = [build_homepage()]
+    built += [build_service_page(k) for k in ALL_SERVICE_SLUGS]
+    built += [build_location_page(loc, i) for i, loc in enumerate(locations)]
+    built += [build_services_page(), build_industries_page(), build_contact_page(), build_about_page(),
+              build_locations_page(locations), build_blog_index()]
+    built += [build_blog_post(p) for p in BLOG_POSTS]
+    built += [build_privacy_page(), build_404_page(), build_sitemap_page(locations), build_sitemap_xml(locations)]
+    print("Built %d files (%d services, %d locations, %d posts)" % (len(built), len(ALL_SERVICE_SLUGS), len(locations), len(BLOG_POSTS)))
 
 if __name__ == "__main__":
     main()

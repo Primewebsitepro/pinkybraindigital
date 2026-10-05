@@ -1,69 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Us | Pinky Brain Digital</title>
-<meta name="description" content="Digital is complicated. Trust shouldn't be. Meet Pinky Brain Digital and the approach behind every project we take on.">
-<link rel="canonical" href="https://pinkybraindigital.com/about-us/">
-<link rel="icon" href="images/favicon-32.png" sizes="32x32">
-<link rel="icon" href="images/favicon-192.png" sizes="192x192">
+<meta name="description" content="Digital is complicated. Trust shouldn’t be. Meet Pinky Brain Digital and the honest, flexible, long-term approach behind every project.">
+<link rel="canonical" href="https://pinkybraindigital.com/about-us.html">
+<meta name="theme-color" content="#01265A">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pinky Brain Digital">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="About Us | Pinky Brain Digital">
+<meta property="og:description" content="Digital is complicated. Trust shouldn’t be. Meet Pinky Brain Digital and the honest, flexible, long-term approach behind every project.">
+<meta property="og:url" content="https://pinkybraindigital.com/about-us.html">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="images/favicon-32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="images/favicon-192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="images/favicon-180.png">
+<link rel="preload" href="assets/fonts/general-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/general-sans-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
+<a class="pb-skip" href="#main">Skip to main content</a>
 
 <header class="pb-header">
   <div class="pb-wrap pb-header__bar">
-    <a class="pb-header__logo" href="index.html">
-      <img src="images/logo.png" alt="Pinky Brain Digital logo" width="192" height="64">
+    <a class="pb-header__logo" href="index.html" aria-label="Pinky Brain Digital, home">
+      <img src="images/logo.png" alt="Pinky Brain Digital" width="192" height="64">
     </a>
-    <nav class="pb-nav" aria-label="Primary">
+    <nav class="pb-nav" aria-label="Main">
       <ul class="pb-nav__list">
-        <li><a href="seo-services.html">SEO Services</a></li>
-        <li><a href="website-design.html">Website Design</a></li>
-        <li><a href="social-media.html">Social Media</a></li>
-        <li class="pb-has-sub">
-          <a href="index.html#pbs-services">Digital Marketing <svg class="pb-i" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
-          <div class="pb-nav__sub"><a href="e-commerce-websites-design.html">E-commerce Websites</a><a href="aeo-ai-search.html">AEO (AI Search)</a><a href="ppc-digital-advertising.html">PPC & Digital Advertising</a><a href="google-ads.html">Google Ads</a></div>
+        <li class="pb-has-mega">
+          <a href="services.html">Services</a>
+          <button type="button" class="pb-nav__toggle" aria-expanded="false" aria-controls="pb-mega" aria-label="Show the services menu"><svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="pb-mega" id="pb-mega">
+            <div class="pb-mega__panel">
+              <div class="pb-mega__grid"><div class="pb-mega__group"><p class="pb-mega__title">Search &amp; Advertising</p><ul><li><a href="seo-services.html">SEO Services</a></li><li><a href="aeo-ai-search.html">AEO (AI Search)</a></li><li><a href="local-seo.html">Local SEO &amp; Google Profile</a></li><li><a href="ppc-digital-advertising.html">PPC &amp; Digital Advertising</a></li><li><a href="google-ads.html">Google Ads</a></li></ul></div><div class="pb-mega__group"><p class="pb-mega__title">Websites &amp; Apps</p><ul><li><a href="website-design.html">Website Design</a></li><li><a href="e-commerce-websites-design.html">E-commerce Websites</a></li><li><a href="app-development.html">Web &amp; Mobile Apps</a></li><li><a href="custom-software.html">Custom Software</a></li></ul></div><div class="pb-mega__group"><p class="pb-mega__title">Marketing</p><ul><li><a href="social-media.html">Social Media Marketing</a></li><li><a href="content-marketing.html">Content Marketing</a></li><li><a href="email-marketing.html">Email Marketing</a></li><li><a href="lead-generation.html">Lead Generation</a></li></ul></div><div class="pb-mega__group"><p class="pb-mega__title">Branding &amp; Creative</p><ul><li><a href="branding.html">Branding &amp; Identity</a></li><li><a href="graphic-design.html">Graphic Design</a></li><li><a href="video-photography.html">Video &amp; Photography</a></li><li><a href="copywriting.html">Copywriting</a></li></ul></div><div class="pb-mega__group"><p class="pb-mega__title">Automation &amp; Security</p><ul><li><a href="ai-automation.html">AI Automation &amp; Chatbots</a></li><li><a href="crm.html">CRM Setup &amp; Integration</a></li><li><a href="cyber-security.html">Cyber Security</a></li><li><a href="website-maintenance.html">Website Care &amp; Hosting</a></li></ul></div><div class="pb-mega__group"><p class="pb-mega__title">Digital Consulting</p><ul><li><a href="digital-consulting.html">Digital Consulting</a></li></ul></div></div>
+              <div class="pb-mega__foot"><span>Not sure what you need? We&rsquo;ll point you in the right direction.</span><a class="pb-link" href="services.html">Explore our services <svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            </div>
+          </div>
         </li>
         <li><a href="locations.html">Locations</a></li>
-        <li><a href="about-us.html">About Us</a></li>
-        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about-us.html" aria-current="page">About Us</a></li>
+        <li><a href="blog.html">Insights</a></li>
       </ul>
-      <a class="pb-btn pb-btn--dark pb-nav__cta" href="contact-us.html">Book a free consultation</a>
-      <button class="pb-burger" aria-label="Open menu"><svg class="pb-i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <a class="pb-btn pb-btn--dark pb-nav__cta" href="contact-us.html">Let’s talk about your business</a>
+      <button type="button" class="pb-burger" aria-label="Open the menu" aria-expanded="false" aria-controls="pb-mobile-nav"><svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </nav>
   </div>
 </header>
-<div class="pb-mobile-nav">
+<div class="pb-mobile-nav" id="pb-mobile-nav" role="dialog" aria-modal="true" aria-label="Menu">
   <div class="pb-mobile-nav__top">
-    <a href="index.html"><img src="images/logo.png" alt="Pinky Brain Digital logo" width="138" height="46"></a>
-    <button class="pb-mobile-nav__close" aria-label="Close menu"><svg class="pb-i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <a href="index.html" aria-label="Pinky Brain Digital, home"><img src="images/logo.png" alt="Pinky Brain Digital" width="138" height="46"></a>
+    <button type="button" class="pb-mobile-nav__close" aria-label="Close the menu"><svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
   </div>
   <ul>
     <li><a href="index.html">Home</a></li>
-    <li><a href="seo-services.html">SEO Services</a></li>
-    <li><a href="website-design.html">Website Design</a></li>
-    <li><a href="social-media.html">Social Media</a></li>
-    <li><a href="index.html#pbs-services">Digital Marketing</a></li>
-    <li class="pb-mobile-sub"><a href="e-commerce-websites-design.html">E-commerce Websites</a></li><li class="pb-mobile-sub"><a href="aeo-ai-search.html">AEO (AI Search)</a></li><li class="pb-mobile-sub"><a href="ppc-digital-advertising.html">PPC & Digital Advertising</a></li><li class="pb-mobile-sub"><a href="google-ads.html">Google Ads</a></li>
+    <li><details><summary>Services</summary><div class="pb-mobile-groups"><a class="pb-mobile-all" href="services.html">All services</a><p class="pb-mobile-grouptitle">Search &amp; Advertising</p><ul><li><a href="seo-services.html">SEO Services</a></li><li><a href="aeo-ai-search.html">AEO (AI Search)</a></li><li><a href="local-seo.html">Local SEO &amp; Google Profile</a></li><li><a href="ppc-digital-advertising.html">PPC &amp; Digital Advertising</a></li><li><a href="google-ads.html">Google Ads</a></li></ul><p class="pb-mobile-grouptitle">Websites &amp; Apps</p><ul><li><a href="website-design.html">Website Design</a></li><li><a href="e-commerce-websites-design.html">E-commerce Websites</a></li><li><a href="app-development.html">Web &amp; Mobile Apps</a></li><li><a href="custom-software.html">Custom Software</a></li></ul><p class="pb-mobile-grouptitle">Marketing</p><ul><li><a href="social-media.html">Social Media Marketing</a></li><li><a href="content-marketing.html">Content Marketing</a></li><li><a href="email-marketing.html">Email Marketing</a></li><li><a href="lead-generation.html">Lead Generation</a></li></ul><p class="pb-mobile-grouptitle">Branding &amp; Creative</p><ul><li><a href="branding.html">Branding &amp; Identity</a></li><li><a href="graphic-design.html">Graphic Design</a></li><li><a href="video-photography.html">Video &amp; Photography</a></li><li><a href="copywriting.html">Copywriting</a></li></ul><p class="pb-mobile-grouptitle">Automation &amp; Security</p><ul><li><a href="ai-automation.html">AI Automation &amp; Chatbots</a></li><li><a href="crm.html">CRM Setup &amp; Integration</a></li><li><a href="cyber-security.html">Cyber Security</a></li><li><a href="website-maintenance.html">Website Care &amp; Hosting</a></li></ul><p class="pb-mobile-grouptitle">Digital Consulting</p><ul><li><a href="digital-consulting.html">Digital Consulting</a></li></ul></div></details></li>
     <li><a href="locations.html">Locations</a></li>
     <li><a href="about-us.html">About Us</a></li>
-    <li><a href="blog.html">Blog</a></li>
+    <li><a href="blog.html">Insights</a></li>
   </ul>
-  <a class="pb-btn pb-btn--dark" href="contact-us.html">Book a free consultation</a>
+  <a class="pb-btn pb-btn--dark" href="contact-us.html">Let’s talk about your business</a>
 </div>
-<div class="pb-wrap pb-crumb"><a href="index.html">Home</a><span>/</span><span style="color:var(--pb-dark);font-weight:600">About Us</span></div>
+<main id="main">
+<nav class="pb-wrap pb-crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="pb-crumb__sep" aria-hidden="true">/</span><span aria-current="page">About Us</span></nav>
 <section class="pb-hero">
   <div class="pb-wrap pb-hero__grid">
     <div>
-      <p class="pb-eyebrow">Our Approach</p>
+      <p class="pb-eyebrow">Our approach</p>
       <h1>Digital is complicated. Trust shouldn&rsquo;t be.</h1>
-      <p class="pb-lead">Just as you have a trusted accountant, mechanic or doctor, we believe every business needs a reliable digital partner &mdash; someone who understands the landscape, explains things clearly and has your best interests at heart. That&rsquo;s what we want Pinky Brain Digital to be.</p>
+      <p class="pb-lead">Just as you have a trusted accountant, mechanic or doctor, we believe every business needs a reliable digital partner: someone who understands the landscape, explains things clearly and has your best interests at heart. That&rsquo;s what we want Pinky Brain Digital to be.</p>
       <div class="pb-hero__actions">
-        <a class="pb-btn pb-btn--dark" href="contact-us.html">Book a free consultation <svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="pb-btn pb-btn--line" href="#approach-1">Read our approach</a>
+        <a class="pb-btn pb-btn--dark" href="contact-us.html">Let’s talk about your business <svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="pb-btn pb-btn--line" href="services.html">Explore our services</a>
       </div>
       <ul class="pb-hero__ticks">
         <li>Honest, plain-English advice</li>
@@ -72,14 +83,14 @@
       </ul>
     </div>
     <div class="pb-hero__media">
-      <img class="pb-hero__img" src="images/about-pinky-brain-digital-team.webp" alt="Pinky Brain Digital team working together on a client project" width="900" height="792" loading="eager" decoding="async">
+      <img class="pb-hero__img" src="images/about-pinky-brain-digital-team.webp" alt="The Pinky Brain Digital team working together on a client project" width="900" height="792" fetchpriority="high" decoding="async">
       <div class="pb-hero__badge"><div><b>Trust, always</b><span>Our promise</span></div></div>
     </div>
   </div>
 </section>
 <section class="pb-quote-band">
   <div class="pb-wrap">
-    <span class="pb-mark">&ldquo;</span>
+    <span class="pb-mark" aria-hidden="true">&ldquo;</span>
     <p>Good work. Fair advice. Clear communication. Always evolving. Long-term relationships.</p>
     <span>That&rsquo;s the Pinky Brain approach</span>
   </div>
@@ -87,9 +98,9 @@
 
 <section class="pb-approach-row" id="approach-1">
   <div class="pb-wrap pb-split">
-    <img class="pb-split__img" src="images/website-design-development-process.webp" alt="Team reviewing a client's project requirements together" loading="lazy" decoding="async">
+    <img class="pb-split__img" src="images/website-design-development-process.webp" alt="Team reviewing a client's project requirements together" width="760" height="644" loading="lazy" decoding="async">
     <div>
-      <p class="pb-approach-row__num">01 &mdash; 05</p>
+      <p class="pb-approach-row__num">01 of 05</p>
       <h2>Your needs come before our services</h2>
       <p style="margin-top:16px">We don&rsquo;t start with what we can sell you. We start with what you&rsquo;re trying to achieve. We look at what&rsquo;s important now, what can wait, what you can already manage and where you genuinely need help.</p>
       <p style="margin-top:16px">Sometimes that means working alongside your existing team. Sometimes we&rsquo;ll bring in expertise from our wider network. And sometimes we&rsquo;ll tell you that you don&rsquo;t need to spend money on something yet. If we&rsquo;re not the right people for something, we&rsquo;ll be honest about that too. We&rsquo;d rather give you the right advice than sell you the wrong service.</p>
@@ -98,9 +109,9 @@
 </section>
 <section class="pb-approach-row pb-section--tint" id="approach-2">
   <div class="pb-wrap pb-split pb-split--rev">
-    <img class="pb-split__img" src="images/ppc-digital-advertising-detail.webp" alt="A plan being built and tailored around one specific business" loading="lazy" decoding="async">
+    <img class="pb-split__img" src="images/ppc-digital-advertising-detail.webp" alt="A plan being built and tailored around one specific business" width="760" height="644" loading="lazy" decoding="async">
     <div>
-      <p class="pb-approach-row__num">02 &mdash; 05</p>
+      <p class="pb-approach-row__num">02 of 05</p>
       <h2>Built around your business</h2>
       <p style="margin-top:16px">Every business is different. We stay flexible and adapt our approach around what you actually need, rather than trying to fit you into a standard package.</p>
       <p style="margin-top:16px">As your business grows and changes, we want to grow and adapt with you.</p>
@@ -109,9 +120,9 @@
 </section>
 <section class="pb-approach-row" id="approach-3">
   <div class="pb-wrap pb-split">
-    <img class="pb-split__img" src="images/aeo-ai-search-hero.webp" alt="AI search interface representing new digital technology" loading="lazy" decoding="async">
+    <img class="pb-split__img" src="images/aeo-ai-search-hero.webp" alt="AI search interface representing new digital technology" width="760" height="644" loading="lazy" decoding="async">
     <div>
-      <p class="pb-approach-row__num">03 &mdash; 05</p>
+      <p class="pb-approach-row__num">03 of 05</p>
       <h2>Keeping you ahead</h2>
       <p style="margin-top:16px">Digital never stands still, and neither do we. We keep up with new technologies, platforms, tools and changes in the digital world so you don&rsquo;t have to.</p>
       <p style="margin-top:16px">It&rsquo;s not about following every trend. It&rsquo;s about understanding what&rsquo;s changing, what matters to your business, and helping you take advantage of the right opportunities at the right time.</p>
@@ -120,9 +131,9 @@
 </section>
 <section class="pb-approach-row pb-section--tint" id="approach-4">
   <div class="pb-wrap pb-split pb-split--rev">
-    <img class="pb-split__img" src="images/google-ads-detail.webp" alt="Performance data and reporting being reviewed openly" loading="lazy" decoding="async">
+    <img class="pb-split__img" src="images/google-ads-detail.webp" alt="Performance data and reporting being reviewed openly" width="760" height="644" loading="lazy" decoding="async">
     <div>
-      <p class="pb-approach-row__num">04 &mdash; 05</p>
+      <p class="pb-approach-row__num">04 of 05</p>
       <h2>Transparency from the start</h2>
       <p style="margin-top:16px">You should know what we&rsquo;re doing, why we&rsquo;re doing it, what it costs and how things are progressing.</p>
       <p style="margin-top:16px">We&rsquo;ll keep you updated, be open about what&rsquo;s working, and equally open when something needs to change.</p>
@@ -131,9 +142,9 @@
 </section>
 <section class="pb-approach-row" id="approach-5">
   <div class="pb-wrap pb-split">
-    <img class="pb-split__img" src="images/ecommerce-store-design-detail.webp" alt="Ongoing work being reviewed together over time" loading="lazy" decoding="async">
+    <img class="pb-split__img" src="images/ecommerce-store-design-detail.webp" alt="Ongoing work being reviewed together over time" width="760" height="644" loading="lazy" decoding="async">
     <div>
-      <p class="pb-approach-row__num">05 &mdash; 05</p>
+      <p class="pb-approach-row__num">05 of 05</p>
       <h2>Here for the long term</h2>
       <p style="margin-top:16px">We don&rsquo;t expect trust because we have a website or make promises. We have to earn it through our work, communication, transparency and the way we treat people.</p>
       <p style="margin-top:16px">We&rsquo;re not looking for a quick transaction. We want to become the digital team you trust and still want to call years from now.</p>
@@ -144,7 +155,7 @@
   <div class="pb-wrap">
     <div class="pb-section__head" style="display:block">
       <p class="pb-eyebrow">What we stand for</p>
-      <h2>The Pinky Brain approach, in five words</h2>
+      <h2>The Pinky Brain approach, in five phrases</h2>
     </div>
     <ul class="pb-values-row"><li><svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg> Good work</li><li><svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg> Fair advice</li><li><svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg> Clear communication</li><li><svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg> Always evolving</li><li><svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg> Long-term relationships</li></ul>
   </div>
@@ -154,55 +165,72 @@
   <div class="pb-wrap">
     <div class="pb-cta">
       <div class="pb-cta__solo">
-        <h2>Get in touch</h2>
-        <p><b>In a nutshell:</b> tell us about your business, and we&rsquo;ll reply within one business day with honest, straight-talking advice &mdash; not a sales pitch.</p>
+        <h2>Tell us what you want to achieve.</h2>
+        <p>Tell us about your business and what you want to achieve, and we’ll reply within one business day with honest, straight-talking advice, not a sales pitch.</p>
         <div class="pb-cta__actions">
-          <a class="pb-btn pb-btn--pink" href="contact-us.html">Contact us <svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          <a class="pb-cta__mail" href="mailto:hello@pinkybraindigital.com">or email hello@pinkybraindigital.com directly</a>
+          <a class="pb-btn pb-btn--pink" href="contact-us.html">Let’s talk about your business <svg class="pb-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="pb-btn pb-btn--ghost" href="services.html">Explore our services</a>
         </div>
+        
+        <p class="pb-cta__small">Prefer email? <a href="mailto:hello@pinkybraindigital.com">hello@pinkybraindigital.com</a></p>
       </div>
     </div>
   </div>
 </section>
 
+</main>
 <footer class="pb-footer">
-  <div class="pb-wrap">
+  <div class="pb-wrap pb-footer__top">
     <div class="pb-footer__brand">
-      <img src="images/logo.png" alt="Pinky Brain Digital logo" width="174" height="58" style="filter:brightness(0) invert(1)">
-      <p>Most businesses juggle a web designer, an SEO freelancer, a social media manager and an ads specialist, and nobody owns the results. We bring every digital discipline into one team.</p>
-      <div class="pb-footer__social">
-        <a href="#" aria-label="Facebook"><svg class="pb-i" viewBox="0 0 24 24" width="16" height="16"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H9v3h2v7h3v-7h3l1-3h-4V9c0-.6.4-1 1-1z"/></svg></a>
-        <a href="#" aria-label="X (Twitter)"><svg class="pb-i" viewBox="0 0 24 24" width="16" height="16"><path d="M4 4l16 16M20 4 4 20"/></svg></a>
-        <a href="#" aria-label="YouTube"><svg class="pb-i" viewBox="0 0 24 24" width="16" height="16"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="m10 9 5 3-5 3z"/></svg></a>
-      </div>
+      <img src="images/logo.png" alt="Pinky Brain Digital" width="174" height="58" style="filter:brightness(0) invert(1)">
+      <p>One trusted digital team for your website, search, advertising, social media and AI, built around your business and your goals.</p>
+      
     </div>
-    <div>
-      <h4>Services</h4>
-      <ul><li><a href="seo-services.html">SEO Services</a></li><li><a href="website-design.html">Website Design</a></li><li><a href="e-commerce-websites-design.html">E-commerce Websites</a></li><li><a href="aeo-ai-search.html">AEO (AI Search)</a></li><li><a href="ppc-digital-advertising.html">PPC & Digital Advertising</a></li><li><a href="social-media.html">Social Media Marketing</a></li><li><a href="google-ads.html">Google Ads</a></li></ul>
-    </div>
-    <div>
-      <h4>Company</h4>
+    <nav aria-label="Services">
+      <p class="pb-footer__h">Services</p>
+      <ul><li><a href="seo-services.html">SEO Services</a></li><li><a href="website-design.html">Website Design</a></li><li><a href="e-commerce-websites-design.html">E-commerce Websites</a></li><li><a href="aeo-ai-search.html">AEO (AI Search)</a></li><li><a href="ppc-digital-advertising.html">PPC &amp; Digital Advertising</a></li><li><a href="social-media.html">Social Media Marketing</a></li><li><a href="google-ads.html">Google Ads</a></li><li><a href="services.html">All services</a></li></ul>
+    </nav>
+    <nav aria-label="Company">
+      <p class="pb-footer__h">Company</p>
       <ul>
         <li><a href="about-us.html">About Us</a></li>
-        <li><a href="index.html#pbs-industries">Industries</a></li>
+        <li><a href="industries.html">Industries</a></li>
         <li><a href="locations.html">Locations</a></li>
-        <li><a href="blog.html">Blog</a></li>
+        <li><a href="blog.html">Insights</a></li>
         <li><a href="index.html#pbs-faq">FAQs</a></li>
         <li><a href="contact-us.html">Contact Us</a></li>
-        <li><a href="sitemap.html">Sitemap</a></li>
       </ul>
-    </div>
+    </nav>
     <div>
-      <h4>Get In Touch</h4>
-      <ul>
-        <li>International House, 109–111 Fulham Palace Road, London, W6 8JA</li>
-        <li><a href="mailto:hello@pinkybraindigital.com">hello@pinkybraindigital.com</a></li>
-      </ul>
+      <p class="pb-footer__h">Get in touch</p>
+      <address>International House, 109–111 Fulham Palace Road, London, W6 8JA<br><a href="mailto:hello@pinkybraindigital.com">hello@pinkybraindigital.com</a></address>
     </div>
   </div>
   <div class="pb-wrap pb-footer__bottom">
-    <span>&copy; 2026 All Rights Reserved to Pinky Brain Digital</span>
+    <span>&copy; 2026 Pinky Brain Digital. All rights reserved.</span>
+    <ul>
+      <li><a href="privacy-policy.html">Privacy Policy</a></li>
+      <li><a href="sitemap.html">Sitemap</a></li>
+    </ul>
   </div>
 </footer>
-<script src="assets/js/site.js"></script>
+<script src="assets/js/site.js" defer></script>
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Organization",
+ "name": "Pinky Brain Digital",
+ "url": "https://pinkybraindigital.com/",
+ "logo": "https://pinkybraindigital.com/images/logo.png",
+ "email": "hello@pinkybraindigital.com",
+ "address": {
+  "@type": "PostalAddress",
+  "streetAddress": "International House, 109–111 Fulham Palace Road",
+  "addressLocality": "London",
+  "postalCode": "W6 8JA",
+  "addressCountry": "GB"
+ }
+}
+</script>
 </body></html>
