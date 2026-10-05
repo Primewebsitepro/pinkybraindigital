@@ -334,7 +334,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
    SITEMAP
 ========================================================= */
 .pb-sitemap-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px}
-.pb-sitemap-grid h3{font-family:var(--pb-font-head);font-size:1.05rem;font-weight:700;margin-bottom:14px;color:var(--pb-dark)}
+.pb-sitemap-grid h2,.pb-sitemap-grid h3{font-family:var(--pb-font-head);font-size:18px;line-height:1.3;font-weight:700;margin-bottom:14px;color:var(--pb-dark)}
 .pb-sitemap-grid ul{display:flex;flex-direction:column;gap:8px}
 .pb-sitemap-grid a{font-size:.92rem;color:var(--pb-body)}
 .pb-sitemap-grid a:hover{color:var(--pb-pink)}
