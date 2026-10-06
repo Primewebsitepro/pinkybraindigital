@@ -2223,10 +2223,10 @@ def build_about_page():
 # BUILD: LOCATIONS PAGE
 # ---------------------------------------------------------------------------
 LOCATIONS_REGIONS = [
-    ("UK", "United Kingdom", "Our home market, with local pages for the major cities across England."),
-    ("Europe", "Europe", "Websites and search visibility for the European market, with local and legal requirements in mind."),
-    ("USA", "United States", "Local expertise across the US’s biggest business hubs, from the East Coast to the West."),
-    ("Canada", "Canada", "Support for businesses across Canada’s largest cities."),
+    ("UK", "United Kingdom", "Our home market. We work with businesses nationwide, from our London base to every region of the UK."),
+    ("Europe", "Europe", "Websites and search visibility for businesses across Europe, with local and legal requirements in mind."),
+    ("USA", "United States", "Support for businesses across the whole of the USA, from the East Coast to the West."),
+    ("Canada", "Canada", "Support for businesses right across Canada, coast to coast."),
 ]
 
 def build_locations_page(locations):
@@ -2248,12 +2248,12 @@ def build_locations_page(locations):
 <section class="pb-section%s">
   <div class="pb-wrap">
     <div class="pb-section__head">
-      <div><p class="pb-eyebrow">%d %s</p><h2>%s</h2></div>
+      <div><h2>%s</h2></div>
       <p>%s</p>
     </div>
     <div class="pb-grid-4">%s</div>
   </div>
-</section>""" % (" pb-section--tint" if alt.next() else "", len(cities), "city" if len(cities) == 1 else "cities", label, blurb, "".join(cards)))
+</section>""" % (" pb-section--tint" if alt.next() else "", label, blurb, "".join(cards)))
     out = [
         head_html(root, "Locations We Cover | Pinky Brain Digital",
                   "Website design and SEO for businesses across the UK, Europe, the United States and Canada, plus international clients. Find your city.",
@@ -2265,7 +2265,7 @@ def build_locations_page(locations):
   <div class="pb-wrap pb-narrow">
     <p class="pb-eyebrow">Where we work</p>
     <h1>Locations we cover</h1>
-    <p class="pb-lead">We work with businesses across the UK, Europe, the United States and Canada, and with international clients remotely. Choose your city to see how we help businesses like yours locally.</p>
+    <p class="pb-lead">We work with businesses nationwide across the UK, and across Europe, the United States and Canada, as well as with international clients remotely. The places below are a few of the areas we work in most often; wherever you are, we can help.</p>
   </div>
 </section>""",
         "".join(blocks),
