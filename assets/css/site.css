@@ -447,3 +447,64 @@ b,strong{font-weight:600}
 h1,h2,h3,h4{color:var(--pb-dark)}
 .pb-footer h1,.pb-footer h2,.pb-footer h3,.pb-footer h4,.pb-cta h1,.pb-cta h2,.pb-cta h3,.pb-quote-band h2{color:#fff}
 small,.pb-meta,.pb-post-card__meta,.pb-breadcrumb{color:var(--pb-muted)}
+
+/* ---- Homepage free-offer calls to action ---- */
+.pb-freelinks{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;margin-top:22px;font-size:.95rem;color:var(--pb-muted)}
+.pb-freelinks span{font-weight:600;color:var(--pb-dark)}
+.pb-freelinks a{display:inline-flex;align-items:center;min-height:44px;padding:8px 18px;border-radius:999px;border:1.5px solid var(--pb-pink);background:var(--pb-pink-soft);color:#B0154F;font-weight:600;transition:background .2s ease,color .2s ease}
+.pb-freelinks a:hover{background:var(--pb-pink);color:#fff}
+.pb-freeband{background:var(--pb-slate);color:#fff;padding-block:clamp(40px,5vw,64px)}
+.pb-freeband__inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:28px 48px}
+.pb-freeband__inner > div:first-child{flex:1 1 440px;max-width:680px}
+.pb-freeband__eyebrow{margin-bottom:10px;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#FFAFCC}
+.pb-freeband h2{color:#fff;font-size:clamp(1.6rem,2.8vw,2.3rem);line-height:1.15;letter-spacing:-.02em;margin-bottom:12px}
+.pb-freeband p:not(.pb-freeband__eyebrow){color:rgba(255,255,255,.85);max-width:56ch}
+.pb-freeband__actions{display:flex;flex-wrap:wrap;gap:12px}
+@media (max-width:640px){.pb-freeband__actions{width:100%;flex-direction:column}.pb-freeband__actions .pb-btn{width:100%}}
+
+/* ---- WhatsApp sticky button (icon only) ---- */
+.pb-whatsapp{position:fixed;right:20px;bottom:20px;z-index:90;display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;background:#128C4A;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.22);transition:transform .2s ease,background .2s ease}
+.pb-whatsapp:hover{background:#0E7A40;transform:translateY(-2px)}
+.pb-whatsapp:focus-visible{outline:2px solid #fff;outline-offset:-5px;box-shadow:0 0 0 3px #01265A}
+@media (max-width:640px){.pb-whatsapp{right:14px;bottom:14px}}
+@media print{.pb-whatsapp{display:none}}
+.pb-freelinks span{flex-basis:100%;margin-bottom:2px}
+
+/* ---- Homepage: shorter, more compact on phones ---- */
+@media (max-width:640px){
+  section.pbs-about,section.pbs-services,section.pbs-industries,section.pbs-why,section.pbs-faq,
+  section.pbd-testimonials,section.pbs-stats{padding-block:44px}
+  #free-reviews,.pb-section:has(.pb-post-card){padding-block:44px}
+  /* hero: keep the message and the calls to action, drop decoration */
+  body .pbs-hero .pbs-float,body .pbs-hero .pbs-platforms,body .pbs-hero .pbs-ticks{display:none}
+  body .pbs-hero .pbs-hero__img{max-height:280px;object-fit:cover;width:100%}
+  .pb-freeband{padding-block:32px}
+  .pb-freeband p:not(.pb-freeband__eyebrow){display:none}
+  /* about */
+  body .pbs-about .pbs-about__inset,body .pbs-about .pbs-about__badge,body .pbs-about .pbs-feat{display:none}
+  body .pbs-about .pbs-about__main{max-height:260px;object-fit:cover;width:100%}
+  /* services: names only, tap through for detail */
+  body .pbs-services .pbs-svc__nut{display:none}
+  body .pbs-services .pbs-svc{padding:18px}
+  body .pbs-services .pbs-svc__item{padding-block:9px}
+  /* industries */
+  body .pbs-industries .pbs-lux__media,body .pbs-industries .pbs-lux__chips,body .pbs-industries .pbs-lux__row p{display:none}
+  body .pbs-industries .pbs-sme img,body .pbs-industries .pbs-sme p{display:none}
+  body .pbs-industries .pbs-sme-grid{grid-template-columns:1fr 1fr;gap:10px}
+  /* swipeable rows instead of long stacks */
+  .pb-offers,.pb-post-card:first-child{scroll-snap-type:x mandatory}
+  #free-reviews .pb-offers{display:flex;gap:12px;overflow-x:auto;padding-bottom:10px;-webkit-overflow-scrolling:touch}
+  #free-reviews .pb-offer{flex:0 0 82%;scroll-snap-align:start}
+  /* faq: the first four questions are enough */
+  body .pbs-faq details:nth-of-type(n+5){display:none}
+  /* why us: compact two-column tiles for the supporting points */
+  body .pbs-why .pbs-markets{padding:16px;margin-top:20px}
+  body .pbs-why .pbs-why__items{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  body .pbs-why .pbs-why__item--wide{grid-column:1 / -1}
+  body .pbs-why .pbs-why__item:not(.pbs-why__item--wide){padding:14px;display:flex;flex-direction:column;gap:8px}
+  body .pbs-why .pbs-why__item:not(.pbs-why__item--wide) h3{font-size:.95rem;line-height:1.25}
+  /* insights: swipeable, no tall images */
+  .pb-blog-grid{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px}
+  .pb-blog-grid .pb-post-card{flex:0 0 82%;scroll-snap-align:start}
+  .pb-blog-grid .pb-post-card img{max-height:150px;object-fit:cover}
+}

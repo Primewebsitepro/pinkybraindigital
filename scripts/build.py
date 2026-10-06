@@ -169,7 +169,7 @@ SERVICES = {
         ],
         "faq": [
             ("How long does it take to build an e-commerce website?", "Most online stores take around 6&ndash;10 weeks from approved design to launch, depending on the number of products, integrations (payments, shipping, stock) and how much content is ready. You&rsquo;ll get a clear timeline in your proposal."),
-            ("Which platform do you build on &mdash; WooCommerce or Shopify?", "We recommend the platform that fits your products, budget and how you want to manage the store. WooCommerce suits businesses that want full control on WordPress; Shopify suits those who want a simple, hosted setup. We&rsquo;ll explain the trade-offs in plain English before you decide."),
+            ("Which platform do you build on &mdash; WooCommerce or Shopify?", "We recommend the platform that fits your products, budget and how you want to manage the store. WooCommerce suits businesses that want full control on WordPress; Shopify suits those who want a simple, hosted setup. We&rsquo;ll walk you through the trade-offs before you decide."),
             ("Can my store sell to customers in the UK, Europe, the USA and Canada?", "Yes. We can set up multiple currencies, shipping zones, tax and VAT options and the payment methods customers expect in each market. Tax rules vary by country, so we&rsquo;ll always suggest confirming the details with your accountant."),
             ("Will I be able to manage products and orders myself?", "Yes. We build the store so you can add products, change prices, manage stock and process orders without a developer, and we&rsquo;ll show you how during a handover session."),
             ("Can you help with product photos and descriptions?", "We can guide you on the images and descriptions that sell best, and help write or edit product copy. If you&rsquo;d like us to handle it, we&rsquo;ll include it in your quote."),
@@ -188,8 +188,8 @@ SERVICES = {
         "eyebrow": "Services · SEO Services",
         "h1": "SEO that puts your business in front of customers ready to buy",
         "lead": "we help your business rank higher, get seen by the right people and turn that visibility into enquiries, customers and growth.",
-        "meta": "SEO services for better rankings, more visibility, relevant traffic and more enquiries. Technical, content and local SEO with plain-English reporting.",
-        "ticks": ["Technical, local & content SEO", "Plain-English monthly reports", "Ranking in UK, Europe, USA & Canada"],
+        "meta": "SEO services for better rankings, more visibility, relevant traffic and more enquiries. Technical, content and local SEO with comprehensive reporting.",
+        "ticks": ["Technical, local & content SEO", "Comprehensive monthly reports", "Ranking in UK, Europe, USA & Canada"],
         "badge": ("What we improve", "Technical &middot; Content &middot; Local", ""),
         "hero_img": "seo-services-hero.webp",
         "hero_alt": "SEO services dashboard showing search rankings improving",
@@ -199,7 +199,7 @@ SERVICES = {
         "why_cards": [
             ("Better rankings. More visibility. More opportunities to grow.", "We care about the complete result: higher rankings and visibility, relevant traffic, enquiries, customers and, ultimately, growth for your business. We report on all of it, not just a list of keywords."),
             ("We tell you what&rsquo;s realistic.", "Some searches can be won in months, others take a year or more. We show you which is which before you commit."),
-            ("No secret tricks.", "We don&rsquo;t buy spammy links or hide behind jargon. Everything we do follows Google&rsquo;s guidelines, and we explain it in plain English."),
+            ("No secret tricks.", "We don&rsquo;t buy spammy links or hide behind jargon. Everything we do follows Google&rsquo;s guidelines, and we explain it clearly."),
             ("Reports you&rsquo;ll actually read.", "A short monthly summary of what we did, what changed and what happens next &mdash; no 40-page data dumps."),
         ],
         "core_title": "Four things that decide whether Google sends you customers.",
@@ -234,7 +234,7 @@ SERVICES = {
             ("Can you guarantee first-page rankings?", "No &mdash; and be cautious of any agency that does. Nobody outside Google controls its results. What we can do is follow best practice, focus on the searches most likely to bring customers and report honestly on progress."),
             ("Can you help my business rank in more than one country?", "Yes. We work with businesses across the UK, Europe, the USA and Canada, and adapt keywords, spelling, local listings and location pages for each market you want to reach."),
             ("What&rsquo;s the difference between SEO and local SEO?", "SEO helps your website rank for searches anywhere. Local SEO focuses on &ldquo;near me&rdquo; and city-based searches and your Google Business Profile, which matters most if customers visit you or you serve a specific area."),
-            ("Will I get reports I can understand?", "Yes. Every month you&rsquo;ll receive a plain-English report covering what we did, how your visibility and enquiries changed and what&rsquo;s planned next."),
+            ("Will I get reports I can understand?", "Yes. Every month you&rsquo;ll receive a comprehensive report covering what we did, how your visibility and enquiries changed and what&rsquo;s planned next."),
         ],
         "cta_intro": "tell us about your website and who you want to reach, and we&rsquo;ll reply within one business day with honest next steps.",
         "cta_points": [
@@ -271,7 +271,7 @@ SERVICES = {
             ("Answer-ready content", "We rewrite and structure your pages to answer the questions customers really ask, in clear, direct language that AI tools can quote."),
             ("Structured data and schema", "We add behind-the-scenes markup that tells search engines and AI tools exactly who you are, what you offer and where you operate."),
             ("Brand and entity consistency", "We make sure your business name, services, locations and details match across your website, profiles and directories, so AI tools describe you correctly."),
-            ("AI visibility tracking", "We check how your brand appears in AI answers for the questions that matter, and report changes in plain English."),
+            ("AI visibility tracking", "We check how your brand appears in AI answers for the questions that matter, and report every change in full."),
         ],
         "g3_numbered": True,
         "g3_title": "How We Make Your Brand AI-Ready",
@@ -302,7 +302,7 @@ SERVICES = {
         "cta_points": [
             ("We reply within 1 business day", "A real person reads your message and comes back with a few questions about your business and customers."),
             ("A short AI search call", "15&ndash;20 minutes on the questions your customers ask and where you&rsquo;d like to appear."),
-            ("A plain-English plan", "What we&rsquo;d change, in what order, and how we&rsquo;d measure whether it&rsquo;s working."),
+            ("A comprehensive plan", "What we&rsquo;d change, in what order, and how we&rsquo;d measure whether it&rsquo;s working."),
         ],
     },
     "ppc-digital-advertising": {
@@ -448,7 +448,7 @@ SERVICES = {
             ("Google&rsquo;s defaults aren&rsquo;t built around you.", "Automated suggestions often push you to spend more. We manage the account around your goals, not the platform&rsquo;s default settings."),
             ("Every click is accounted for.", "We set up tracking first, so you know which keywords, ads and campaigns lead to enquiries &mdash; and which just cost money."),
             ("Intent matters more than volume.", "We target searches from people ready to act and block irrelevant ones, so your budget goes to customers rather than curiosity."),
-            ("Honest fees, honest reporting.", "You&rsquo;ll see your ad spend, our fee and your results in one plain-English report &mdash; no hidden charges, no jargon."),
+            ("Honest fees, honest reporting.", "You&rsquo;ll see your ad spend, our fee and your results in one comprehensive report &mdash; no hidden charges, no jargon."),
         ],
         "core_title": "What we set up, fix and manage in your account.",
         "core_sub": "Account structure, keywords, landing pages and tracking, all handled.",
@@ -733,7 +733,7 @@ EXTRA_SERVICES = {
             ("Genuinely Useful", "Every email offers something worth opening, not just a sales pitch."),
             ("Properly Segmented", "The right message reaches the right group, not your whole list every time."),
             ("Mobile-Friendly Design", "Emails that look clean and work properly on a phone, where most people read them."),
-            ("Clear Reporting", "You see opens, clicks and sales attributed back to email, in plain English."),
+            ("Clear Reporting", "You see opens, clicks and sales attributed back to email, in full."),
         ],
         "faq": [
             ("What email platform do you use?", "We work with popular platforms such as Mailchimp, Klaviyo and HubSpot, and recommend the one that fits your budget and CRM."),
@@ -1091,9 +1091,9 @@ EXTRA_SERVICES = {
         "slug": "cyber-security", "nav_label": "Cyber Security", "name": "Cyber Security",
         "eyebrow": "Services · Cyber Security",
         "h1": "Protect your website and customer data from hackers and downtime",
-        "lead": "we protect your website and customer data from hackers and downtime, with plain-English advice rather than scare tactics.",
-        "meta": "Cyber security for websites and customer data - monitoring, hardening and plain-English advice, not scare tactics.",
-        "ticks": ["Security monitoring &amp; hardening", "Backups &amp; recovery plans", "Plain-English advice"],
+        "lead": "we protect your website and customer data from hackers and downtime, with expert advice rather than scare tactics.",
+        "meta": "Cyber security for websites and customer data - monitoring, hardening and expert advice, not scare tactics.",
+        "ticks": ["Security monitoring &amp; hardening", "Backups &amp; recovery plans", "Expert advice"],
         "badge": ("Monitored", "Around the clock", ""),
         "hero_img": "website-design-service-hero.webp", "hero_alt": "Website security dashboard shown on a laptop",
         "split_img": "aeo-ai-search-detail.webp", "split_alt": "Security review being carried out on a website",
@@ -1101,13 +1101,13 @@ EXTRA_SERVICES = {
         "why_cards": [
             ("Most attacks target easy targets, not big ones.", "Automated attacks scan for unpatched, poorly configured websites &mdash; size rarely matters."),
             ("Downtime costs more than the fix.", "Lost trading time and reputation damage usually outweigh the cost of proper prevention."),
-            ("We explain risk in plain English.", "No scare tactics or jargon &mdash; just a clear view of your actual risk and what to do about it."),
+            ("We explain risk clearly.", "No scare tactics or jargon &mdash; just a clear view of your actual risk and what to do about it."),
             ("Prevention is cheaper than recovery.", "Ongoing monitoring and backups cost far less than recovering from a serious breach."),
         ],
         "core_title": "What we cover.", "core_sub": "The essentials that keep your website and data safe.",
         "core_intro": "We combine monitoring, hardening and backups so problems get caught before they become disasters.",
         "core_cards": [
-            ("Security audits", "A clear review of your current risks, in plain English, with a prioritised action plan."),
+            ("Security audits", "A clear review of your current risks, in full, with a prioritised action plan."),
             ("Website hardening", "Firewalls, malware scanning and configuration fixes that close common attack routes."),
             ("Backups &amp; recovery", "Regular, tested backups so you can recover quickly if the worst happens."),
             ("Ongoing monitoring", "Continuous monitoring that flags issues before they become serious problems."),
@@ -1122,7 +1122,7 @@ EXTRA_SERVICES = {
         ],
         "g4_title": "Security That Doesn&rsquo;t Get in Your Way", "g4_intro": "Good security should be invisible day-to-day, and obvious the moment it&rsquo;s needed.",
         "g4_cards": [
-            ("Plain-English Reporting", "You understand your risk without needing a technical background."),
+            ("Comprehensive Reporting", "You understand your risk without needing a technical background."),
             ("Proactive, Not Reactive", "We aim to catch issues before they become incidents."),
             ("Tested Backups", "Backups are actually tested, not just taken and forgotten."),
             ("Fast Response", "If something does happen, we respond quickly to limit the damage."),
@@ -1142,7 +1142,7 @@ EXTRA_SERVICES = {
         "h1": "We keep your site fast, updated and online, so you don&rsquo;t have to",
         "lead": "we keep your site fast, updated, backed up and online, so you don’t have to think about it.",
         "meta": "Website care plans and hosting - updates, backups, speed and uptime monitoring, so your site is always looked after.",
-        "ticks": ["Managed hosting", "Updates &amp; backups handled", "Fast, plain-English support"],
+        "ticks": ["Managed hosting", "Updates &amp; backups handled", "Fast, responsive support"],
         "badge": ("Uptime", "Monitored 24/7", ""),
         "hero_img": "website-design-development-process.webp", "hero_alt": "Website hosting and maintenance dashboard",
         "split_img": "homepage-hero-digital-agency-team.webp", "split_alt": "Support team monitoring website performance",
@@ -1190,8 +1190,8 @@ EXTRA_SERVICES = {
         "eyebrow": "Services · Digital Consulting",
         "h1": "Not sure what you actually need? Let&rsquo;s find out, honestly",
         "lead": "not sure what you actually need? We look at your website and marketing, then tell you plainly where your money is best spent and what can wait.",
-        "meta": "Digital consulting - a plain-English review of your website and marketing, with a prioritised, honest plan.",
-        "ticks": ["Plain-English review", "Prioritised plan with costs", "No jargon, no obligation"],
+        "meta": "Digital consulting - a comprehensive review of your website and marketing, with a prioritised, honest plan.",
+        "ticks": ["Comprehensive review", "Prioritised plan with costs", "No jargon, no obligation"],
         "badge": ("Delivered", "A clear, honest plan", ""),
         "hero_img": "homepage-hero-digital-agency-team.webp", "hero_alt": "Digital strategy consultation in progress",
         "split_img": "about-pinky-brain-digital-team.webp", "split_alt": "Consultant reviewing a website and marketing plan",
@@ -1220,7 +1220,7 @@ EXTRA_SERVICES = {
         ],
         "g4_title": "Advice You Can Actually Use", "g4_intro": "A good consultation leaves you clearer, not more confused.",
         "g4_cards": [
-            ("Plain English, Always", "No jargon &mdash; just a clear explanation of what matters and why."),
+            ("Clear Guidance, Always", "No jargon &mdash; just a clear explanation of what matters and why."),
             ("Honest Prioritisation", "We tell you what to do first, and what genuinely can wait."),
             ("Costed Recommendations", "Every suggestion comes with a realistic sense of cost and effort."),
             ("No Pressure", "You&rsquo;re free to use the plan however, and with whoever, you choose."),
@@ -1483,6 +1483,9 @@ def footer_html(root, scripts=""):
     </ul>
   </div>
 </footer>
+<a class="pb-whatsapp" href="https://wa.me/447436236290?text=Hi%%20Pinky%%20Brain%%20Digital%%2C%%20I%%27d%%20like%%20to%%20talk%%20about%%20my%%20business." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><path fill="#fff" d="M16.04 3C9.4 3 4 8.38 4 15.01c0 2.12.56 4.19 1.61 6.01L4 29l8.17-1.57a12.03 12.03 0 0 0 3.87.64C22.68 28.07 28 22.69 28 16.06 28 9.4 22.7 3 16.04 3Zm0 22.03c-1.2 0-2.38-.27-3.45-.78l-.5-.24-4.85.93.95-4.72-.27-.52a9.1 9.1 0 0 1-1.35-4.7c0-5.04 4.1-9.14 9.15-9.14 5.04 0 9.14 4.1 9.14 9.14 0 5.05-4.1 9.03-8.82 9.03Zm5.02-6.85c-.28-.14-1.63-.8-1.88-.9-.25-.09-.44-.14-.62.14-.18.27-.71.9-.87 1.08-.16.18-.32.2-.6.07-.27-.14-1.16-.43-2.2-1.36-.81-.72-1.36-1.62-1.52-1.89-.16-.27-.02-.42.12-.56.12-.12.27-.32.4-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.62-1.5-.85-2.05-.22-.54-.45-.46-.62-.47h-.53c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29s.98 2.66 1.12 2.84c.14.18 1.93 2.95 4.68 4.13.65.28 1.16.45 1.56.58.66.21 1.25.18 1.72.11.52-.08 1.63-.67 1.86-1.31.23-.64.23-1.19.16-1.31-.07-.11-.25-.18-.53-.32Z"/></svg>
+</a>
 <script src="%(root)sassets/js/site.js" defer></script>
 %(scripts)s
 """ % {"root": root, "services_links": services_links, "social": social, "address": SITE_ADDRESS,
@@ -1759,7 +1762,7 @@ PROCESS_INTROS = {
     "seo-services": [
         "Good SEO is a long-term asset, so we follow a clear process that builds search performance month after month.",
         "SEO works best when it is steady and measured, so every client gets the same clear, staged process.",
-        "We keep SEO simple and transparent, with clear steps and a plain-English update after each one.",
+        "We keep SEO simple and transparent, with clear steps and a clear update after each one.",
     ],
 }
 
@@ -1787,7 +1790,11 @@ def build_location_page(loc, idx):
         verb = "We build " if web else "We focus on "
         sector_cards.append((sec, verb + note))
 
+    london_regions = ("Central, North, South, East, West and South West London, as well as Surrey and Hertfordshire (within 25 miles) "
+                      "and the Kent and Essex borders")
     local_faq = [
+        ("Do you only work with businesses in Central London?", "No. We work with businesses across %s. We usually work remotely by video call and email, and can arrange to meet where it makes sense." % london_regions)
+        if city == "London" else
         ("Do you only work with businesses in central %s?" % city,
          "No. We work with businesses across %s and the surrounding area, including %s. We usually work remotely by video call and email, and can arrange to meet where it makes sense." % (city, join_list(areas[:4]))),
         ("What kinds of businesses do you work with in %s?" % city,
@@ -1831,12 +1838,9 @@ def build_location_page(loc, idx):
       <div><p class="pb-eyebrow">%(city)s</p><h2>%(h2)s</h2></div>
       <div><p>%(intro)s</p><p>%(note)s</p><p>%(more)s</p></div>
     </div>
-    <p class="pb-areas-label">Areas we serve around %(city)s</p>
-    <ul class="pb-chips">%(chips)s</ul>
   </div>
 </section>
-""" % {"tint": " pb-section--tint" if alt.next() else "", "city": city, "h2": h2, "intro": prof["intro"], "note": local_note, "more": prof["more"],
-       "chips": "".join("<li>%s</li>" % cap_first(a) for a in areas)},
+""" % {"tint": " pb-section--tint" if alt.next() else "", "city": city, "h2": h2, "intro": prof["intro"], "note": local_note, "more": prof["more"]},
         render_section("Who we help in %s" % city, "Businesses we work with in %s" % city,
                        sector_intro, sector_cards, CORE_ICONS, tint=alt.next()),
         render_section("Our process", process_title, pintro, psteps, STEP_ICONS, tint=alt.next(), numbered=True),
@@ -1915,6 +1919,7 @@ def build_homepage():
     assert faq_marker in frag, "faq marker missing"
     frag = frag.replace(faq_marker, render_free_offers("") + render_blog_teaser() + faq_marker, 1)
 
+
     frag = re.sub(r"<!--.*?-->", "", frag, flags=re.S)
     frag = _fix_text_nodes(frag)
 
@@ -1934,7 +1939,7 @@ GROUP_INTROS = {
     "Marketing": "Social, content, email and lead generation that build visibility, engagement and a steady flow of enquiries.",
     "Branding & Creative": "Identity, design, photography and writing that make your business look and sound established.",
     "Automation & Security": "Smart tools, tidy systems and solid protection that save time and keep your business safe.",
-    "Digital Consulting": "Not sure where to start? Honest, plain-English advice on where your money is best spent.",
+    "Digital Consulting": "Not sure where to start? Honest, expert advice on where your money is best spent.",
 }
 GROUP_ICONS = {"Search & Advertising": "search", "Websites & Apps": "doc", "Marketing": "growth",
                "Branding & Creative": "target", "Automation & Security": "shield", "Digital Consulting": "users"}
@@ -1961,7 +1966,7 @@ def build_services_page():
 </section>""" % (" pb-section--tint" if alt.next() else "", gname, gname, GROUP_INTROS[gname], cards))
     out = [
         head_html(root, "Our Services | Pinky Brain Digital",
-                  "SEO, websites, advertising, social media, branding, AI automation and more. Every service explained in plain English, with the results it should deliver.",
+                  "SEO, websites, advertising, social media, branding, AI automation and more. Every service explained in full, with the results it should deliver.",
                   "services.html"),
         header_html(root, current="services"),
         render_breadcrumb([("Home", "index.html"), ("Services", None)]),
@@ -2152,6 +2157,15 @@ def build_about_page():
 
     values_html = "".join("<li>%s %s</li>" % (icon("check"), v) for v in APPROACH_VALUES)
 
+    heritage_html = render_section(
+        "Our heritage", "14 years of experience in digital.",
+        "Pinky Brain Digital is built on more than 14 years of hands-on experience in the industry. We have worked through every major shift in search, advertising and web design, and we bring that depth to every project.",
+        [("14+ years in the industry", "Over a decade of practical experience across websites, SEO, advertising and social media."),
+         ("Experience that adapts", "From early search engines to AI-driven discovery, we have kept pace with every change and know what lasts."),
+         ("Proven across sectors", "From luxury property to local trades, we understand what different businesses need to grow."),
+         ("A partner for the long term", "Experience means we give honest advice, set realistic expectations and stay with you as you grow.")],
+        ['growth', 'users', 'check', 'chart'], tint=True)
+
     out = [
         head_html(root, title, desc, "about-us.html"),
         header_html(root, current="about"),
@@ -2168,7 +2182,7 @@ def build_about_page():
         <a class="pb-btn pb-btn--line" href="services.html">%(secondary)s</a>
       </div>
       <ul class="pb-hero__ticks">
-        <li>Honest, plain-English advice</li>
+        <li>Honest, expert advice</li>
         <li>Flexible, not one-size-fits-all</li>
         <li>A long-term digital partner</li>
       </ul>
@@ -2186,6 +2200,7 @@ def build_about_page():
     <span>That&rsquo;s the Pinky Brain approach</span>
   </div>
 </section>
+%(heritage)s
 %(rows)s
 <section class="pb-section">
   <div class="pb-wrap">
@@ -2196,7 +2211,7 @@ def build_about_page():
     <ul class="pb-values-row">%(values)s</ul>
   </div>
 </section>
-""" % {"rows": rows_html, "values": values_html, "primary": CTA_PRIMARY, "secondary": CTA_SECONDARY, "arrow": icon("arrow")},
+""" % {"rows": rows_html, "values": values_html, "heritage": heritage_html, "primary": CTA_PRIMARY, "secondary": CTA_SECONDARY, "arrow": icon("arrow")},
         render_cta("Tell us about your business and what you want to achieve, and we’ll reply within one business day with honest, straight-talking advice, not a sales pitch.", root=root),
         footer_html(root),
         render_jsonld(ORG_JSONLD),
@@ -2321,7 +2336,7 @@ BLOG_POSTS = [
         "read": "6 min read",
         "image": "aeo-ai-search-hero.webp",
         "image_alt": "AI search interface answering a customer's question",
-        "excerpt": "More customers now ask ChatGPT and Google&rsquo;s AI for recommendations instead of scrolling through results. Here&rsquo;s what that means for your search visibility &mdash; in plain English.",
+        "excerpt": "More customers now ask ChatGPT and Google&rsquo;s AI for recommendations instead of scrolling through results. Here&rsquo;s what that means for your search visibility, explained in full.",
         "service": "seo-services",
         "body": [
             ("callout", "SEO helps you rank in Google&rsquo;s list of results. AEO helps AI tools like ChatGPT and Google&rsquo;s AI Overviews understand and recommend you. They share the same foundations, so most businesses should treat them as one strategy, not two."),
@@ -2360,7 +2375,7 @@ BLOG_POSTS = [
                 "Check that your business name, address and phone number match exactly across your website, Google Business Profile and directories.",
                 "Search for your own services in ChatGPT and Google &mdash; note who gets recommended, and why.",
             ]),
-            ("p", "If you&rsquo;d like a plain-English view of where you stand on both, we&rsquo;re happy to take a look &mdash; no jargon, no obligation."),
+            ("p", "If you&rsquo;d like a comprehensive view of where you stand on both, we&rsquo;re happy to take a look &mdash; no jargon, no obligation."),
         ],
     },
 ]
@@ -2394,7 +2409,7 @@ def render_blog_teaser(root=""):
 <section class="pb-section">
   <div class="pb-wrap">
     <div class="pb-section__head">
-      <div><p class="pb-eyebrow">Insights</p><h2>Plain-English advice for growing businesses</h2></div>
+      <div><p class="pb-eyebrow">Insights</p><h2>Expert advice for growing businesses</h2></div>
       <div>
         <p>Guides on websites, search and marketing, written to help you decide, not to sell.</p>
         <a class="pb-link" href="%(root)sblog.html" style="margin-top:14px">Read all insights %(arrow)s</a>
@@ -2471,7 +2486,7 @@ def build_blog_post(post):
        "img": post["image"], "alt": post["image_alt"], "body": _render_post_body(post["body"]),
        "sname": s["name"], "slead": cap_first(s["lead"]), "sslug": s["slug"], "slabel": s["nav_label"],
        "arrow": icon("arrow"), "more": "".join(render_post_card(p) for p in others)},
-        render_cta("Tell us what you’re working on, and we’ll reply within one business day with honest, plain-English advice.", root=root,
+        render_cta("Tell us what you’re working on, and we’ll reply within one business day with honest, expert advice.", root=root,
                    offer_key=SERVICE_OFFER.get(post["service"])),
         footer_html(root),
         jsonld,
@@ -2484,7 +2499,7 @@ def build_blog_index():
     featured, rest = BLOG_POSTS[0], BLOG_POSTS[1:]
     out = [
         head_html(root, "Insights | Pinky Brain Digital",
-                  "Plain-English guides on websites, SEO, AI search and digital marketing from the Pinky Brain Digital team.", "blog.html"),
+                  "Practical guides on websites, SEO, AI search and digital marketing from the Pinky Brain Digital team.", "blog.html"),
         header_html(root, current="insights"),
         render_breadcrumb([("Home", "index.html"), ("Insights", None)]),
         """
@@ -2492,7 +2507,7 @@ def build_blog_index():
   <div class="pb-wrap pb-narrow">
     <p class="pb-eyebrow">Insights &amp; advice</p>
     <h1>Insights</h1>
-    <p class="pb-lead">Honest, plain-English guides on websites, search and marketing, written to help you make better decisions, not to sell you something.</p>
+    <p class="pb-lead">Honest, practical guides on websites, search and marketing, written to help you make better decisions, not to sell you something.</p>
   </div>
 </section>
 <section class="pb-section" style="padding-top:clamp(40px,5vw,64px)">

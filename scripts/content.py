@@ -76,7 +76,7 @@ OUTCOMES = {
         ("The right audience", "Your ads in front of people chosen by location, interest and intent."),
         ("More leads", "Campaigns and landing pages built to bring in enquiries, bookings or sales."),
         ("Better return on spend", "Budget moved towards what works and away from what doesn’t."),
-        ("Clear reporting", "Spend, results and next steps in one plain-English report."),
+        ("Clear reporting", "Spend, results and next steps in one comprehensive report."),
     ]),
     "google-ads": ("Google Ads works best when every click can be traced to a result.", [
         ("Found at the moment of intent", "Your ads appear when customers search for what you offer."),
@@ -181,7 +181,7 @@ OUTCOMES = {
         ("Time back for you", "The technical upkeep handled by someone else."),
     ]),
     "digital-consulting": ("A consultation should leave you clearer, not more confused.", [
-        ("Clarity", "A plain-English view of where you stand."),
+        ("Clarity", "A comprehensive view of where you stand."),
         ("Clear priorities", "What to do first, what can wait and what to skip."),
         ("Money well spent", "Budget directed to what will actually move your business forward."),
         ("Confidence", "A plan you can act on with us, your own team or anyone else."),
